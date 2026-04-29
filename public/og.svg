@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7c3aed"/>
+      <stop offset="0.52" stop-color="#06b6d4"/>
+      <stop offset="1" stop-color="#22c55e"/>
+    </linearGradient>
+    <filter id="b" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="30"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" rx="48" fill="#0b1020"/>
+  <circle cx="260" cy="180" r="170" fill="#7c3aed" opacity="0.45" filter="url(#b)"/>
+  <circle cx="860" cy="210" r="190" fill="#06b6d4" opacity="0.35" filter="url(#b)"/>
+  <circle cx="640" cy="520" r="220" fill="#22c55e" opacity="0.25" filter="url(#b)"/>
+  <g font-family="Inter, ui-sans-serif, system-ui" fill="#e5e7eb">
+    <text x="90" y="310" font-size="62" font-weight="700">Kelvin Ofori</text>
+    <text x="90" y="380" font-size="34" fill="#9ca3af">Software Engineer • .NET (C#) • React</text>
+    <text x="90" y="440" font-size="28" fill="#9ca3af">Reliable APIs. Product-grade web apps. Clean, efficient code.</text>
+  </g>
+  <rect x="90" y="480" width="520" height="10" rx="5" fill="url(#g)"/>
+</svg>
+

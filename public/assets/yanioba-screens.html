@@ -1,0 +1,1801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yanioba — Mobile UI System</title>
+  <style>
+    :root {
+      --bg: #f0f4f3;
+      --surface: #ffffff;
+      --surface-2: #f8faf9;
+      --text: #0f172a;
+      --text-2: #64748b;
+      --text-3: #94a3b8;
+      --border: #e2e8f0;
+      --brand: #0f766e;
+      --brand-2: #14b8a6;
+      --brand-soft: rgba(15, 118, 110, 0.12);
+      --warn: #d97706;
+      --warn-soft: rgba(217, 119, 6, 0.12);
+      --danger: #dc2626;
+      --danger-soft: rgba(220, 38, 38, 0.12);
+      --success: #059669;
+      --success-soft: rgba(5, 150, 105, 0.12);
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --shadow-sm: 0 2px 10px rgba(15, 23, 42, 0.06);
+      --r-lg: 20px;
+      --r-md: 14px;
+      --r-sm: 10px;
+      --r-pill: 999px;
+      --pad: 16px;
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      background: #e8eceb;
+      color: var(--text);
+      line-height: 1.35;
+      padding: 32px 24px 80px;
+    }
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .intro {
+      max-width: 720px;
+      color: var(--text-2);
+      margin-bottom: 28px;
+      font-size: 0.95rem;
+    }
+    .intro strong { color: var(--brand); }
+    .category {
+      margin: 48px 0 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--brand-soft);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--brand);
+      letter-spacing: -0.01em;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 28px;
+      align-items: start;
+    }
+    .mockup { display: flex; flex-direction: column; gap: 10px; }
+    .mockup-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-2);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .phone {
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto;
+      background: var(--surface);
+      border-radius: 36px;
+      box-shadow: var(--shadow), 0 0 0 1px rgba(15, 23, 42, 0.04);
+      overflow: hidden;
+      min-height: 640px;
+      display: flex;
+      flex-direction: column;
+    }
+    .status {
+      flex-shrink: 0;
+      height: 44px;
+      padding: 12px 22px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .status .time { font-variant-numeric: tabular-nums; }
+    .status .icons { display: flex; gap: 5px; align-items: center; font-size: 12px; }
+    .screen {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 596px;
+      background: var(--bg);
+      position: relative;
+    }
+    .screen--light { background: var(--surface); }
+    .screen--dark { background: #0f172a; color: #f8fafc; }
+    .screen--dark .t2 { color: #94a3b8; }
+    .screen--dark .card { background: #1e293b; border-color: #334155; }
+    .screen--immersive { background: #cbd5e1; }
+    .safe { padding: 0 var(--pad) 20px; }
+    .safe--top { padding-top: 8px; }
+    .hdr {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px var(--pad) 12px;
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+    .hdr--flat { box-shadow: none; border-bottom: 1px solid var(--border); }
+    .hdr h2 { font-size: 1.05rem; font-weight: 700; }
+    .hdr .back, .hdr .icon-btn {
+      width: 40px; height: 40px;
+      border-radius: var(--r-sm);
+      border: none;
+      background: var(--surface-2);
+      display: grid; place-items: center;
+      cursor: default;
+      font-size: 18px;
+      color: var(--text);
+    }
+    .hdr .icon-btn { background: transparent; }
+    .search {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface-2);
+      border-radius: var(--r-pill);
+      padding: 10px 14px;
+      margin: 0 var(--pad) 12px;
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--text-3);
+    }
+    .tabs {
+      display: flex;
+      gap: 8px;
+      padding: 0 var(--pad) 12px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab {
+      flex-shrink: 0;
+      padding: 8px 14px;
+      border-radius: var(--r-pill);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-2);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+    }
+    .tab--on {
+      background: var(--brand-soft);
+      color: var(--brand);
+      border-color: transparent;
+    }
+    .card {
+      background: var(--surface);
+      border-radius: var(--r-lg);
+      padding: 14px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+    }
+    .card--map {
+      height: 140px;
+      background: linear-gradient(145deg, #d8e8e6 0%, #b8d4cf 45%, #94a3a8 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .map-pin {
+      position: absolute;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--danger);
+      border: 2px solid #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,.2);
+    }
+    .row { display: flex; align-items: flex-start; gap: 12px; }
+    .avatar {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      background: var(--brand-soft);
+      color: var(--brand);
+      display: grid; place-items: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .t1 { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+    .t2 { font-size: 0.8rem; color: var(--text-2); margin-top: 2px; }
+    .t3 { font-size: 0.72rem; color: var(--text-3); margin-top: 4px; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: var(--r-pill);
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .badge--urgent { background: var(--danger-soft); color: var(--danger); }
+    .badge--warn { background: var(--warn-soft); color: var(--warn); }
+    .badge--ok { background: var(--success-soft); color: var(--success); }
+    .badge--brand { background: var(--brand-soft); color: var(--brand); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      padding: 6px 12px;
+      border-radius: var(--r-pill);
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-2);
+    }
+    .chip--sel {
+      background: var(--brand);
+      color: #fff;
+      border-color: var(--brand);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 18px;
+      border-radius: var(--r-md);
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: none;
+      width: 100%;
+      background: var(--brand);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(15, 118, 110, 0.35);
+    }
+    .btn--secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      box-shadow: none;
+    }
+    .btn--ghost { background: transparent; color: var(--brand); box-shadow: none; }
+    .btn:disabled { opacity: 0.45; box-shadow: none; }
+    .fab {
+      position: absolute;
+      right: 18px;
+      bottom: 88px;
+      width: 58px; height: 58px;
+      border-radius: 18px;
+      background: var(--brand);
+      color: #fff;
+      border: none;
+      font-size: 26px;
+      box-shadow: 0 8px 24px rgba(15, 118, 110, 0.45);
+      display: grid; place-items: center;
+    }
+    .fab--exp { bottom: 160px; width: 52px; height: 52px; font-size: 22px; border-radius: 16px; }
+    .nav-bot {
+      margin-top: auto;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 6px 22px;
+      box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.06);
+    }
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.62rem;
+      font-weight: 600;
+      color: var(--text-3);
+      flex: 1;
+    }
+    .nav-item svg { width: 22px; height: 22px; opacity: 0.5; }
+    .nav-item--on { color: var(--brand); }
+    .nav-item--on svg { opacity: 1; color: var(--brand); }
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .stat {
+      background: var(--surface);
+      border-radius: var(--r-md);
+      padding: 12px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .stat b { font-size: 1.25rem; display: block; }
+    .stat span { font-size: 0.72rem; color: var(--text-2); }
+    .banner {
+      border-radius: var(--r-md);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    .banner--urgent { background: var(--danger-soft); color: var(--danger); }
+    .banner--warn { background: var(--warn-soft); color: var(--warn); }
+    .banner--info { background: var(--brand-soft); color: var(--brand); }
+    .progress {
+      height: 4px;
+      background: var(--border);
+      border-radius: var(--r-pill);
+      overflow: hidden;
+      margin: 12px 0;
+    }
+    .progress > i { display: block; height: 100%; width: 55%; background: var(--brand); border-radius: var(--r-pill); }
+    .steps { display: flex; gap: 6px; margin: 12px var(--pad); }
+    .steps i {
+      flex: 1; height: 4px; border-radius: 3px;
+      background: var(--border);
+    }
+    .steps i.on { background: var(--brand); }
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .toggle {
+      width: 48px; height: 28px;
+      border-radius: var(--r-pill);
+      background: var(--brand);
+      position: relative;
+    }
+    .toggle::after {
+      content: "";
+      position: absolute;
+      width: 22px; height: 22px;
+      background: #fff;
+      border-radius: 50%;
+      top: 3px; right: 3px;
+      box-shadow: var(--shadow-sm);
+    }
+    .toggle--off { background: #cbd5e1; }
+    .toggle--off::after { right: auto; left: 3px; }
+    .sheet {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      background: var(--surface);
+      border-radius: var(--r-lg) var(--r-lg) 0 0;
+      padding: 12px var(--pad) 28px;
+      box-shadow: 0 -12px 40px rgba(15, 23, 42, 0.15);
+      border-top: 1px solid var(--border);
+    }
+    .sheet-handle {
+      width: 40px; height: 4px;
+      background: var(--border);
+      border-radius: 4px;
+      margin: 0 auto 14px;
+    }
+    .modal-dim {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--pad);
+    }
+    .modal {
+      background: var(--surface);
+      border-radius: var(--r-lg);
+      padding: 22px;
+      width: 100%;
+      max-width: 300px;
+      box-shadow: var(--shadow);
+    }
+    .modal h3 { font-size: 1.05rem; margin-bottom: 8px; }
+    .modal p { font-size: 0.85rem; color: var(--text-2); margin-bottom: 18px; }
+    .modal-actions { display: flex; gap: 10px; }
+    .modal-actions .btn { flex: 1; padding: 12px; font-size: 0.85rem; }
+    .drawer {
+      position: absolute;
+      inset: 0;
+      display: flex;
+    }
+    .drawer-dim { flex: 1; background: rgba(15,23,42,0.35); }
+    .drawer-panel {
+      width: 82%;
+      max-width: 290px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .drawer-user {
+      display: flex; gap: 12px; align-items: center;
+      padding: 12px 8px 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 8px;
+    }
+    .drawer-user .avatar { width: 48px; height: 48px; border-radius: 14px; }
+    .drawer-link {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 10px;
+      border-radius: var(--r-sm);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .drawer-link:hover { background: var(--surface-2); }
+    .drawer-link svg { width: 22px; height: 22px; color: var(--brand); opacity: 0.85; }
+    .toast {
+      position: absolute;
+      left: 16px; right: 16px;
+      bottom: 100px;
+      background: #1e293b;
+      color: #f8fafc;
+      padding: 12px 14px;
+      border-radius: var(--r-md);
+      font-size: 0.82rem;
+      font-weight: 600;
+      box-shadow: var(--shadow);
+    }
+    .skeleton {
+      background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+      background-size: 200% 100%;
+      animation: sk 1.2s ease infinite;
+      border-radius: 8px;
+      height: 14px;
+    }
+    @keyframes sk { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    .logo-mark {
+      width: 72px; height: 72px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      margin: 0 auto 16px;
+      display: grid; place-items: center;
+      color: #fff;
+      font-size: 2rem;
+      font-weight: 800;
+      box-shadow: 0 12px 32px rgba(15, 118, 110, 0.35);
+    }
+    .hero-illus {
+      height: 200px;
+      border-radius: var(--r-lg);
+      background: linear-gradient(180deg, var(--brand-soft) 0%, transparent 100%);
+      margin: 20px var(--pad);
+      display: grid; place-items: center;
+      font-size: 4rem;
+    }
+    .list-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .chev { color: var(--text-3); font-size: 1.1rem; }
+    .fab-mini {
+      position: absolute;
+      right: 18px;
+      bottom: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
+    }
+    .fab-mini button {
+      padding: 10px 14px;
+      border-radius: var(--r-pill);
+      border: none;
+      background: var(--surface);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--brand);
+      box-shadow: var(--shadow-sm);
+    }
+    .heat-dot {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.55;
+      filter: blur(8px);
+    }
+    .leader-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .leader-row b { font-size: 0.85rem; }
+    .leader-row span { font-size: 0.72rem; color: var(--text-2); }
+    .icon-svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+</head>
+<body>
+  <h1>Yanioba</h1>
+  <p class="intro">Production-style mobile UI kit — <strong>79 labeled screens</strong> (full A–J set): onboarding, 10 home layouts, map &amp; location, full reporting flow, alerts, incidents, search, profile &amp; community, settings, and system states. One locked design system (teal civic-tech palette, rounded cards, soft shadows). Ghana-local sample copy. Navigation mix: bottom nav, top tabs, drawer, FAB / expandable FAB, stack, modals &amp; bottom sheets, immersive (no chrome).</p>
+
+  <h2 class="category">A — Onboarding &amp; Entry</h2>
+  <div class="grid">
+    <article class="mockup">
+      <h3 class="mockup-title">A1 · Splash</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light" style="justify-content:center;align-items:center;padding:40px;">
+          <div class="logo-mark">Y</div>
+          <p class="t1" style="text-align:center;">Yanioba</p>
+          <p class="t2" style="text-align:center;">Community-powered safety</p>
+          <div class="skeleton" style="width:120px;height:6px;margin-top:32px;margin-left:auto;margin-right:auto;border-radius:99px;"></div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">A2 · Onboarding — Safer communities</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hero-illus">🏘️</div>
+          <div class="safe">
+            <p class="t1" style="font-size:1.35rem;line-height:1.2;">Safer communities, together</p>
+            <p class="t2" style="margin-top:10px;">See what neighbours report near East Legon, Osu, and Cantonments — then act with confidence.</p>
+            <div style="margin-top:28px;display:flex;gap:10px;">
+              <button class="btn">Continue</button>
+            </div>
+            <p class="t3" style="text-align:center;margin-top:14px;">Skip for now</p>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">A3 · Onboarding — Real-time alerts</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hero-illus">📡</div>
+          <div class="safe">
+            <p class="t1" style="font-size:1.35rem;">Real-time alerts</p>
+            <p class="t2" style="margin-top:10px;">Heavy congestion on N1 Highway and flooding in East Legon surface instantly for people on your routes.</p>
+            <div class="steps" style="margin-left:0;margin-right:0;"><i class="on"></i><i class="on"></i><i></i></div>
+            <button class="btn">Next</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">A4 · Onboarding — Report incidents</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hero-illus">📝</div>
+          <div class="safe">
+            <p class="t1" style="font-size:1.35rem;">Report in seconds</p>
+            <p class="t2" style="margin-top:10px;">Potholes, barriers, outages, and suspicious activity — add a photo, pin the spot, help everyone nearby.</p>
+            <div class="steps" style="margin-left:0;margin-right:0;"><i class="on"></i><i class="on"></i><i class="on"></i></div>
+            <button class="btn">Get started</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">A5 · Location permission</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="safe safe--top" style="padding-top:48px;">
+            <div class="card" style="text-align:center;padding:24px;">
+              <div style="font-size:2.5rem;">📍</div>
+              <p class="t1" style="margin-top:12px;">Enable location</p>
+              <p class="t2" style="margin-top:8px;">Yanioba uses your approximate area to show 5 incidents nearby and route-aware risk on the N1 Highway.</p>
+              <button class="btn" style="margin-top:20px;">Allow while using app</button>
+              <button class="btn btn--secondary" style="margin-top:10px;">Not now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">A6 · Notification permission</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="safe safe--top" style="padding-top:48px;">
+            <div class="card" style="text-align:center;padding:24px;">
+              <div style="font-size:2.5rem;">🔔</div>
+              <p class="t1" style="margin-top:12px;">Stay in the loop</p>
+              <p class="t2" style="margin-top:8px;">Get critical alerts like fire outbreak near Makola or power outage in Osu — you can fine-tune categories later.</p>
+              <button class="btn" style="margin-top:20px;">Turn on notifications</button>
+              <button class="btn btn--ghost" style="margin-top:8px;">Maybe later</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">A7 · Sign in</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat">
+            <button class="back" aria-hidden="true">‹</button>
+            <h2>Sign in</h2>
+            <span style="width:40px;"></span>
+          </div>
+          <div class="safe" style="padding-top:20px;">
+            <label class="t2" style="display:block;margin-bottom:6px;">Phone or email</label>
+            <div class="search" style="margin:0 0 14px;">+233 · · · · · · · · ·</div>
+            <label class="t2" style="display:block;margin-bottom:6px;">Password</label>
+            <div class="search" style="margin:0 0 20px;">••••••••••</div>
+            <button class="btn">Continue</button>
+            <p class="t3" style="text-align:center;margin-top:16px;">Forgot password?</p>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">A8 · Create account</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat">
+            <button class="back">‹</button>
+            <h2>Join Yanioba</h2>
+            <span style="width:40px;"></span>
+          </div>
+          <div class="safe" style="padding-top:16px;">
+            <div class="search" style="margin:0 0 10px;">Full name</div>
+            <div class="search" style="margin:0 0 10px;">Phone number</div>
+            <div class="search" style="margin:0 0 10px;">Create password</div>
+            <div class="toggle-row" style="border:none;padding-top:4px;">
+              <span class="t2" style="margin:0;">I agree to community guidelines</span>
+              <div class="toggle"></div>
+            </div>
+            <button class="btn" style="margin-top:16px;">Create account</button>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <h2 class="category">B — Home (10 variations)</h2>
+  <div class="grid">
+    <article class="mockup">
+      <h3 class="mockup-title">B1 · Dashboard + stats — Bottom nav</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr"><h2>Good morning, Ama</h2><button class="icon-btn">☰</button></div>
+          <div class="search" style="margin:12px var(--pad) 0;">Search Cantonments, Circle…</div>
+          <div class="safe safe--top">
+            <div class="banner banner--info" style="margin-bottom:12px;"><span>📣</span> New report submitted · 25 mins ago</div>
+            <div class="stat-grid">
+              <div class="stat"><b>5</b><span>Incidents nearby</span></div>
+              <div class="stat"><b>3</b><span>Active alerts</span></div>
+            </div>
+            <p class="t1" style="margin:16px 0 8px;">Nearby</p>
+            <div class="card row"><div class="avatar">🚧</div><div><p class="t1">Police barrier · Labone</p><p class="t2">2 hrs ago · Community update</p><span class="badge badge--warn">Traffic</span></div></div>
+            <div class="card row" style="margin-top:10px;"><div class="avatar">💡</div><div><p class="t1">Broken streetlight near Circle</p><p class="t2">Verified · Utilities</p><span class="badge badge--brand">Utilities</span></div></div>
+          </div>
+          <nav class="nav-bot">
+            <div class="nav-item nav-item--on"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</div>
+            <div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>Map</div>
+            <div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Report</div>
+            <div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Alerts</div>
+            <div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</div>
+          </nav>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">B2 · Map-dominant home — FAB + expandable quick reports</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen" style="padding-bottom:0;">
+          <div class="card card--map" style="margin:12px;border-radius:var(--r-lg);height:320px;">
+            <span class="map-pin" style="top:30%;left:40%;"></span><span class="map-pin" style="background:var(--warn);top:55%;left:65%;"></span>
+            <span class="map-pin" style="background:var(--brand);top:70%;left:30%;width:10px;height:10px;"></span>
+            <div class="card" style="position:absolute;bottom:12px;left:12px;right:12px;padding:10px;"><p class="t1">Central Accra</p><p class="t2">5 incidents nearby · tap map</p></div>
+          </div>
+          <div class="chips" style="padding:0 var(--pad) 12px;"><span class="chip chip--sel">All</span><span class="chip">Traffic</span><span class="chip">Crime</span><span class="chip">Fire</span></div>
+          <div class="fab-mini">
+            <button type="button">Report utility</button>
+            <button type="button">Report crime</button>
+            <button type="button">Report fire</button>
+            <button type="button">Report traffic</button>
+          </div>
+          <button class="fab" aria-label="Report">+</button>
+          <nav class="nav-bot"><div class="nav-item nav-item--on"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>Map</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Report</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>Alerts</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</div></nav>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">B3 · Alert-priority — Top tabs</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><h2>Live alerts</h2><button class="icon-btn">⚙</button></div>
+          <div class="tabs"><span class="tab tab--on">Urgent</span><span class="tab">Area</span><span class="tab">Following</span></div>
+          <div class="safe safe--top">
+            <div class="banner banner--urgent"><span>!</span> Flooding reported in East Legon · avoid lower roads</div>
+            <div class="card" style="margin-top:12px;"><div class="row"><div class="avatar" style="background:var(--danger-soft);color:var(--danger);">🔥</div><div><p class="t1">Fire outbreak near Makola</p><p class="t2">25 mins ago · Ghana Fire advised</p><span class="badge badge--urgent">Emergency</span></div></div></div>
+            <div class="card" style="margin-top:10px;"><div class="row"><div class="avatar">🚔</div><div><p class="t1">Suspicious activity · Labone</p><p class="t2">Stay aware · 1 hr ago</p><span class="badge badge--warn">Crime</span></div></div></div>
+          </div>
+          <nav class="nav-bot"><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>Map</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>Report</div><div class="nav-item nav-item--on"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>Alerts</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/></svg>Profile</div></nav>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">B4 · Minimal clean — Inline cards</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="safe safe--top" style="padding-top:20px;">
+            <p class="t3" style="letter-spacing:0.08em;text-transform:uppercase;">Today near you</p>
+            <p class="t1" style="font-size:1.6rem;margin-top:6px;">5 incidents</p>
+            <div class="card" style="margin-top:24px;border:none;box-shadow:var(--shadow-sm);"><p class="t1">Heavy congestion on N1 Highway</p><p class="t2">Updated 12 mins ago</p><p class="t3" style="margin-top:10px;color:var(--brand);font-weight:700;">View on Map →</p></div>
+            <div class="card" style="margin-top:12px;"><p class="t1">Power outage in Osu</p><p class="t2">Utility crew notified</p><p class="t3" style="margin-top:10px;color:var(--brand);font-weight:700;">Track status →</p></div>
+          </div>
+          <nav class="nav-bot"><div class="nav-item nav-item--on"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>Map</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/></svg>Report</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>Alerts</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/></svg>Profile</div></nav>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">B5 · Feed-based — Top tabs + FAB</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr"><h2>Community feed</h2><button class="icon-btn">🔍</button></div>
+          <div class="tabs"><span class="tab tab--on">Nearby</span><span class="tab">Trending</span><span class="tab">Following</span><span class="tab">Saved</span></div>
+          <div class="safe safe--top" style="flex:1;overflow:hidden;">
+            <div class="card row"><div class="avatar">🕳️</div><div><p class="t1">Pothole near Spintex Road</p><p class="t2">Madina corridor · 3 confirmations</p><div class="chips" style="margin-top:8px;"><span class="chip chip--sel">Road</span><span class="chip">Photo</span></div></div></div>
+            <div class="card row" style="margin-top:10px;"><div class="avatar">🚗</div><div><p class="t1">Accident at Tetteh Quarshie</p><p class="t2">Emergency services on scene · 25 mins ago</p><span class="badge badge--urgent">Active</span></div></div>
+          </div>
+          <button class="fab">+</button>
+          <nav class="nav-bot"><div class="nav-item nav-item--on"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>Map</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>Report</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>Alerts</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/></svg>Profile</div></nav>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">B6 · Action-first — Large CTA</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="safe safe--top" style="padding-top:32px;text-align:center;">
+            <p class="t1" style="font-size:1.4rem;">See something? Say something.</p>
+            <p class="t2" style="margin-top:8px;">Your report helps neighbours across Accra stay safe.</p>
+            <button class="btn" style="margin-top:28px;padding:18px;font-size:1rem;border-radius:var(--r-lg);">Report incident</button>
+            <div class="card" style="margin-top:24px;text-align:left;"><p class="t1">Nearby snapshot</p><p class="t2">5 incidents nearby · Circle, Osu, Labone</p><button class="btn btn--secondary" style="margin-top:12px;">Open map</button></div>
+          </div>
+          <nav class="nav-bot"><div class="nav-item nav-item--on"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>Map</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/></svg>Report</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>Alerts</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/></svg>Profile</div></nav>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">B7 · Split map + activity</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr"><h2>Home</h2><button class="icon-btn">⌁</button></div>
+          <div class="card card--map" style="margin:0 var(--pad);height:160px;border-radius:var(--r-lg);"><span class="map-pin" style="top:45%;left:50%;"></span></div>
+          <p class="t1" style="padding:12px var(--pad) 4px;">Latest activity</p>
+          <div class="safe safe--top" style="padding-top:0;">
+            <div class="card row"><div class="avatar">⚡</div><div><p class="t1">Power outage in Osu</p><p class="t2">2 hrs ago</p></div></div>
+          </div>
+          <nav class="nav-bot"><div class="nav-item nav-item--on"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>Map</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>Report</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>Alerts</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/></svg>Profile</div></nav>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">B8 · Assistant-style recommendations</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr hdr--flat"><h2>For your commute</h2></div>
+          <div class="safe safe--top">
+            <div class="card" style="background:linear-gradient(135deg,var(--brand-soft),transparent);border-color:transparent;">
+              <p class="t3" style="color:var(--brand);font-weight:700;">Suggested</p>
+              <p class="t1" style="margin-top:6px;">Avoid N1 Highway — heavy congestion</p>
+              <p class="t2">Try Ring Road stretch · saves ~14 min</p>
+              <button class="btn btn--secondary" style="margin-top:12px;">See alternate route</button>
+            </div>
+            <p class="t1" style="margin:16px 0 8px;">Because you follow Osu</p>
+            <div class="card row"><div class="avatar">🌊</div><div><p class="t1">Flooding reported in East Legon</p><p class="t2">May affect links toward Madina</p></div></div>
+          </div>
+          <nav class="nav-bot"><div class="nav-item nav-item--on"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>Map</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>Report</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>Alerts</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/></svg>Profile</div></nav>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">B9 · Heatmap / risk overview</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><h2>Risk overview</h2><button class="icon-btn">i</button></div>
+          <div class="card card--map" style="margin:12px var(--pad);height:200px;position:relative;">
+            <span class="heat-dot" style="width:80px;height:80px;background:var(--danger);top:20%;left:25%;"></span>
+            <span class="heat-dot" style="width:60px;height:60px;background:var(--warn);top:50%;left:55%;"></span>
+            <span class="heat-dot" style="width:100px;height:100px;background:var(--brand);opacity:0.35;top:35%;left:40%;"></span>
+          </div>
+          <div class="safe safe--top"><p class="t2">Higher activity: Makola · Circle · Tetteh Quarshie</p><div class="stat-grid" style="margin-top:12px;"><div class="stat"><b>Medium</b><span>Labone corridor</span></div><div class="stat"><b>Low</b><span>Cantonments</span></div></div></div>
+          <nav class="nav-bot"><div class="nav-item nav-item--on"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>Map</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>Report</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>Alerts</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/></svg>Profile</div></nav>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">B10 · Community insights — Drawer entry</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light" style="position:relative;">
+          <div class="drawer">
+            <div class="drawer-dim"></div>
+            <aside class="drawer-panel">
+              <div class="drawer-user"><div class="avatar" style="width:48px;height:48px;">AK</div><div><p class="t1">Ama K.</p><p class="t2">Trust score · High</p></div></div>
+              <a class="drawer-link"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</a>
+              <a class="drawer-link"><svg class="icon-svg" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>Map</a>
+              <a class="drawer-link"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Reports</a>
+              <a class="drawer-link"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>Alerts</a>
+              <a class="drawer-link"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Community</a>
+              <a class="drawer-link"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a>
+              <a class="drawer-link"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Help &amp; Support</a>
+            </aside>
+          </div>
+          <div class="hdr hdr--flat" style="opacity:0.5;"><h2>Insights</h2></div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <h2 class="category">C — Map &amp; Location</h2>
+  <div class="grid">
+    <article class="mockup">
+      <h3 class="mockup-title">C1 · Full map + markers — FAB + chips</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--immersive" style="position:relative;">
+          <div class="hdr hdr--flat" style="background:rgba(255,255,255,.92);"><button class="back">‹</button><h2>Map</h2><button class="icon-btn">◎</button></div>
+          <div class="card card--map" style="margin:8px var(--pad);flex:1;min-height:380px;height:auto;border-radius:var(--r-lg);">
+            <span class="map-pin" style="top:28%;left:38%;"></span><span class="map-pin" style="background:var(--warn);top:48%;left:62%;"></span><span class="map-pin" style="background:var(--brand);top:62%;left:44%;"></span><span class="map-pin" style="top:35%;left:72%;width:14px;height:14px;border-width:3px;"></span>
+          </div>
+          <div class="chips" style="padding:0 var(--pad) 8px;"><span class="chip chip--sel">All</span><span class="chip">Traffic</span><span class="chip">Crime</span><span class="chip">Fire</span><span class="chip">Utilities</span></div>
+          <button class="fab fab--exp" style="bottom:100px;">⌖</button>
+          <button class="fab">+</button>
+          <nav class="nav-bot"><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</div><div class="nav-item nav-item--on"><svg class="icon-svg" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>Map</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>Report</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>Alerts</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/></svg>Profile</div></nav>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">C2 · Map + category filters</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr"><h2>Layers</h2><button class="icon-btn">✓</button></div>
+          <div class="tabs"><span class="tab tab--on">Incidents</span><span class="tab">Routes</span><span class="tab">Safety</span></div>
+          <div class="safe safe--top">
+            <p class="t2" style="margin-bottom:10px;">Filter what you see on the map</p>
+            <div class="toggle-row"><span>Road &amp; traffic</span><div class="toggle"></div></div>
+            <div class="toggle-row"><span>Crime &amp; suspicious</span><div class="toggle"></div></div>
+            <div class="toggle-row"><span>Fire &amp; flooding</span><div class="toggle toggle--off"></div></div>
+            <div class="toggle-row" style="border:none;"><span>Utilities &amp; lights</span><div class="toggle"></div></div>
+            <button class="btn" style="margin-top:16px;">Apply filters</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">C3 · Incident detail bottom sheet</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--immersive" style="position:relative;">
+          <div class="card card--map" style="margin:0;height:100%;border-radius:0;min-height:596px;"><span class="map-pin" style="top:40%;left:48%;"></span></div>
+          <div class="sheet">
+            <div class="sheet-handle"></div>
+            <div class="row" style="justify-content:space-between;align-items:flex-start;">
+              <div><p class="t1">Accident at Tetteh Quarshie</p><p class="t2">25 mins ago · 12 confirmations</p></div>
+              <span class="badge badge--urgent">Active</span>
+            </div>
+            <p class="t2" style="margin-top:10px;">Slow both directions — consider Ring Road.</p>
+            <div style="display:flex;gap:10px;margin-top:16px;">
+              <button class="btn" style="flex:1;padding:12px;">Navigate safer</button>
+              <button class="btn btn--secondary" style="flex:1;padding:12px;">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">C4 · Route planning + risk alerts</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Route</h2><span style="width:40px;"></span></div>
+          <div class="card card--map" style="margin:12px var(--pad);height:200px;"><div style="position:absolute;inset:20% 15% 25% 20%;border:3px dashed var(--brand);border-radius:12px;opacity:.9;"></div><span class="map-pin" style="background:var(--warn);top:35%;left:55%;"></span></div>
+          <div class="safe safe--top">
+            <div class="banner banner--warn"><span>⚠</span> Risk: Heavy congestion on N1 Highway ahead</div>
+            <p class="t1" style="margin-top:12px;">Osu → Madina</p>
+            <p class="t2">ETA 42 min · +8 min vs usual</p>
+            <button class="btn btn--secondary" style="margin-top:12px;">See alternate</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">C5 · Heatmap density</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr"><h2>Density</h2><button class="icon-btn">?</button></div>
+          <div class="card card--map" style="margin:12px var(--pad);height:280px;position:relative;background:linear-gradient(160deg,#e0f2f1,#b2dfdb 40%,#80cbc4 70%);">
+            <span class="heat-dot" style="width:90px;height:90px;background:var(--danger);top:15%;left:20%;"></span>
+            <span class="heat-dot" style="width:70px;height:70px;background:var(--warn);top:45%;left:50%;"></span>
+          </div>
+          <div class="safe safe--top"><p class="t2">Hotspots: Circle · Makola · Spintex junction</p></div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">C6 · Clustered markers</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--immersive">
+          <div class="card card--map" style="margin:12px var(--pad);flex:1;min-height:420px;">
+            <div style="position:absolute;top:38%;left:42%;width:36px;height:36px;border-radius:12px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800;font-size:.85rem;box-shadow:var(--shadow);">9+</div>
+            <div style="position:absolute;top:55%;left:60%;width:32px;height:32px;border-radius:10px;background:var(--danger);color:#fff;display:grid;place-items:center;font-weight:800;font-size:.75rem;">3</div>
+          </div>
+          <p class="t3" style="text-align:center;padding-bottom:12px;">Pinch to expand clusters · Central Accra</p>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">C7 · Immersive map (no nav)</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--immersive" style="position:relative;">
+          <div class="card card--map" style="margin:0;border-radius:0;flex:1;min-height:596px;height:auto;"></div>
+          <button class="icon-btn" style="position:absolute;top:52px;left:16px;width:44px;height:44px;border-radius:14px;background:#fff;box-shadow:var(--shadow-sm);">‹</button>
+          <button class="icon-btn" style="position:absolute;top:52px;right:16px;width:44px;height:44px;border-radius:14px;background:#fff;">◎</button>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">C8 · Saved places / watched areas</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Watched areas</h2><button class="icon-btn">+</button></div>
+          <div class="safe safe--top">
+            <div class="card row"><div class="avatar">🏠</div><div style="flex:1;"><p class="t1">Home · Cantonments</p><p class="t2">Alerts on · 5 incidents nearby</p></div><span class="chev">›</span></div>
+            <div class="card row" style="margin-top:10px;"><div class="avatar">🏢</div><div style="flex:1;"><p class="t1">Work · East Legon</p><p class="t2">Flooding watch active</p></div><span class="chev">›</span></div>
+            <div class="card row" style="margin-top:10px;"><div class="avatar">📍</div><div style="flex:1;"><p class="t1">Parents · Labone</p><p class="t2">Quiet · last alert 2 days ago</p></div><span class="chev">›</span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <h2 class="category">D — Reporting Flow</h2>
+  <div class="grid">
+    <article class="mockup">
+      <h3 class="mockup-title">D1 · Category selection (modal-style)</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen" style="position:relative;">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>New report</h2><span style="width:40px;"></span></div>
+          <p class="t2" style="padding:12px var(--pad) 0;">What are you reporting?</p>
+          <div class="safe safe--top">
+            <div class="card row"><div class="avatar">🚗</div><div><p class="t1">Traffic &amp; roads</p><p class="t2">Congestion, barriers, potholes</p></div><span class="chev">›</span></div>
+            <div class="card row" style="margin-top:10px;"><div class="avatar">🚨</div><div><p class="t1">Crime &amp; suspicious</p><p class="t2">Share safely · avoid identifying victims</p></div><span class="chev">›</span></div>
+            <div class="card row" style="margin-top:10px;"><div class="avatar">🔥</div><div><p class="t1">Fire &amp; flooding</p><p class="t2">Emergencies &amp; hazards</p></div><span class="chev">›</span></div>
+            <div class="card row" style="margin-top:10px;"><div class="avatar">💡</div><div><p class="t1">Utilities</p><p class="t2">Lights, power, water</p></div><span class="chev">›</span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">D2 · Report traffic incident</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Traffic</h2><span class="t3">Save draft</span></div>
+          <div class="steps"><i class="on"></i><i class="on"></i><i></i><i></i></div>
+          <div class="safe safe--top">
+            <p class="t1">Describe the situation</p>
+            <div class="search" style="margin:12px 0;height:88px;align-items:flex-start;border-radius:var(--r-md);">Heavy congestion on N1 Highway near Tetteh Quarshie…</div>
+            <div class="chips" style="margin-top:8px;"><span class="chip chip--sel">Congestion</span><span class="chip">Barrier</span><span class="chip">Accident</span></div>
+            <button class="btn" style="margin-top:20px;">Continue</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">D3 · Report crime / suspicious</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Crime alert</h2><span style="width:40px;"></span></div>
+          <div class="steps"><i class="on"></i><i></i><i></i><i></i></div>
+          <div class="safe safe--top">
+            <div class="banner banner--info"><span>i</span> Avoid names/photos of people; focus on time &amp; place.</div>
+            <p class="t1" style="margin-top:12px;">What did you observe?</p>
+            <div class="search" style="margin:12px 0;height:72px;align-items:flex-start;border-radius:var(--r-md);">Suspicious activity reported in Labone near the junction…</div>
+            <div class="toggle-row" style="border:none;padding-top:0;"><span class="t2" style="margin:0;">Share anonymously</span><div class="toggle"></div></div>
+            <button class="btn">Add location</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">D4 · Report fire / emergency</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat" style="background:var(--danger-soft);"><button class="back">‹</button><h2 style="color:var(--danger);">Emergency</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top">
+            <p class="t1">Fire outbreak near Makola</p>
+            <p class="t2" style="margin-top:8px;">If anyone is injured, call emergency services first.</p>
+            <div class="search" style="margin:16px 0;height:64px;align-items:flex-start;border-radius:var(--r-md);">Visible smoke, approximate building…</div>
+            <button class="btn" style="background:var(--danger);box-shadow:0 4px 14px rgba(220,38,38,.35);">Submit urgent alert</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">D5 · Report utility issue</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Utilities</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top">
+            <div class="tabs"><span class="tab tab--on">Power</span><span class="tab">Streetlight</span><span class="tab">Water</span></div>
+            <div class="card"><p class="t1">Power outage in Osu</p><p class="t2">Affects ~3 blocks · since 2 hrs ago</p><div class="progress"><i style="width:33%;"></i></div><p class="t3">Step 2 of 4</p></div>
+            <button class="btn btn--secondary" style="margin-top:12px;">Continue</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">D6 · Add photo / media</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Add media</h2><span style="width:40px;"></span></div>
+          <div class="steps"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+          <div class="safe safe--top">
+            <div class="card" style="height:180px;display:grid;place-items:center;border-style:dashed;background:var(--surface-2);"><p class="t2">Tap to add photo of pothole near Spintex Road</p><button class="btn btn--secondary" style="margin-top:12px;width:auto;padding:10px 20px;">Choose from library</button></div>
+            <p class="t3" style="margin-top:10px;">Photos help verify · you can blur plates</p>
+            <button class="btn">Next</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">D7 · Location picker</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Pin location</h2><button class="icon-btn">⌖</button></div>
+          <div class="card card--map" style="margin:12px var(--pad);height:240px;"><span class="map-pin" style="top:45%;left:50%;transform:translate(-50%,-50%);"></span></div>
+          <div class="safe safe--top">
+            <div class="search" style="margin:0;">Circle, Accra</div>
+            <p class="t2" style="margin-top:10px;">Drag map to adjust · Broken streetlight near Circle</p>
+            <button class="btn">Confirm location</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">D8 · Review report</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Review</h2><span style="width:40px;"></span></div>
+          <div class="steps"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+          <div class="safe safe--top">
+            <div class="card"><p class="t1">Pothole · Road</p><p class="t2">Spintex Road · Madina bound</p><span class="badge badge--brand">Pending send</span></div>
+            <div class="card" style="margin-top:10px;"><p class="t2">“Deep pothole after the speed table — cars swerving.”</p><p class="t3" style="margin-top:8px;">1 photo attached</p></div>
+            <button class="btn">Submit report</button>
+            <button class="btn btn--ghost" style="margin-top:8px;">Edit</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">D9 · Success (no navigation)</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light" style="justify-content:center;align-items:center;padding:32px;text-align:center;">
+          <div class="avatar" style="width:72px;height:72px;border-radius:22px;background:var(--success-soft);color:var(--success);font-size:2rem;">✓</div>
+          <p class="t1" style="margin-top:20px;font-size:1.2rem;">Report submitted</p>
+          <p class="t2" style="margin-top:8px;">Thanks — neighbours will see this after quick checks. New report submitted appears in the feed.</p>
+          <button class="btn" style="margin-top:28px;">Back to home</button>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">D10 · Draft / validation error</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Utilities</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top">
+            <div class="banner banner--urgent" style="background:var(--warn-soft);color:var(--warn);"><span>!</span> Add a location to continue</div>
+            <div class="card"><p class="t1">Broken streetlight near Circle</p><p class="t2">Draft saved · 2 mins ago</p></div>
+            <button class="btn" disabled>Submit report</button>
+            <button class="btn btn--secondary" style="margin-top:10px;">Pick location</button>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <h2 class="category">E — Alerts &amp; Notifications</h2>
+  <div class="grid">
+    <article class="mockup">
+      <h3 class="mockup-title">E1 · Notifications list — Stack</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Notifications</h2><button class="icon-btn">✓</button></div>
+          <div class="safe safe--top">
+            <div class="card row"><div class="avatar" style="background:var(--danger-soft);">🔥</div><div><p class="t1">Fire outbreak near Makola</p><p class="t2">25 mins ago · Critical</p></div></div>
+            <div class="card row" style="margin-top:8px;"><div class="avatar">🌊</div><div><p class="t1">Flooding in East Legon</p><p class="t2">2 hrs ago · Area alert</p></div></div>
+            <div class="card row" style="margin-top:8px;"><div class="avatar">⚡</div><div><p class="t1">Power outage in Osu</p><p class="t2">Yesterday · Utilities</p></div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">E2 · Grouped by category — Top tabs</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr"><h2>Alerts</h2></div>
+          <div class="tabs"><span class="tab tab--on">All</span><span class="tab">Traffic</span><span class="tab">Crime</span><span class="tab">Fire</span><span class="tab">Utilities</span></div>
+          <div class="safe safe--top">
+            <p class="t3" style="margin-bottom:8px;">Traffic · 3 new</p>
+            <div class="card row"><div class="avatar">🚧</div><div><p class="t1">Heavy congestion on N1 Highway</p><p class="t2">12 mins ago</p></div></div>
+            <p class="t3" style="margin:14px 0 8px;">Crime · 1 new</p>
+            <div class="card row"><div class="avatar">🚔</div><div><p class="t1">Suspicious activity · Labone</p><p class="t2">1 hr ago</p></div></div>
+          </div>
+          <nav class="nav-bot"><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>Map</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>Report</div><div class="nav-item nav-item--on"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>Alerts</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/></svg>Profile</div></nav>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">E3 · Critical alert (immersive)</h3>
+      <div class="phone">
+        <div class="status" style="background:var(--danger);color:#fff;"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen" style="background:linear-gradient(180deg,#450a0a,#7f1d1d);justify-content:center;padding:28px;color:#fef2f2;">
+          <p class="t3" style="color:#fecaca;text-align:center;">CRITICAL · FIRE</p>
+          <p style="font-size:1.5rem;font-weight:800;text-align:center;margin-top:12px;line-height:1.2;">Fire outbreak near Makola</p>
+          <p class="t2" style="color:#fecaca;text-align:center;margin-top:12px;">Move to clear air · avoid the market frontage. Emergency services notified.</p>
+          <button class="btn" style="margin-top:28px;background:#fff;color:var(--danger);box-shadow:none;">I'm safe — show map</button>
+          <button class="btn btn--secondary" style="margin-top:10px;background:transparent;border:1px solid rgba(255,255,255,.4);color:#fff;">Share with family</button>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">E4 · Alert detail</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Alert detail</h2><button class="icon-btn">♡</button></div>
+          <div class="safe safe--top">
+            <span class="badge badge--urgent">Active</span>
+            <p class="t1" style="margin-top:12px;font-size:1.15rem;">Flooding reported in East Legon</p>
+            <p class="t2" style="margin-top:8px;">Updated 25 mins ago · 18 confirmations</p>
+            <div class="card card--map" style="margin-top:14px;height:120px;"></div>
+            <p class="t2" style="margin-top:12px;">Lower sections near the underpass are impassable. Use higher ground routes toward Madina.</p>
+            <button class="btn">View safer route</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">E5 · Filtered alert view</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Utilities only</h2><button class="icon-btn">⚙</button></div>
+          <div class="safe safe--top">
+            <div class="card row"><div class="avatar">💡</div><div><p class="t1">Broken streetlight near Circle</p><p class="t2">Pending verification</p><span class="badge badge--warn">Pending</span></div></div>
+            <div class="card row" style="margin-top:10px;"><div class="avatar">⚡</div><div><p class="t1">Power outage in Osu</p><p class="t2">Crew assigned · 2 hrs ago</p><span class="badge badge--brand">Tracking</span></div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">E6 · Empty alerts</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><h2>Alerts</h2></div>
+          <div class="safe safe--top" style="text-align:center;padding-top:48px;">
+            <div class="card" style="padding:32px 20px;">
+              <p style="font-size:2.5rem;">✨</p>
+              <p class="t1" style="margin-top:12px;">All quiet right now</p>
+              <p class="t2" style="margin-top:8px;">No new alerts for Cantonments in the last 24 hours. See all alerts for wider areas.</p>
+              <button class="btn btn--secondary" style="margin-top:16px;">Expand radius</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">E7 · Alert settings shortcut</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Alert tuning</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top">
+            <div class="toggle-row"><span>Critical only</span><div class="toggle toggle--off"></div></div>
+            <div class="toggle-row"><span>Sound for emergencies</span><div class="toggle"></div></div>
+            <div class="toggle-row"><span>Quiet hours (11pm–6am)</span><div class="toggle"></div></div>
+            <div class="toggle-row" style="border:none;"><span>Follow saved places</span><div class="toggle"></div></div>
+            <button class="btn" style="margin-top:16px;">Save preferences</button>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <h2 class="category">F — Incidents &amp; Activity</h2>
+  <div class="grid">
+    <article class="mockup">
+      <h3 class="mockup-title">F1 · Incident detail</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Incident</h2><button class="icon-btn">↗</button></div>
+          <div class="card card--map" style="margin:0 var(--pad);height:140px;"></div>
+          <div class="safe safe--top">
+            <p class="t1">Accident at Tetteh Quarshie</p>
+            <div class="chips" style="margin-top:10px;"><span class="chip chip--sel">Traffic</span><span class="chip">Active</span></div>
+            <p class="t2" style="margin-top:12px;">Lane closures · emergency on scene. Community updates every few minutes.</p>
+            <button class="btn btn--secondary">View on Map</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">F2 · Timeline / status updates</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Timeline</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top">
+            <div class="card"><p class="t3">25 mins ago</p><p class="t1" style="margin-top:4px;">Report filed</p><p class="t2">“Two vehicles · ambulance arriving”</p></div>
+            <div class="card" style="margin-top:10px;"><p class="t3">40 mins ago</p><p class="t1" style="margin-top:4px;">Status: Active</p><p class="t2">Police directing traffic</p></div>
+            <div class="card" style="margin-top:10px;opacity:.75;"><p class="t3">2 hrs ago</p><p class="t1" style="margin-top:4px;">First confirmation</p><p class="t2">From rider near interchange</p></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">F3 · Community comments</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Comments</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top" style="flex:1;">
+            <div class="card row"><div class="avatar">KO</div><div><p class="t1">Kofi</p><p class="t2">Still backed up toward Madina · 15 mins ago</p></div></div>
+            <div class="card row" style="margin-top:8px;"><div class="avatar">AB</div><div><p class="t1">Abla</p><p class="t2">Police moved barriers slightly · helpful</p></div></div>
+          </div>
+          <div class="search" style="margin:8px var(--pad) 20px;">Add a helpful update…</div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">F4 · Verification</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Verification</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top">
+            <div class="banner banner--info"><span>◎</span> Help confirm this report responsibly</div>
+            <p class="t1" style="margin-top:12px;">Pothole near Spintex Road</p>
+            <p class="t2">Do you still see this issue?</p>
+            <div style="display:flex;gap:10px;margin-top:16px;">
+              <button class="btn" style="flex:1;">Yes, still there</button>
+              <button class="btn btn--secondary" style="flex:1;">Cleared / fixed</button>
+            </div>
+            <p class="t3" style="margin-top:14px;text-align:center;">Pending verification · 4 responses so far</p>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">F5 · Resolved incident</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Resolved</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top">
+            <span class="badge badge--ok">Resolved</span>
+            <p class="t1" style="margin-top:12px;">Broken streetlight near Circle</p>
+            <p class="t2" style="margin-top:8px;">Marked fixed by utility partner · 2 hrs ago</p>
+            <div class="card" style="margin-top:14px;background:var(--success-soft);border-color:transparent;"><p class="t2" style="color:var(--success);font-weight:600;">Thanks to 7 community confirmations</p></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">F6 · Saved incident</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Saved</h2><button class="icon-btn">♡</button></div>
+          <div class="safe safe--top">
+            <div class="card row"><div class="avatar">🌊</div><div><p class="t1">Flooding in East Legon</p><p class="t2">Saved · notify on updates</p><span class="badge badge--brand">Watching</span></div></div>
+            <button class="btn btn--secondary" style="margin-top:16px;">Remove from saved</button>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <h2 class="category">G — Search &amp; Discovery</h2>
+  <div class="grid">
+    <article class="mockup">
+      <h3 class="mockup-title">G1 · Search</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Search</h2><span style="width:40px;"></span></div>
+          <div class="search" style="margin:12px var(--pad);border:2px solid var(--brand);">N1 Highway, Osu, Labone…</div>
+          <p class="t3" style="padding:0 var(--pad);">Recent</p>
+          <div class="safe safe--top" style="padding-top:8px;">
+            <div class="list-item"><span>East Legon flooding</span><span class="chev">↗</span></div>
+            <div class="list-item"><span>Circle streetlight</span><span class="chev">↗</span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">G2 · Search results</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>“N1 Highway”</h2><button class="icon-btn">⚙</button></div>
+          <div class="safe safe--top">
+            <p class="t2">6 results · traffic &amp; road</p>
+            <div class="card row"><div class="avatar">🚗</div><div><p class="t1">Heavy congestion on N1 Highway</p><p class="t2">Live · 12 mins ago</p></div></div>
+            <div class="card row" style="margin-top:8px;"><div class="avatar">🚧</div><div><p class="t1">Police barrier · merge point</p><p class="t2">Community update</p></div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">G3 · Recent searches</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><h2>Recent</h2><button class="icon-btn">Clear</button></div>
+          <div class="safe safe--top">
+            <div class="list-item"><span>Makola fire</span><span class="chev">›</span></div>
+            <div class="list-item"><span>Spintex pothole</span><span class="chev">›</span></div>
+            <div class="list-item"><span>Osu outage</span><span class="chev">›</span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">G4 · Suggested areas</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr"><h2>Discover</h2></div>
+          <div class="safe safe--top">
+            <p class="t2">Suggested areas near you</p>
+            <div class="stat-grid" style="margin-top:12px;">
+              <div class="stat"><b>Labone</b><span>3 active reports</span></div>
+              <div class="stat"><b>Cantonments</b><span>Quiet</span></div>
+              <div class="stat"><b>Madina</b><span>Road work</span></div>
+              <div class="stat"><b>Central Accra</b><span>High activity</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">G5 · Filter bottom sheet</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen" style="position:relative;">
+          <div class="safe safe--top" style="opacity:.35;"><p class="t1">Search results</p></div>
+          <div class="sheet">
+            <div class="sheet-handle"></div>
+            <p class="t1">Filters</p>
+            <p class="t2" style="margin-top:6px;">Refine incidents and alerts</p>
+            <div class="chips" style="margin-top:14px;"><span class="chip chip--sel">Nearby</span><span class="chip">24h</span><span class="chip">7d</span><span class="chip">Verified</span></div>
+            <div class="toggle-row"><span>Hide resolved</span><div class="toggle"></div></div>
+            <div class="toggle-row" style="border:none;"><span>High severity only</span><div class="toggle toggle--off"></div></div>
+            <button class="btn" style="margin-top:12px;">Apply</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">G6 · Category discovery</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Categories</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top">
+            <div class="card row"><div class="avatar">🚗</div><div><p class="t1">Traffic &amp; roads</p><p class="t2">Congestion, accidents, potholes</p></div><span class="chev">›</span></div>
+            <div class="card row" style="margin-top:10px;"><div class="avatar">🚨</div><div><p class="t1">Crime &amp; safety</p><p class="t2">Suspicious activity, local crime alerts</p></div><span class="chev">›</span></div>
+            <div class="card row" style="margin-top:10px;"><div class="avatar">🔥</div><div><p class="t1">Fire &amp; disasters</p><p class="t2">Flooding, outbreaks, hazards</p></div><span class="chev">›</span></div>
+            <div class="card row" style="margin-top:10px;"><div class="avatar">💡</div><div><p class="t1">Utilities</p><p class="t2">Power, lights, water</p></div><span class="chev">›</span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <h2 class="category">H — Profile &amp; Community</h2>
+  <div class="grid">
+    <article class="mockup">
+      <h3 class="mockup-title">H1 · Profile overview — Bottom nav</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><h2>Profile</h2><button class="icon-btn">⚙</button></div>
+          <div class="safe safe--top" style="text-align:center;">
+            <div class="avatar" style="width:72px;height:72px;border-radius:22px;margin:8px auto 0;font-size:1.25rem;">AK</div>
+            <p class="t1" style="margin-top:12px;">Ama Kweku</p>
+            <p class="t2">Accra · joined 2024</p>
+            <span class="badge badge--brand" style="margin-top:10px;">Trusted contributor</span>
+          </div>
+          <div class="safe safe--top" style="padding-top:0;">
+            <div class="card row" style="cursor:default;"><div class="avatar">📊</div><div><p class="t1">Contribution stats</p><p class="t2">See reports &amp; verifications</p></div><span class="chev">›</span></div>
+            <div class="card row" style="margin-top:10px;"><div class="avatar">🏆</div><div><p class="t1">Badges &amp; leaderboard</p><p class="t2">Community standing</p></div><span class="chev">›</span></div>
+          </div>
+          <nav class="nav-bot"><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>Map</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>Report</div><div class="nav-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>Alerts</div><div class="nav-item nav-item--on"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</div></nav>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">H2 · Contribution stats</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Your impact</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top">
+            <div class="stat-grid">
+              <div class="stat"><b>42</b><span>Reports filed</span></div>
+              <div class="stat"><b>128</b><span>Helpful votes</span></div>
+              <div class="stat"><b>31</b><span>Verifications</span></div>
+              <div class="stat"><b>9</b><span>Saved lives*</span></div>
+            </div>
+            <p class="t3" style="margin-top:10px;">*Community-estimated route avoidance</p>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">H3 · Activity history</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Activity</h2><span style="width:40px;"></span></div>
+          <div class="tabs"><span class="tab tab--on">All</span><span class="tab">Reports</span><span class="tab">Comments</span></div>
+          <div class="safe safe--top">
+            <div class="list-item"><span>Confirmed · Osu outage</span><span class="t3">2d</span></div>
+            <div class="list-item"><span>Reported · Spintex pothole</span><span class="t3">5d</span></div>
+            <div class="list-item"><span>Comment · N1 congestion</span><span class="t3">1w</span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">H4 · Badges / achievements</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Badges</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top">
+            <div class="card row"><div class="avatar" style="background:var(--warn-soft);color:var(--warn);">⚡</div><div><p class="t1">Early reporter</p><p class="t2">First credible alert in your grid</p><span class="badge badge--ok">Earned</span></div></div>
+            <div class="card row" style="margin-top:10px;opacity:.55;"><div class="avatar">🛡️</div><div><p class="t1">Neighbourhood guardian</p><p class="t2">50 verifications · locked</p></div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">H5 · Trust / credibility</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Trust score</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top">
+            <div class="card" style="text-align:center;padding:24px;">
+              <p class="t1" style="font-size:2.5rem;font-weight:800;color:var(--brand);">82</p>
+              <p class="t2">High credibility · accurate history</p>
+              <div class="progress" style="margin-top:16px;"><i style="width:82%;"></i></div>
+              <p class="t3" style="margin-top:10px;">Improves with confirmations &amp; civil tone</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">H6 · Community leaderboard</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Leaderboard</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top">
+            <div class="leader-row"><span class="t1" style="width:24px;">1</span><div class="avatar">YM</div><div style="flex:1;"><b>Yawa M.</b><span>East Legon · 540 pts</span></div></div>
+            <div class="leader-row"><span class="t1" style="width:24px;">2</span><div class="avatar">JA</div><div style="flex:1;"><b>Joe A.</b><span>Osu · 512 pts</span></div></div>
+            <div class="leader-row"><span class="t1" style="width:24px;">3</span><div class="avatar">AK</div><div style="flex:1;"><b>You</b><span>Cantonments · 498 pts</span></div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">H7 · Saved places (profile)</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Saved places</h2><button class="icon-btn">+</button></div>
+          <div class="safe safe--top">
+            <div class="card row"><div class="avatar">🏠</div><div><p class="t1">Home</p><p class="t2">Cantonments</p></div><span class="chev">›</span></div>
+            <div class="card row" style="margin-top:10px;"><div class="avatar">🏢</div><div><p class="t1">Office</p><p class="t2">Tetteh Quarshie area</p></div><span class="chev">›</span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">H8 · Personal safety zones</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Safety zones</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top">
+            <p class="t2">Get louder alerts inside these radii</p>
+            <div class="card card--map" style="margin-top:12px;height:140px;"><span class="map-pin" style="background:var(--brand);top:50%;left:50%;width:48px;height:48px;opacity:.25;border:none;"></span></div>
+            <div class="toggle-row" style="border:none;margin-top:12px;"><span>Labone · 1.2 km</span><div class="toggle"></div></div>
+            <button class="btn btn--secondary">Add zone</button>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <h2 class="category">I — Settings</h2>
+  <div class="grid">
+    <article class="mockup">
+      <h3 class="mockup-title">I1 · General — Drawer-style list</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Settings</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top">
+            <div class="list-item"><span>Account</span><span class="chev">›</span></div>
+            <div class="list-item"><span>Notifications</span><span class="chev">›</span></div>
+            <div class="list-item"><span>Privacy</span><span class="chev">›</span></div>
+            <div class="list-item"><span>Language</span><span class="chev">›</span></div>
+            <div class="list-item"><span>Help &amp; support</span><span class="chev">›</span></div>
+            <div class="list-item" style="border:none;"><span>About Yanioba</span><span class="chev">›</span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">I2 · Notification preferences</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Notifications</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top">
+            <div class="toggle-row"><span>Push alerts</span><div class="toggle"></div></div>
+            <div class="toggle-row"><span>Email digest</span><div class="toggle toggle--off"></div></div>
+            <div class="toggle-row" style="border:none;"><span>SMS for critical only</span><div class="toggle toggle--off"></div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">I3 · Alert category preferences</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Categories</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top">
+            <div class="toggle-row"><span>Traffic &amp; roads</span><div class="toggle"></div></div>
+            <div class="toggle-row"><span>Crime &amp; suspicious</span><div class="toggle"></div></div>
+            <div class="toggle-row"><span>Fire &amp; flooding</span><div class="toggle"></div></div>
+            <div class="toggle-row" style="border:none;"><span>Utilities</span><div class="toggle"></div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">I4 · Privacy</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Privacy</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top">
+            <div class="toggle-row"><span>Approximate location on map</span><div class="toggle"></div></div>
+            <div class="toggle-row"><span>Show display name</span><div class="toggle"></div></div>
+            <div class="toggle-row" style="border:none;"><span>Share analytics</span><div class="toggle toggle--off"></div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">I5 · Language</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Language</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top">
+            <div class="list-item"><span>English</span><span style="color:var(--brand);font-weight:700;">✓</span></div>
+            <div class="list-item"><span>Twi</span><span class="chev">›</span></div>
+            <div class="list-item" style="border:none;"><span>Ga</span><span class="chev">›</span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">I6 · Account management</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Account</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top">
+            <div class="card"><p class="t1">+233 ··· ··· 482</p><p class="t2">Phone</p></div>
+            <div class="list-item" style="margin-top:12px;"><span>Change password</span><span class="chev">›</span></div>
+            <div class="list-item"><span>Download my data</span><span class="chev">›</span></div>
+            <div class="list-item" style="border:none;color:var(--danger);"><span>Delete account</span><span class="chev">›</span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">I7 · Help &amp; support</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>Help</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top">
+            <div class="card row"><div class="avatar">💬</div><div><p class="t1">Chat with support</p><p class="t2">Avg reply · 12 min</p></div><span class="chev">›</span></div>
+            <div class="card row" style="margin-top:10px;"><div class="avatar">📚</div><div><p class="t1">Safety reporting guide</p><p class="t2">What to include / avoid</p></div><span class="chev">›</span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">I8 · About Yanioba</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="hdr hdr--flat"><button class="back">‹</button><h2>About</h2><span style="width:40px;"></span></div>
+          <div class="safe safe--top" style="text-align:center;">
+            <div class="logo-mark" style="transform:scale(.85);">Y</div>
+            <p class="t1">Yanioba</p>
+            <p class="t2" style="margin-top:8px;">Version 2.8.0 · Community safety for Ghana</p>
+            <p class="t3" style="margin-top:16px;">Terms · Privacy · Open source notices</p>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <h2 class="category">J — States &amp; System</h2>
+  <div class="grid">
+    <article class="mockup">
+      <h3 class="mockup-title">J1 · Loading skeleton</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light">
+          <div class="hdr hdr--flat"><h2>Nearby</h2></div>
+          <div class="safe safe--top">
+            <div class="card"><div class="skeleton" style="width:60%;"></div><div class="skeleton" style="width:90%;margin-top:10px;"></div><div class="skeleton" style="width:40%;margin-top:10px;height:10px;"></div></div>
+            <div class="card" style="margin-top:10px;"><div class="skeleton" style="width:70%;"></div><div class="skeleton" style="width:100%;margin-top:10px;"></div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">J2 · Empty — no incidents nearby</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen" style="justify-content:center;padding:24px;">
+          <div class="card" style="text-align:center;padding:28px;">
+            <p style="font-size:2.25rem;">🗺️</p>
+            <p class="t1" style="margin-top:12px;">No incidents nearby</p>
+            <p class="t2" style="margin-top:8px;">Your area looks calm — widen search to Central Accra or enable alerts.</p>
+            <button class="btn" style="margin-top:18px;">Expand area</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">J3 · Error — network</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light" style="justify-content:center;padding:24px;text-align:center;">
+          <p style="font-size:2rem;">📶</p>
+          <p class="t1" style="margin-top:12px;">Network unavailable</p>
+          <p class="t2" style="margin-top:8px;">We could not refresh alerts. Check connection and try again.</p>
+          <button class="btn" style="margin-top:20px;">Retry</button>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">J4 · Error — location</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="safe safe--top" style="padding-top:80px;text-align:center;">
+            <p style="font-size:2rem;">⌖</p>
+            <p class="t1" style="margin-top:12px;">Location unavailable</p>
+            <p class="t2" style="margin-top:8px;">Enable location to sort “5 incidents nearby” and route risk on the N1 Highway.</p>
+            <button class="btn" style="margin-top:20px;">Open settings</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">J5 · Offline mode</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--dark">
+          <div class="safe safe--top" style="padding-top:72px;text-align:center;">
+            <p style="font-size:2rem;">✈️</p>
+            <p class="t1" style="margin-top:12px;color:#f8fafc;">Offline mode</p>
+            <p class="t2" style="margin-top:8px;">Viewing saved incidents only. Reports will sync when you reconnect.</p>
+            <div class="card" style="margin-top:20px;text-align:left;"><p class="t1">Saved · Flooding East Legon</p><p class="t2">Cached 2 hrs ago</p></div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">J6 · Maintenance</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen screen--light" style="justify-content:center;padding:28px;text-align:center;">
+          <p style="font-size:2rem;">🛠️</p>
+          <p class="t1" style="margin-top:12px;">Service unavailable</p>
+          <p class="t2" style="margin-top:8px;">Yanioba is under maintenance. Alerts will resume shortly.</p>
+          <p class="t3" style="margin-top:12px;">Incident ID: YN-4821</p>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">J7 · Permission denied</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen">
+          <div class="safe safe--top" style="padding-top:64px;">
+            <div class="card" style="text-align:center;padding:24px;">
+              <p style="font-size:2rem;">🔕</p>
+              <p class="t1" style="margin-top:12px;">Notifications off</p>
+              <p class="t2" style="margin-top:8px;">You denied alerts — critical warnings like fire near Makola may be missed.</p>
+              <button class="btn" style="margin-top:16px;">Fix in system settings</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="mockup">
+      <h3 class="mockup-title">J8 · Confirmation modal + toast</h3>
+      <div class="phone">
+        <div class="status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+        <div class="screen" style="position:relative;">
+          <div class="safe safe--top" style="opacity:.4;"><p class="t1">Report settings</p></div>
+          <div class="modal-dim">
+            <div class="modal">
+              <h3>Discard draft?</h3>
+              <p>Your utility report for Osu will be lost.</p>
+              <div class="modal-actions">
+                <button class="btn btn--secondary" style="box-shadow:none;">Keep</button>
+                <button class="btn" style="background:var(--danger);box-shadow:0 4px 14px rgba(220,38,38,.3);">Discard</button>
+              </div>
+            </div>
+          </div>
+          <div class="toast">New report submitted · East Legon</div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <p class="intro" style="margin-top:40px;">End of kit — open this file in any browser. No assets required.</p>
+</body>
+</html>
