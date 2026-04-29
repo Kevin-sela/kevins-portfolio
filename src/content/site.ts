@@ -119,6 +119,20 @@ export const projects: Project[] = [
 
 export const experience: ExperienceItem[] = [
   {
+    role: "Backend Software Engineer",
+    company: "Aptiveon Technologies (client: Relitix)",
+    start: "2023",
+    end: "Present",
+    bullets: [
+      "Architected and maintained scalable REST APIs and microservices for real-time systems.",
+      "Deployed and managed services on AWS EC2, S3, and Lambda.",
+      "Used Docker and Kubernetes for containerization and orchestration.",
+      "Optimized performance using Cython.",
+      "Integrated enterprise systems via secure APIs.",
+    ],
+    tech: ["Python", "AWS", "Docker", "Kubernetes", "Cython", "REST APIs"],
+  },
+  {
     role: "Software Developer",
     company: "INNORIK USA",
     start: "Aug 2022",

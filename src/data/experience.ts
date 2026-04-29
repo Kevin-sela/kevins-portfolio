@@ -2,8 +2,8 @@ export const experience = [
   {
     dates: "2023 - Present",
     role: "Backend Software Engineer",
-    company: "Relitix (via Aptiveon Technologies)",
-    brand: "RELITIX",
+    company: "Aptiveon Technologies (client: Relitix)",
+    brand: "APTIVEON",
     bullets: [
       "Architected and maintained scalable REST APIs and microservices for real-time systems",
       "Deployed and managed services on AWS EC2, S3, and Lambda",
