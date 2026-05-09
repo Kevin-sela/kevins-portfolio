@@ -1,13 +1,25 @@
 "use client";
 
-import { Code2, FileDown, Github, Sun } from "lucide-react";
+import { Code2, FileDown, Github } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { EASE_OUT } from "@/lib/motion";
 
 const navItems = ["Home", "About", "Skills", "Projects", "Experience", "Contact"] as const;
 
 export function Navbar() {
   const reduceMotion = useReducedMotion();
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(docHeight > 0 ? (scrollTop / docHeight) * 100 : 0);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <motion.header
@@ -33,10 +45,13 @@ export function Navbar() {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <a href="https://github.com/Kevin-sela" aria-label="GitHub" className="hidden text-slate-200 transition hover:text-violet-300 sm:block">
+          <a
+            href="https://github.com/Kevin-sela"
+            aria-label="GitHub"
+            className="hidden text-slate-200 transition hover:text-violet-300 sm:block"
+          >
             <Github className="h-5 w-5" />
           </a>
-          <Sun className="hidden h-5 w-5 text-amber-300 sm:block" />
           <a
             href="/resume/Kelvin_Ofori_org_Resume.docx"
             className="inline-flex items-center gap-2 rounded-lg border border-violet-400/60 px-4 py-2 text-sm font-semibold text-slate-50 transition hover:bg-violet-500/15"
@@ -45,6 +60,10 @@ export function Navbar() {
           </a>
         </div>
       </div>
+      <div
+        className="nav-scroll-progress"
+        style={{ width: `${scrollProgress}%` }}
+      />
     </motion.header>
   );
 }

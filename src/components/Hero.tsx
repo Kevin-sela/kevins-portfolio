@@ -29,10 +29,10 @@ const dashboardItems = [
 ] as const;
 
 const typingLines = [
-  "boot.sequence('portfolio-ui')",
-  "compile.experience({ mode: 'live' })",
-  "ship.features(['backend', 'cloud', 'ux'])",
-  "status: operational",
+  "$ deploy --env production --scale 10",
+  "$ kubectl scale deployment api --replicas=5",
+  "$ terraform apply --target=infra",
+  "✓ deploy complete · latency: 42ms",
 ] as const;
 
 function RevealWords({
@@ -67,12 +67,11 @@ function RevealWords({
           key={`${word}-${index}`}
           className="inline-block pr-[0.32em]"
           variants={{
-            hidden: { opacity: 0, y: 20, filter: "blur(6px)" },
+            hidden: { opacity: 0, y: 16 },
             visible: {
               opacity: 1,
               y: 0,
-              filter: "blur(0px)",
-              transition: { duration: 0.6, ease: easeOutExpo },
+              transition: { duration: 0.5, ease: easeOutExpo },
             },
           }}
         >
@@ -277,14 +276,14 @@ export function Hero() {
           <span className="gradient-text inline-block hero-name-plate">Ofori</span>
         </motion.h1>
         <motion.p variants={fadeUp} className="mt-5 text-xl font-extrabold uppercase tracking-[0.12em] text-slate-200 sm:text-2xl">
-          <HeroLineTyping lines={["Software Engineer", "Backend Systems Builder", "Product-Focused Developer"]} />
+          <HeroLineTyping lines={["Backend Engineer", "Cloud Systems Architect", "Full-Stack Developer", "API & Platform Builder"]} />
         </motion.p>
         <motion.p variants={fadeUp} className="mt-1 text-xl font-extrabold uppercase tracking-[0.11em] text-blue-400 sm:text-2xl">
           <RevealWords text="Backend - Full-Stack - Cloud" delay={0.34} />
         </motion.p>
         <motion.p variants={fadeUp} className="max-w-[620px]">
           <RevealWords
-            text="I build scalable systems, real-time platforms, and developer tools that solve real-world problems."
+            text="I architect distributed systems and ship production-grade APIs — from cloud infrastructure to user-facing React interfaces."
             delay={0.42}
           />
         </motion.p>
@@ -310,6 +309,10 @@ export function Hero() {
           </Magnetic>
         </motion.div>
       </motion.div>
+      <div className="hero-scroll-hint" aria-hidden>
+        <div className="hero-scroll-hint-dot" />
+        <div className="hero-scroll-hint-line" />
+      </div>
     </section>
   );
 }

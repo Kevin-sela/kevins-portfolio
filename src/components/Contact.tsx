@@ -11,8 +11,8 @@ export function Contact() {
   const reduceMotion = useReducedMotion();
   const socials = [
     { icon: Github, label: "GitHub", href: "https://github.com/Kevin-sela" },
-    { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/" },
-    { icon: Twitter, label: "Twitter", href: "https://twitter.com/" },
+    { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/kelvin-ofori" },
+    { icon: Twitter, label: "Twitter", href: "https://twitter.com/kelvinofori_dev" },
     { icon: Zap, label: "Portfolio", href: "#home" },
   ];
 
@@ -74,8 +74,9 @@ export function Contact() {
                 </div>
                 <div>
                   <h3 className="font-bold text-white">BSc Information Technology</h3>
-                  <p className="mt-1 text-sm text-slate-400">(In Progress)</p>
-                  <p className="mt-4 text-sm text-slate-300">Accra Institute of Technology</p>
+                  <p className="mt-1 text-sm text-slate-400">BSc in Information Technology</p>
+                  <p className="mt-1 text-xs text-violet-300/80 font-semibold">Currently Enrolled</p>
+                  <p className="mt-3 text-sm text-slate-300">Accra Institute of Technology</p>
                 </div>
               </div>
             </Card>

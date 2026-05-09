@@ -7,7 +7,7 @@ import { ProjectCard } from "@/components/ui/project-card";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { easeOutExpo } from "@/lib/motion";
 
-const projectSignals = ["Orbital planning", "Neon cards", "Live systems"] as const;
+const projectSignals = ["Production Ready", "Open Source", "AI-Powered"] as const;
 
 export function Projects() {
   const reduceMotion = useReducedMotion();

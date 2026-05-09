@@ -2,6 +2,9 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { experience } from "@/data/experience";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { TimelineItem } from "@/components/ui/timeline-item";
@@ -9,6 +12,33 @@ import { easeOutExpo } from "@/lib/motion";
 
 export function Experience() {
   const reduceMotion = useReducedMotion();
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (reduceMotion) return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        progressRef.current,
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          ease: "none",
+          transformOrigin: "top center",
+          scrollTrigger: {
+            trigger: timelineRef.current,
+            start: "top 72%",
+            end: "bottom 28%",
+            scrub: 0.6,
+          },
+        }
+      );
+    });
+
+    return () => ctx.revert();
+  }, [reduceMotion]);
 
   return (
     <motion.section
@@ -29,12 +59,17 @@ export function Experience() {
           <SectionHeading eyebrow="Experience" title="My Professional Journey" />
         </motion.div>
         <motion.div
+          ref={timelineRef}
           className="timeline mt-10"
           initial={reduceMotion ? false : { opacity: 0, y: 20 }}
           whileInView={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.24 }}
           transition={{ duration: 0.68, ease: easeOutExpo, delay: 0.12 }}
         >
+          <div className="timeline-track" aria-hidden />
+          <div ref={progressRef} className="timeline-progress" aria-hidden>
+            <div className="timeline-progress-tip" />
+          </div>
           {experience.map((experienceItem, index) => (
             <TimelineItem
               key={`${experienceItem.company}-${experienceItem.dates}`}

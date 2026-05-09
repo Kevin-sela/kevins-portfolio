@@ -15,6 +15,7 @@ export function SectionHeading({
       <h2 className="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">
         {title}
       </h2>
+      <span className={`section-heading-accent${align === "center" ? " mx-auto" : ""}`} />
     </div>
   );
 }

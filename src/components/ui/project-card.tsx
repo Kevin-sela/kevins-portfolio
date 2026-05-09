@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowUpRight, Github } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { easeOutExpo } from "@/lib/motion";
@@ -25,17 +25,58 @@ export function ProjectCard({
 }) {
   const isGithubRepo = href.includes("github.com");
 
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const glowX = useMotionValue(50);
+  const glowY = useMotionValue(50);
+
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [7, -7]), { stiffness: 280, damping: 28 });
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-7, 7]), { stiffness: 280, damping: 28 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const nx = (e.clientX - rect.left) / rect.width - 0.5;
+    const ny = (e.clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(nx);
+    mouseY.set(ny);
+    glowX.set(((e.clientX - rect.left) / rect.width) * 100);
+    glowY.set(((e.clientY - rect.top) / rect.height) * 100);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+    glowX.set(50);
+    glowY.set(50);
+  };
+
+  const glowBg = useTransform(
+    [glowX, glowY],
+    ([x, y]: number[]) =>
+      `radial-gradient(380px circle at ${x}% ${y}%, rgba(139,92,246,0.13), transparent 55%)`
+  );
+
   return (
     <motion.article
       className="project-tilt-scene"
       initial={{ opacity: 0, y: 40, scale: 0.97 }}
-      whileInView={{ opacity: 1, rotateX: 0, rotateY: 0, y: 0, scale: 1 }}
-      whileHover={{ y: -6, scale: 1.015 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: false, amount: 0.35 }}
       transition={{ duration: 0.7, ease: easeOutExpo }}
-      style={{ transformPerspective: 1200, transformStyle: "preserve-3d" }}
+      style={{
+        transformPerspective: 1200,
+        transformStyle: "preserve-3d",
+        rotateX,
+        rotateY,
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
     >
-      <Card className="project-card project-tilt-card group h-full">
+      <Card className="project-card group h-full relative overflow-hidden">
+        <motion.div
+          className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          style={{ background: glowBg }}
+        />
         <div className={`project-image ${imageClass}`}>
           {previewSrc ? <iframe src={previewSrc} title={`${title} screen preview`} loading="lazy" /> : null}
         </div>
@@ -52,7 +93,7 @@ export function ProjectCard({
               <Badge key={`${title}-${techItem}`}>{techItem}</Badge>
             ))}
           </div>
-          <a href={href} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-blue-400">
+          <a href={href} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-blue-400 transition hover:text-blue-300">
             {isGithubRepo ? (
               <>
                 GitHub Repo <Github className="h-4 w-4 transition group-hover:translate-x-1 group-hover:-translate-y-1" />

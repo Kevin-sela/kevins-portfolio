@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import { MotionConfig } from "framer-motion";
 import { EASE_OUT } from "@/lib/motion";
+import { SmoothScroll } from "@/components/smooth-scroll";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(
@@ -23,7 +24,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
         <MotionConfig reducedMotion="user" transition={{ ease: EASE_OUT }}>
-          {children}
+          <SmoothScroll>
+            {children}
+          </SmoothScroll>
         </MotionConfig>
       </QueryClientProvider>
     </ThemeProvider>
