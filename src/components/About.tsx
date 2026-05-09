@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import { CheckCircle2, Download, MapPin, Code2, Zap, Globe } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Card } from "@/components/ui/card";
@@ -122,9 +123,11 @@ export function About() {
             <div className="profile-ring-outer" aria-hidden />
             <div className="profile-ring-inner" aria-hidden />
             <div className="profile-glow" aria-hidden />
-            <img
+            <Image
               src="/images/profile.png"
               alt="Kevin Ofori"
+              width={320}
+              height={320}
               className="profile-photo"
               draggable={false}
             />

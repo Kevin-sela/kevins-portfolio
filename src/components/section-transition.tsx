@@ -6,11 +6,7 @@ import { cn } from "@/lib/cn";
 
 type Variant = "rise" | "tilt" | "float" | "burst" | "pull";
 
-type Config = {
-  hidden: Record<string, unknown>;
-  visible: Record<string, unknown>;
-  transition: Transition;
-};
+type Config = { hidden: any; visible: any; transition: Transition };
 
 const configs: Record<Variant, Config> = {
   // Big dramatic rise from below — timeline, footer
