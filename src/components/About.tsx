@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
-import { CheckCircle2, Download, MapPin, Code2, Zap, Globe } from "lucide-react";
+import { CheckCircle2, Download, MapPin, Code2, Zap, Globe, Briefcase, Wifi, CalendarCheck } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Card } from "@/components/ui/card";
 import { easeOutExpo } from "@/lib/motion";
@@ -171,6 +171,26 @@ export function About() {
                   {item}
                 </div>
               ))}
+            </div>
+          </Card>
+
+          <Card className="hire-card p-6 mt-4">
+            <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.18em] text-emerald-400">
+              What I&rsquo;m Looking For
+            </p>
+            <div className="grid gap-3">
+              <div className="flex items-center gap-3 text-sm text-slate-300">
+                <Briefcase className="h-4 w-4 shrink-0 text-emerald-400" />
+                <span>Backend, Full-Stack, or Cloud Engineer roles</span>
+              </div>
+              <div className="flex items-center gap-3 text-sm text-slate-300">
+                <Wifi className="h-4 w-4 shrink-0 text-emerald-400" />
+                <span>Remote, hybrid, or relocation considered</span>
+              </div>
+              <div className="flex items-center gap-3 text-sm text-slate-300">
+                <CalendarCheck className="h-4 w-4 shrink-0 text-emerald-400" />
+                <span>Available to start immediately</span>
+              </div>
             </div>
           </Card>
         </motion.div>

@@ -8,16 +8,37 @@ import { ScrollProgress } from "@/components/scroll-progress";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
-  title: "Kelvin Ofori — Software Engineer",
+  title: "Kelvin Ofori — Backend & Full-Stack Engineer | Available for Hire",
   description:
-    "Backend, full-stack, and cloud software engineer building reliable web platforms, APIs, and real-time systems.",
+    "Backend and full-stack software engineer with 7+ years of experience. Specialising in .NET, Python, React, AWS, and distributed systems. Open to remote engineering roles globally.",
+  keywords: [
+    "Backend Engineer",
+    "Full-Stack Developer",
+    "Software Engineer",
+    "Cloud Engineer",
+    "Kelvin Ofori",
+    ".NET Developer",
+    "React Developer",
+    "AWS Engineer",
+    "Python Developer",
+    "Microservices",
+    "Available for hire",
+    "Remote software engineer",
+    "Ghana developer",
+  ],
   openGraph: {
-    title: "Kelvin Ofori — Software Engineer",
-    description: "Backend, full-stack, and cloud software engineer.",
+    title: "Kelvin Ofori — Backend & Full-Stack Engineer",
+    description:
+      "7+ years building distributed systems, REST APIs, and full-stack web platforms on AWS & Azure. Open to remote engineering roles.",
     images: ["/og.svg"],
-    type: "website"
+    type: "website",
   },
-  icons: [{ rel: "icon", url: "/favicon.svg" }]
+  twitter: {
+    card: "summary_large_image",
+    title: "Kelvin Ofori — Backend & Full-Stack Engineer",
+    description: "7+ years building distributed systems, APIs, and full-stack platforms. Open to remote roles.",
+  },
+  icons: [{ rel: "icon", url: "/favicon.svg" }],
 };
 
 export default function RootLayout({

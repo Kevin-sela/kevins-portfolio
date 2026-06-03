@@ -64,15 +64,20 @@ section {
   contain: layout style;
 }
 
-html,
-body {
+html {
   height: 100%;
   background:
     radial-gradient(circle at 20% 10%, rgba(139, 92, 246, 0.25), transparent 30%),
     radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.18), transparent 35%),
     var(--bg-hex);
+  overflow-y: auto;
   overflow-x: hidden;
   text-rendering: geometricPrecision;
+}
+
+body {
+  min-height: 100%;
+  overflow-x: clip;
 }
 
 body::after {
@@ -372,6 +377,13 @@ body::after {
   }
 }
 
+/* ─── Custom cursor — hide OS cursor on fine-pointer devices ─── */
+@media (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+}
+
 .fancy-ring:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px hsl(var(--bg)), 0 0 0 5px hsl(var(--ring));
@@ -460,6 +472,7 @@ body::after {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.03),
     0 0 40px rgba(59, 130, 246, 0.04);
+  will-change: transform, opacity;
 }
 
 .code-card-a {
@@ -984,6 +997,12 @@ body::after {
 
 .hero-cta-outline {
   box-shadow: inset 0 0 0 1px rgba(139, 92, 246, 0.06), 0 0 24px rgba(59, 130, 246, 0.08);
+}
+
+.hero-cta-ghost {
+  background: transparent;
+  border: none;
+  padding: 0 4px;
 }
 
 .floating-tech {
@@ -1872,6 +1891,44 @@ body::after {
   border-radius: 999px;
   background: rgba(139, 92, 246, 0.75);
   box-shadow: 0 0 10px rgba(139, 92, 246, 0.6);
+}
+
+/* ─── Testimonial cards ─────────────────────────────────────── */
+.testimonial-card {
+  position: relative;
+  border-color: rgba(139, 92, 246, 0.16) !important;
+  background: linear-gradient(180deg, rgba(10, 16, 36, 0.85), rgba(6, 11, 24, 0.92)) !important;
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.testimonial-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--sx, 50%) var(--sy, 50%), rgba(139, 92, 246, 0.1), transparent 55%);
+  opacity: 0;
+  transition: opacity 220ms ease;
+  pointer-events: none;
+}
+
+.testimonial-card:hover::before {
+  opacity: 1;
+}
+
+.testimonial-card:hover {
+  border-color: rgba(139, 92, 246, 0.35) !important;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(139, 92, 246, 0.1),
+    0 0 30px rgba(139, 92, 246, 0.08);
+  transform: translateY(-4px);
+}
+
+/* ─── "What I'm Looking For" hire card ──────────────────────── */
+.hire-card {
+  border-color: rgba(52, 211, 153, 0.2) !important;
+  background: linear-gradient(135deg, rgba(6, 78, 59, 0.12), rgba(5, 46, 22, 0.08)) !important;
 }
 
 /* ─── Responsive ────────────────────────────────────────────── */

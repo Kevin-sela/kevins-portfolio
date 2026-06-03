@@ -2,24 +2,12 @@
 
 import { Code2, FileDown, Github } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
 import { EASE_OUT } from "@/lib/motion";
 
 const navItems = ["Home", "About", "Skills", "Projects", "Experience", "Contact"] as const;
 
 export function Navbar() {
   const reduceMotion = useReducedMotion();
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      setScrollProgress(docHeight > 0 ? (scrollTop / docHeight) * 100 : 0);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <motion.header
@@ -60,10 +48,6 @@ export function Navbar() {
           </a>
         </div>
       </div>
-      <div
-        className="nav-scroll-progress"
-        style={{ width: `${scrollProgress}%` }}
-      />
     </motion.header>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, FileDown } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { FaAws } from "react-icons/fa";
@@ -261,13 +261,14 @@ export function Hero() {
         animate="visible"
         transition={reduceMotion ? undefined : { staggerChildren: 0.085, delayChildren: 0.06 }}
       >
-        <motion.div
+        <motion.a
+          href="#contact"
           variants={fadeUp}
-          className="inline-flex items-center gap-2 rounded-full border border-emerald-300/10 bg-slate-950/70 px-4 py-2 text-xs font-medium text-slate-300 shadow-[0_10px_30px_rgba(2,6,23,0.35)]"
+          className="inline-flex items-center gap-2 rounded-full border border-emerald-300/10 bg-slate-950/70 px-4 py-2 text-xs font-medium text-slate-300 shadow-[0_10px_30px_rgba(2,6,23,0.35)] transition hover:border-emerald-400/30 hover:text-emerald-200"
         >
-          <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.8)]" />
-          Available for opportunities
-        </motion.div>
+          <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.8)]" />
+          Available for opportunities &mdash; Let&rsquo;s talk
+        </motion.a>
         <motion.p variants={fadeUp} className="mt-12 text-xl font-semibold text-slate-300 sm:text-2xl">
           <CommandLineIntro />
         </motion.p>
@@ -299,9 +300,18 @@ export function Hero() {
             </a>
           </Magnetic>
           <Magnetic strength={10}>
-            <a href="#contact">
+            <a href="/resume/Kelvin_Ofori_org_Resume.docx" download>
               <Button variant="outline" className="hero-cta hero-cta-outline">
                 <span className="hero-cta-label">
+                Download CV <FileDown className="h-5 w-5" />
+                </span>
+              </Button>
+            </a>
+          </Magnetic>
+          <Magnetic strength={10}>
+            <a href="#contact">
+              <Button variant="ghost" className="hero-cta hero-cta-ghost">
+                <span className="hero-cta-label text-slate-300 hover:text-white">
                 Contact Me <ArrowRight className="h-5 w-5 transition group-hover:translate-x-1" />
                 </span>
               </Button>
