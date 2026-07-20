@@ -124,7 +124,7 @@ export function About() {
             <div className="profile-ring-inner" aria-hidden />
             <div className="profile-glow" aria-hidden />
             <Image
-              src="/images/profile.png"
+              src="/images/kevs-portfolio.jpeg"
               alt="Kevin Ofori"
               width={320}
               height={320}

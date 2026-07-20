@@ -16,29 +16,29 @@ const services: {
 }[] = [
   {
     icon: Server,
-    title: "Backend Engineering",
-    description: "High-throughput APIs and distributed systems engineered for scale, reliability, and low latency.",
+    title: "APIs That Scale",
+    description: "Microservices, GraphQL, real-time systems, and data flows built for reliability under production load.",
     points: ["REST & GraphQL APIs", "Microservices architecture", "Real-time WebSocket systems", "Database optimisation"],
     accent: "rgba(59,130,246,0.18)",
   },
   {
     icon: Cloud,
-    title: "Cloud & Infrastructure",
-    description: "Cloud-native deployments on AWS and Azure with infrastructure-as-code and full CI/CD automation.",
+    title: "Cloud Migration",
+    description: "Move legacy workloads to AWS or Azure with resilient infrastructure, deployment discipline, and cost control.",
     points: ["AWS & Azure deployments", "Docker & Kubernetes", "Terraform & IaC", "Zero-downtime pipelines"],
     accent: "rgba(6,182,212,0.18)",
   },
   {
     icon: Code2,
-    title: "Full-Stack Development",
-    description: "End-to-end product delivery — from polished React UIs to performant, type-safe server logic.",
+    title: "Full-Stack Products",
+    description: "From idea to deployed MVP: polished React interfaces backed by secure, maintainable server logic.",
     points: ["React & Next.js", "TypeScript / C# / Python", "Server-side rendering", "Accessible component systems"],
     accent: "rgba(139,92,246,0.18)",
   },
   {
     icon: GitBranch,
-    title: "DevOps & Automation",
-    description: "Streamlined engineering workflows with automated testing, deployment pipelines, and observability.",
+    title: "DevOps Automation",
+    description: "CI/CD, testing, monitoring, and container workflows that reduce release risk and speed up delivery.",
     points: ["GitHub Actions & CI", "Automated unit/e2e testing", "Log monitoring & alerting", "Containerised workloads"],
     accent: "rgba(52,211,153,0.18)",
   },
@@ -110,7 +110,7 @@ export function Services() {
           transition={{ duration: 0.6, ease: easeOutExpo, delay: 0.04 }}
           className="mb-10"
         >
-          <SectionHeading eyebrow="What I Offer" title="Services & Expertise" />
+          <SectionHeading eyebrow="What I Can Build For You" title="Outcome-Focused Engineering" />
         </motion.div>
         <div className="services-grid">
           {services.map((service, index) => (

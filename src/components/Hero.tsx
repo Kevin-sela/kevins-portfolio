@@ -267,7 +267,7 @@ export function Hero() {
           className="inline-flex items-center gap-2 rounded-full border border-emerald-300/10 bg-slate-950/70 px-4 py-2 text-xs font-medium text-slate-300 shadow-[0_10px_30px_rgba(2,6,23,0.35)] transition hover:border-emerald-400/30 hover:text-emerald-200"
         >
           <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.8)]" />
-          Available for opportunities &mdash; Let&rsquo;s talk
+          Available for Backend / Full-Stack roles &mdash; Remote friendly
         </motion.a>
         <motion.p variants={fadeUp} className="mt-12 text-xl font-semibold text-slate-300 sm:text-2xl">
           <CommandLineIntro />
@@ -284,7 +284,7 @@ export function Hero() {
         </motion.p>
         <motion.p variants={fadeUp} className="max-w-[620px]">
           <RevealWords
-            text="I architect distributed systems and ship production-grade APIs — from cloud infrastructure to user-facing React interfaces."
+            text="I help startups and product teams scale backends, cut cloud costs, and ship reliable APIs - 7+ years, 20+ projects, 99.9% uptime experience."
             delay={0.42}
           />
         </motion.p>

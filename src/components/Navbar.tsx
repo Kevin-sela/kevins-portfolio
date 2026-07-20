@@ -4,7 +4,7 @@ import { Code2, FileDown, Github } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { EASE_OUT } from "@/lib/motion";
 
-const navItems = ["Home", "About", "Skills", "Projects", "Experience", "Contact"] as const;
+const navItems = ["Home", "About", "Services", "Projects", "Experience", "Contact"] as const;
 
 export function Navbar() {
   const reduceMotion = useReducedMotion();

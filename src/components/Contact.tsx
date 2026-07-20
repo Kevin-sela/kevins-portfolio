@@ -77,7 +77,9 @@ export function Contact() {
                 <div>
                   <h3 className="font-bold text-white">BSc Information Technology</h3>
                   <p className="mt-1 text-sm text-slate-300">Accra Institute of Technology</p>
-                  <p className="mt-1 text-xs text-violet-300/80 font-semibold">Currently Enrolled</p>
+                  <p className="mt-1 text-xs text-violet-300/80 font-semibold">
+                    In Progress | 7+ Years Professional Experience
+                  </p>
                   <p className="mt-2 text-xs text-slate-400">Coursework: Algorithms, Databases, Distributed Systems</p>
                 </div>
               </div>

@@ -7,7 +7,7 @@ import { ProjectCard } from "@/components/ui/project-card";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { easeOutExpo } from "@/lib/motion";
 
-const projectSignals = ["Production Ready", "Open Source", "AI-Powered"] as const;
+const projectSignals = ["Live Demos", "Case Studies", "Business Impact"] as const;
 
 export function Projects() {
   const reduceMotion = useReducedMotion();
@@ -31,10 +31,10 @@ export function Projects() {
         >
           <SectionHeading eyebrow="Featured Projects" title="Some Things I've Built" />
           <a
-            href="#projects"
+            href="#case-studies"
             className="hidden items-center gap-2 text-sm font-semibold text-slate-200 transition hover:text-violet-300 sm:inline-flex"
           >
-            View All Projects <ArrowRight className="h-4 w-4 text-violet-400" />
+            See Case Studies <ArrowRight className="h-4 w-4 text-violet-400" />
           </a>
         </motion.div>
         <motion.div

@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: "Kelvin Ofori — Backend & Full-Stack Engineer",
     description: "7+ years building distributed systems, APIs, and full-stack platforms. Open to remote roles.",
   },
-  icons: [{ rel: "icon", url: "/favicon.svg" }],
+  icons: [{ rel: "icon", url: "/favicon.png", type: "image/png" }],
 };
 
 export default function RootLayout({
