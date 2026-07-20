@@ -1894,36 +1894,6 @@ body::after {
 }
 
 /* ─── Testimonial cards ─────────────────────────────────────── */
-.testimonial-card {
-  position: relative;
-  border-color: rgba(139, 92, 246, 0.16) !important;
-  background: linear-gradient(180deg, rgba(10, 16, 36, 0.85), rgba(6, 11, 24, 0.92)) !important;
-  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
-}
-
-.testimonial-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(circle at var(--sx, 50%) var(--sy, 50%), rgba(139, 92, 246, 0.1), transparent 55%);
-  opacity: 0;
-  transition: opacity 220ms ease;
-  pointer-events: none;
-}
-
-.testimonial-card:hover::before {
-  opacity: 1;
-}
-
-.testimonial-card:hover {
-  border-color: rgba(139, 92, 246, 0.35) !important;
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.35),
-    0 0 0 1px rgba(139, 92, 246, 0.1),
-    0 0 30px rgba(139, 92, 246, 0.08);
-  transform: translateY(-4px);
-}
 
 /* ─── "What I'm Looking For" hire card ──────────────────────── */
 .hire-card {

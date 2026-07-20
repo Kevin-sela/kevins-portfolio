@@ -10,7 +10,7 @@ const caseStudies = [
     imageClass: "case-study-relitix",
   },
   {
-    title: "INNORIK ERP Platform",
+    title: "ERP Platform",
     problem: "Internal operations needed secure role-based workflows instead of fragmented manual processes.",
     solution: "Built .NET 6 APIs, React screens, JWT authentication, RBAC, and QA-backed test workflows.",
     impact: ["200+ concurrent users", "60% fewer production bugs", "Role-secured service layers"],

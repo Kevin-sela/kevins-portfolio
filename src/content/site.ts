@@ -71,7 +71,7 @@ export const socials: SocialLink[] = [
 
 export const projects: Project[] = [
   {
-    name: "ERP System (Innorik)",
+    name: "ERP System",
     description:
       "A full ERP suite with role-based access, reporting, and operational workflows - built end-to-end.",
     highlights: [
@@ -131,19 +131,6 @@ export const experience: ExperienceItem[] = [
       "Integrated enterprise systems via secure APIs.",
     ],
     tech: ["Python", "AWS", "Docker", "Kubernetes", "Cython", "REST APIs"],
-  },
-  {
-    role: "Software Developer",
-    company: "INNORIK USA",
-    start: "Aug 2022",
-    end: "Jun 2023",
-    bullets: [
-      "Led unit and post-production testing in collaboration with QA.",
-      "Shipped features and improvements on legacy systems.",
-      "Built an ERP system using C#/.NET, React, TypeScript, and Tailwind CSS.",
-      "Secured the app using JWT authentication and ASP.NET Identity.",
-    ],
-    tech: ["C#", ".NET", "React", "TypeScript", "Tailwind", "SQL", "JWT"],
   },
   {
     role: "Freelance Website Developer",

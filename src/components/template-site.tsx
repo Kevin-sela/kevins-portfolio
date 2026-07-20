@@ -18,7 +18,6 @@ import { SiteProof } from "@/components/site-proof";
 import { Skills } from "@/components/Skills";
 import { Stats } from "@/components/Stats";
 import { TechMarquee } from "@/components/TechMarquee";
-import { Testimonials } from "@/components/Testimonials";
 import { TrustLogos } from "@/components/trust-logos";
 
 export function TemplateSite() {
@@ -48,9 +47,6 @@ export function TemplateSite() {
       </SectionTransition>
       <SectionTransition variant="rise">
         <Experience />
-      </SectionTransition>
-      <SectionTransition variant="float">
-        <Testimonials />
       </SectionTransition>
       <SectionTransition variant="tilt">
         <Projects />

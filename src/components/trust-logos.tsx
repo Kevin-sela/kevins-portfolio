@@ -1,6 +1,6 @@
 import { SectionHeading } from "@/components/ui/section-heading";
 
-const logos = ["APTIVEON", "RELITIX", "INNORIK USA", "FREELANCE CLIENTS", "YANI OBA"] as const;
+const logos = ["APTIVEON", "RELITIX", "FREELANCE CLIENTS", "YANI OBA"] as const;
 
 export function TrustLogos() {
   return (
