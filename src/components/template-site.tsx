@@ -28,6 +28,9 @@ export function TemplateSite() {
       <Navbar />
       <FloatingCTA />
       <Hero />
+      <SectionTransition variant="tilt">
+        <Projects />
+      </SectionTransition>
       <TechMarquee />
       <SectionTransition variant="burst">
         <Stats />
@@ -47,9 +50,6 @@ export function TemplateSite() {
       </SectionTransition>
       <SectionTransition variant="rise">
         <Experience />
-      </SectionTransition>
-      <SectionTransition variant="tilt">
-        <Projects />
       </SectionTransition>
       <SectionTransition variant="rise">
         <CaseStudies />

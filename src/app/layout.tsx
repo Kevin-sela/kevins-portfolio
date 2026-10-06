@@ -5,6 +5,10 @@ import { CursorGlow } from "@/components/cursor-glow";
 import { PageMotion } from "@/components/page-motion";
 import { ParallaxBackground } from "@/components/parallax-background";
 import { ScrollProgress } from "@/components/scroll-progress";
+import { Inter, Space_Grotesk } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
@@ -47,8 +51,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="font-sans">
+    <html lang="en" className="dark">
+      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans`}>
         <Providers>
           <div className="relative min-h-dvh bg-bg text-fg">
             <ParallaxBackground />

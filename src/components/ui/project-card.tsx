@@ -1,8 +1,8 @@
 "use client";
 
 import { ArrowUpRight, Github } from "lucide-react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
+import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
+import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { easeOutExpo } from "@/lib/motion";
 
@@ -13,7 +13,9 @@ export function ProjectCard({
   tech,
   imageClass,
   href,
-  previewSrc
+  imageSrc,
+  index,
+  total
 }: {
   title: string;
   badge?: string;
@@ -21,19 +23,23 @@ export function ProjectCard({
   tech: readonly string[];
   imageClass: string;
   href: string;
-  previewSrc?: string;
+  imageSrc: string;
+  index: number;
+  total: number;
 }) {
   const isGithubRepo = href.includes("github.com");
+  const reduceMotion = useReducedMotion();
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const glowX = useMotionValue(50);
   const glowY = useMotionValue(50);
 
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [7, -7]), { stiffness: 280, damping: 28 });
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-7, 7]), { stiffness: 280, damping: 28 });
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [2.5, -2.5]), { stiffness: 280, damping: 32 });
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-2.5, 2.5]), { stiffness: 280, damping: 32 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (reduceMotion || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const nx = (e.clientX - rect.left) / rect.width - 0.5;
     const ny = (e.clientY - rect.top) / rect.height - 0.5;
@@ -59,15 +65,15 @@ export function ProjectCard({
   return (
     <motion.article
       className="project-tilt-scene"
-      initial={{ opacity: 0, y: 40, scale: 0.97 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.25 }}
       transition={{ duration: 0.7, ease: easeOutExpo }}
       style={{
         transformPerspective: 1200,
         transformStyle: "preserve-3d",
-        rotateX,
-        rotateY,
+        rotateX: reduceMotion ? 0 : rotateX,
+        rotateY: reduceMotion ? 0 : rotateY,
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -78,31 +84,33 @@ export function ProjectCard({
           style={{ background: glowBg }}
         />
         <div className={`project-image ${imageClass}`}>
-          {previewSrc ? <iframe src={previewSrc} title={`${title} screen preview`} loading="lazy" /> : null}
+          {imageSrc ? (
+            <Image
+              src={imageSrc}
+              alt={`${title} preview`}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              className={imageClass === "project-yanioba" ? "project-image-asset object-contain" : "project-image-asset object-cover"}
+            />
+          ) : null}
+          <div className="project-image-meta">
+            <span className="project-index">{String(index).padStart(2, "0")} <span>/ {String(total).padStart(2, "0")}</span></span>
+            {badge ? <span className="project-category">{badge}</span> : null}
+          </div>
         </div>
         <div className="project-content">
-          <div className="flex items-center gap-2">
-            <h3 className="line-clamp-1 text-sm font-bold text-white">{title}</h3>
-            {badge ? <Badge className="border-amber-400/20 bg-amber-500/15 text-amber-300">{badge}</Badge> : null}
-          </div>
-          <p className="mt-3 line-clamp-3 min-h-[60px] text-sm leading-5 text-slate-300">
+          <h3 className="project-title line-clamp-2">{title}</h3>
+          <p className="project-description line-clamp-3">
             {description}
           </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {tech.map((techItem) => (
-              <Badge key={`${title}-${techItem}`}>{techItem}</Badge>
+          <div className="project-tech-list">
+            {tech.slice(0, 4).map((techItem) => (
+              <span className="project-tech" key={`${title}-${techItem}`}>{techItem}</span>
             ))}
           </div>
-          <a href={href} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-blue-400 transition hover:text-blue-300">
-            {isGithubRepo ? (
-              <>
-                GitHub Repo <Github className="h-4 w-4 transition group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </>
-            ) : (
-              <>
-                Live Demo <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </>
-            )}
+          <a href={href} className="project-link" target="_blank" rel="noreferrer">
+            <span>{isGithubRepo ? "View source code" : "Explore project"}</span>
+            {isGithubRepo ? <Github className="h-4 w-4" aria-hidden="true" /> : <ArrowUpRight className="h-4 w-4" aria-hidden="true" />}
           </a>
         </div>
       </Card>

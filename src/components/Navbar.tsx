@@ -1,13 +1,15 @@
 "use client";
 
-import { Code2, FileDown, Github } from "lucide-react";
+import { Code2, FileDown, Github, Menu, X } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
+import { useState } from "react";
 import { EASE_OUT } from "@/lib/motion";
 
 const navItems = ["Home", "About", "Services", "Projects", "Experience", "Contact"] as const;
 
 export function Navbar() {
   const reduceMotion = useReducedMotion();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <motion.header
@@ -33,6 +35,16 @@ export function Navbar() {
           ))}
         </nav>
         <div className="flex items-center gap-3">
+          <button
+            type="button"
+            className="mobile-menu-toggle lg:hidden"
+            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
           <a
             href="https://github.com/Kevin-sela"
             aria-label="GitHub"
@@ -48,6 +60,13 @@ export function Navbar() {
           </a>
         </div>
       </div>
+      <nav id="mobile-navigation" className="mobile-nav" data-open={menuOpen} aria-label="Mobile navigation" hidden={!menuOpen}>
+        {navItems.map((item) => (
+          <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setMenuOpen(false)}>
+            {item}
+          </a>
+        ))}
+      </nav>
     </motion.header>
   );
 }

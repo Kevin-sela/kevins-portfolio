@@ -51,8 +51,8 @@ export function Projects() {
           ))}
         </motion.div>
         <div className="projects-grid">
-          {projects.map((project) => (
-            <ProjectCard key={project.title} {...project} />
+          {projects.map((project, index) => (
+            <ProjectCard key={project.title} {...project} index={index + 1} total={projects.length} />
           ))}
         </div>
       </div>

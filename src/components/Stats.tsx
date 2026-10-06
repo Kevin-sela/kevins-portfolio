@@ -1,6 +1,6 @@
 "use client";
 
-import { Award, Briefcase, Layers, Star } from "lucide-react";
+import { Award, Briefcase, Layers } from "lucide-react";
 import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Card } from "@/components/ui/card";
@@ -9,8 +9,7 @@ import { easeOutExpo } from "@/lib/motion";
 const stats = [
   { value: 7, suffix: "+", label: "Years Experience", icon: Award },
   { value: 20, suffix: "+", label: "Projects Completed", icon: Briefcase },
-  { value: 15, suffix: "+", label: "Technologies", icon: Layers },
-  { value: 100, suffix: "%", label: "Client Satisfaction", icon: Star }
+  { value: 15, suffix: "+", label: "Technologies", icon: Layers }
 ] as const;
 
 function CountUp({ value, suffix }: { value: number; suffix: string }) {

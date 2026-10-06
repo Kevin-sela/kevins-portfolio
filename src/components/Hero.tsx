@@ -1,191 +1,55 @@
 "use client";
 
-import { ArrowRight, FileDown } from "lucide-react";
+import { ArrowDown, ArrowRight, FileDown } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { FaAws } from "react-icons/fa";
-import { SiDocker, SiKubernetes, SiReact } from "react-icons/si";
-import { Button } from "@/components/ui/button";
+import { SiDocker, SiReact } from "react-icons/si";
 import { Magnetic } from "@/components/rb/magnetic";
 import { easeOutExpo } from "@/lib/motion";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const floatingTech = [
-  { label: "React", icon: SiReact, className: "left-[55%] top-[22%] bg-cyan-500/20 text-cyan-300" },
-  { label: "AWS", icon: FaAws, className: "left-[66%] top-[20%] bg-orange-500/20 text-orange-200" },
-  { label: "K8s", icon: SiKubernetes, className: "right-[20%] top-[18%] bg-blue-500/25 text-blue-200" },
-  { label: "Docker", icon: SiDocker, className: "right-[11%] top-[29%] bg-sky-500/20 text-sky-200" },
+const proof = ["Python", ".NET", "AWS", "React", "Docker"] as const;
+const roleLines = [
+  "Backend / Full-Stack Engineer",
+  "Cloud & API Engineer",
+  "Distributed Systems Engineer",
+] as const;
+const heroBadges = [
+  { label: "React", icon: SiReact, className: "hero-tech-react" },
+  { label: "AWS", icon: FaAws, className: "hero-tech-aws" },
+  { label: "Docker", icon: SiDocker, className: "hero-tech-docker" },
 ] as const;
 
-const dashboardItems = [
-  { label: "React systems", icon: SiReact, color: "text-cyan-300" },
-  { label: "AWS delivery", icon: FaAws, color: "text-orange-300" },
-  { label: "Kubernetes", icon: SiKubernetes, color: "text-blue-300" },
-  { label: "Containerized APIs", icon: SiDocker, color: "text-sky-300" },
-] as const;
-
-const typingLines = [
-  "$ deploy --env production --scale 10",
-  "$ kubectl scale deployment api --replicas=5",
-  "$ terraform apply --target=infra",
-  "✓ deploy complete · latency: 42ms",
-] as const;
-
-function RevealWords({
-  text,
-  className,
-  delay = 0,
-}: {
-  text: string;
-  className?: string;
-  delay?: number;
-}) {
-  const reduceMotion = useReducedMotion();
-  const words = text.split(" ");
-
-  return (
-    <motion.span
-      className={className}
-      initial={reduceMotion ? false : "hidden"}
-      animate="visible"
-      variants={{
-        hidden: {},
-        visible: {
-          transition: {
-            staggerChildren: 0.06,
-            delayChildren: delay,
-          },
-        },
-      }}
-    >
-      {words.map((word, index) => (
-        <motion.span
-          key={`${word}-${index}`}
-          className="inline-block pr-[0.32em]"
-          variants={{
-            hidden: { opacity: 0, y: 16 },
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: { duration: 0.5, ease: easeOutExpo },
-            },
-          }}
-        >
-          {word}
-        </motion.span>
-      ))}
-    </motion.span>
-  );
-}
-
-function CommandLineIntro() {
-  const [typed, setTyped] = useState("");
-  const fullText = "Hi, I'm Kelvin Ofori";
-
-  useEffect(() => {
-    if (typed === fullText) {
-      return;
-    }
-
-    const timeout = window.setTimeout(() => {
-      setTyped(fullText.slice(0, typed.length + 1));
-    }, typed.length < 5 ? 80 : 48);
-
-    return () => window.clearTimeout(timeout);
-  }, [typed]);
-
-  return (
-    <span className="hero-command-line">
-      <span className="hero-command-prompt">&gt;</span> {typed}
-      <span className="typing-caret" />
-    </span>
-  );
-}
-
-function HeroLineTyping({
-  lines,
-  className,
-}: {
-  lines: readonly string[];
-  className?: string;
-}) {
+function TypedRole({ reduceMotion }: { reduceMotion: boolean }) {
   const [lineIndex, setLineIndex] = useState(0);
-  const [typed, setTyped] = useState("");
+  const [text, setText] = useState("");
+  const [deleting, setDeleting] = useState(false);
+  const fullLine = roleLines[lineIndex];
 
   useEffect(() => {
-    const fullLine = lines[lineIndex];
+    if (reduceMotion) return;
 
-    if (typed !== fullLine) {
-      const timeout = window.setTimeout(() => {
-        setTyped(fullLine.slice(0, typed.length + 1));
-      }, 40);
-
-      return () => window.clearTimeout(timeout);
-    }
-
+    const atEnd = text === fullLine;
+    const atStart = text.length === 0;
+    const delay = atEnd && !deleting ? 1200 : atStart && deleting ? 350 : deleting ? 28 : 62;
     const timeout = window.setTimeout(() => {
-      setTyped("");
-      setLineIndex((current) => (current + 1) % lines.length);
-    }, 1400);
+      if (atEnd && !deleting) {
+        setDeleting(true);
+      } else if (atStart && deleting) {
+        setDeleting(false);
+        setLineIndex((current) => (current + 1) % roleLines.length);
+      } else {
+        setText((current) => deleting ? current.slice(0, -1) : fullLine.slice(0, current.length + 1));
+      }
+    }, delay);
 
     return () => window.clearTimeout(timeout);
-  }, [lineIndex, lines, typed]);
+  }, [deleting, fullLine, reduceMotion, text]);
 
   return (
-    <span className={className}>
-      {typed}
-      <span className="typing-caret" />
-    </span>
-  );
-}
-
-function HeroTypingPanel() {
-  const [lineIndex, setLineIndex] = useState(0);
-  const [typed, setTyped] = useState("");
-
-  useEffect(() => {
-    const fullLine = typingLines[lineIndex];
-    const isDone = typed === fullLine;
-
-    if (!isDone) {
-      const timeout = window.setTimeout(() => {
-        setTyped(fullLine.slice(0, typed.length + 1));
-      }, 42);
-
-      return () => window.clearTimeout(timeout);
-    }
-
-    const timeout = window.setTimeout(() => {
-      setTyped("");
-      setLineIndex((current) => (current + 1) % typingLines.length);
-    }, 1350);
-
-    return () => window.clearTimeout(timeout);
-  }, [lineIndex, typed]);
-
-  return (
-    <div className="holo-terminal">
-      <div className="holo-terminal-top">
-        <span className="holo-terminal-dot bg-emerald-400" />
-        <span className="holo-terminal-dot bg-sky-400" />
-        <span className="holo-terminal-dot bg-violet-400" />
-        <span className="ml-3 text-[10px] uppercase tracking-[0.3em] text-sky-200/70">
-          runtime
-        </span>
-      </div>
-      <div className="holo-terminal-body">
-        <div className="text-sky-300/75">$ {typed}<span className="typing-caret" /></div>
-        <div className="mt-3 grid gap-2 text-[11px] text-slate-300/65">
-          <div>&gt; latency: 42ms</div>
-          <div>&gt; region: eu-west-1</div>
-          <div>&gt; uptime: 99.98%</div>
-        </div>
-      </div>
-    </div>
+    <p className="hero-role" aria-label="Backend and full-stack engineer">
+      <span aria-hidden="true">{reduceMotion ? roleLines[0] : text}<span className="typing-caret" /></span>
+    </p>
   );
 }
 
@@ -194,135 +58,86 @@ export function Hero() {
 
   return (
     <section id="home" className="hero">
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-[2] hidden w-[48%] lg:block">
+      <div className="hero-visual pointer-events-none absolute inset-y-0 right-0 z-[2] hidden w-[45%] lg:block" aria-hidden="true">
         <div className="neon-hero-scene">
           <div className="neon-orbit neon-orbit-a" />
           <div className="neon-orbit neon-orbit-b" />
           <div className="neon-orbit neon-orbit-c" />
-          <div className="holo-beacon" />
           <div className="holo-grid" />
-
+          {heroBadges.map(({ label, icon: Icon, className }) => (
+            <div key={label} className={`hero-tech-badge ${className}`}>
+              <Icon aria-hidden="true" />
+              <span>{label}</span>
+            </div>
+          ))}
           <div className="neon-dashboard">
             <div className="neon-dashboard-glow" />
             <div className="neon-dashboard-panel">
-              <div className="mb-1 flex items-center justify-between">
-                <div className="text-[10px] uppercase tracking-[0.32em] text-sky-200/75">
-                  holographic stack
+              <div className="system-heading">
+                <span>SYSTEM</span>
+                <span className="system-indicator"><span /> ENGINEERING TOOLKIT</span>
+              </div>
+              <div className="system-readout">
+                <div className="system-row">
+                  <span>APIs</span>
+                  <strong>Python · .NET</strong>
                 </div>
-                <div className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-300">
-                  live
+                <div className="system-row">
+                  <span>Cloud</span>
+                  <strong><FaAws aria-hidden="true" /> AWS</strong>
+                </div>
+                <div className="system-row">
+                  <span>Delivery</span>
+                  <strong><SiDocker aria-hidden="true" /> Docker</strong>
                 </div>
               </div>
-
-              <HeroTypingPanel />
-
-              <div className="grid gap-3">
-                {dashboardItems.map((item) => (
-                  <div key={item.label} className="neon-dashboard-chip">
-                    <item.icon className={`h-5 w-5 ${item.color}`} />
-                    <span>{item.label}</span>
-                  </div>
-                ))}
+              <div className="system-code" aria-hidden="true">
+                <span className="system-code-prompt">&gt;</span> api.build(&#123; reliable: true &#125;)
+                <span className="typing-caret" />
               </div>
-
               <div className="holo-footer">
-                <span className="holo-footer-pill">API orchestration</span>
                 <span className="holo-footer-pill">Distributed systems</span>
+                <span className="holo-footer-pill">Cloud platforms</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {floatingTech.map((techItem, index) => (
-        <motion.div
-          aria-hidden
-          key={techItem.label}
-          className={`floating-tech absolute hidden items-center gap-2 lg:flex ${techItem.className}`}
-          style={
-            reduceMotion
-              ? undefined
-              : {
-                  animationDelay: `${0.4 + index * 0.35}s`,
-                }
-          }
-          initial={reduceMotion ? false : { opacity: 0, y: 12, scale: 0.98 }}
-          animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.55, delay: 0.18 + index * 0.06, ease: easeOutExpo }}
-        >
-          <techItem.icon className="h-6 w-6" />
-          {techItem.label}
-        </motion.div>
-      ))}
-
       <motion.div
         className="container hero-content"
-        initial="hidden"
-        animate="visible"
-        transition={reduceMotion ? undefined : { staggerChildren: 0.085, delayChildren: 0.06 }}
+        initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: easeOutExpo }}
       >
-        <motion.a
-          href="#contact"
-          variants={fadeUp}
-          className="inline-flex items-center gap-2 rounded-full border border-emerald-300/10 bg-slate-950/70 px-4 py-2 text-xs font-medium text-slate-300 shadow-[0_10px_30px_rgba(2,6,23,0.35)] transition hover:border-emerald-400/30 hover:text-emerald-200"
-        >
-          <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.8)]" />
-          Available for Backend / Full-Stack roles &mdash; Remote friendly
-        </motion.a>
-        <motion.p variants={fadeUp} className="mt-12 text-xl font-semibold text-slate-300 sm:text-2xl">
-          <CommandLineIntro />
-        </motion.p>
-        <motion.h1 variants={fadeUp} className="hero-name">
+        <TypedRole reduceMotion={reduceMotion ?? false} />
+        <h1 className="hero-name">
           <span className="hero-name-plate">Kelvin</span>{" "}
           <span className="gradient-text inline-block hero-name-plate">Ofori</span>
-        </motion.h1>
-        <motion.p variants={fadeUp} className="mt-5 text-xl font-extrabold uppercase tracking-[0.12em] text-slate-200 sm:text-2xl">
-          <HeroLineTyping lines={["Backend Engineer", "Cloud Systems Architect", "Full-Stack Developer", "API & Platform Builder"]} />
-        </motion.p>
-        <motion.p variants={fadeUp} className="mt-1 text-xl font-extrabold uppercase tracking-[0.11em] text-blue-400 sm:text-2xl">
-          <RevealWords text="Backend - Full-Stack - Cloud" delay={0.34} />
-        </motion.p>
-        <motion.p variants={fadeUp} className="max-w-[620px]">
-          <RevealWords
-            text="I help startups and product teams scale backends, cut cloud costs, and ship reliable APIs - 7+ years, 20+ projects, 99.9% uptime experience."
-            delay={0.42}
-          />
-        </motion.p>
-        <motion.div variants={fadeUp} className="hero-buttons">
-          <Magnetic strength={10}>
-            <a href="#projects">
-              <Button className="hero-cta hero-cta-primary">
-                <span className="hero-cta-ping" />
-                <span className="hero-cta-label">
-                View My Work <ArrowRight className="h-5 w-5 transition group-hover:translate-x-1" />
-                </span>
-              </Button>
+        </h1>
+        <p className="hero-description">
+          I build reliable APIs, scalable backend systems, and cloud infrastructure for modern products.
+        </p>
+        <div className="hero-buttons">
+          <Magnetic strength={6}>
+            <a href="#projects" className="hero-cta hero-cta-primary">
+              View Projects <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </a>
           </Magnetic>
-          <Magnetic strength={10}>
-            <a href="/resume/Kelvin_Ofori_org_Resume.docx" download>
-              <Button variant="outline" className="hero-cta hero-cta-outline">
-                <span className="hero-cta-label">
-                Download CV <FileDown className="h-5 w-5" />
-                </span>
-              </Button>
+          <Magnetic strength={6}>
+            <a href="/resume/Kelvin_Ofori_org_Resume.docx" download className="hero-cta hero-cta-outline">
+              Download Resume <FileDown className="h-4 w-4" aria-hidden="true" />
             </a>
           </Magnetic>
-          <Magnetic strength={10}>
-            <a href="#contact">
-              <Button variant="ghost" className="hero-cta hero-cta-ghost">
-                <span className="hero-cta-label text-slate-300 hover:text-white">
-                Contact Me <ArrowRight className="h-5 w-5 transition group-hover:translate-x-1" />
-                </span>
-              </Button>
-            </a>
-          </Magnetic>
-        </motion.div>
+        </div>
+        <ul className="hero-proof-row" aria-label="Core technologies">
+          {proof.map((technology) => <li key={technology}>{technology}</li>)}
+        </ul>
       </motion.div>
-      <div className="hero-scroll-hint" aria-hidden>
-        <div className="hero-scroll-hint-dot" />
-        <div className="hero-scroll-hint-line" />
-      </div>
+
+      <a className="hero-scroll-hint" href="#projects" aria-label="Continue to selected projects">
+        <span>Selected Work</span><ArrowDown className="h-4 w-4" aria-hidden="true" />
+      </a>
     </section>
   );
 }
