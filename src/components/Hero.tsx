@@ -8,7 +8,11 @@ import { SiDocker, SiReact } from "react-icons/si";
 import { Magnetic } from "@/components/rb/magnetic";
 import { easeOutExpo } from "@/lib/motion";
 
-const proof = ["Python", ".NET", "AWS", "React", "Docker"] as const;
+const proofPoints = [
+  { value: "10k+", label: "daily API requests" },
+  { value: "~30%", label: "lower AWS costs" },
+  { value: "2×", label: "Python throughput" },
+] as const;
 const roleLines = [
   "Backend / Full-Stack Engineer",
   "Cloud & API Engineer",
@@ -22,7 +26,7 @@ const heroBadges = [
 
 function TypedRole({ reduceMotion }: { reduceMotion: boolean }) {
   const [lineIndex, setLineIndex] = useState(0);
-  const [text, setText] = useState("");
+  const [text, setText] = useState<string>(roleLines[0]);
   const [deleting, setDeleting] = useState(false);
   const fullLine = roleLines[lineIndex];
 
@@ -130,8 +134,13 @@ export function Hero() {
             </a>
           </Magnetic>
         </div>
-        <ul className="hero-proof-row" aria-label="Core technologies">
-          {proof.map((technology) => <li key={technology}>{technology}</li>)}
+        <ul className="hero-proof-row" aria-label="Selected engineering outcomes">
+          {proofPoints.map(({ value, label }) => (
+            <li key={label}>
+              <strong>{value}</strong>
+              <span>{label}</span>
+            </li>
+          ))}
         </ul>
       </motion.div>
 
