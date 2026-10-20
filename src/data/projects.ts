@@ -1,5 +1,15 @@
 export const projects = [
   {
+    title: "CyberSmart Workplace - Cybersecurity E-learning",
+    badge: "Featured",
+    description:
+      "A practical cybersecurity awareness platform with interactive lessons, knowledge checks, and learner progress tracking for working professionals.",
+    tech: ["Next.js", "React", "TypeScript", "FastAPI"],
+    imageClass: "project-cybersmart",
+    imageSrc: "/images/projects/cybersmart-workplace.png",
+    href: "https://cybersmart-workplace.vercel.app/"
+  },
+  {
     title: "Stark Architects Palette",
     badge: "Featured",
     description:
