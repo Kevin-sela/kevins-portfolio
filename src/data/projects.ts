@@ -30,16 +30,6 @@ export const projects = [
     href: "/images/projects/hospital-management/hospital-screen-1.png"
   },
   {
-    title: "Stark Architects Palette",
-    badge: "Featured",
-    description:
-      "Production-grade design system tool with accessibility checks, real-time preview, and reusable architecture.",
-    tech: ["React", "Node.js", "TypeScript", "SCSS"],
-    imageClass: "project-stark",
-    imageSrc: "/images/projects/stark.svg",
-    href: "https://stark-architects-palette-62.vercel.app/"
-  },
-  {
     title: "Yanioba — Road Safety Platform",
     badge: "Featured",
     description:
@@ -69,24 +59,4 @@ export const projects = [
     imageSrc: "/assets/asiewie-mobile.webp",
     href: "https://asiewie.com/"
   },
-  {
-    title: "NeiMart — E-commerce Platform",
-    badge: "",
-    description:
-      "Marketplace with product listings, search, cart, checkout, and secure user flows.",
-    tech: ["Next.js", "Node.js", "MongoDB"],
-    imageClass: "project-neimart",
-    imageSrc: "/images/projects/neimart.svg",
-    href: "https://github.com/Kevin-sela/NeiMart"
-  },
-  {
-    title: "Cyber Threat Security Detector",
-    badge: "",
-    description:
-      "AI-based anomaly detection system for threat monitoring, traffic analysis, and risk scoring.",
-    tech: ["Python", "FastAPI", "TensorFlow"],
-    imageClass: "project-cyber",
-    imageSrc: "/images/projects/cyber.svg",
-    href: "https://github.com/Kevin-sela/cyber-threat-security-detector"
-  }
 ] as const;

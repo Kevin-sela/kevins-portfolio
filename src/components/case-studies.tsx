@@ -14,16 +14,6 @@ const caseStudies = [
     outcomes: ["Real-time API services", "AWS architecture", "Cython performance tuning"],
   },
   {
-    category: "Full-stack · Enterprise",
-    title: "ERP Platform",
-    image: "/projects/erp.svg",
-    imageAlt: "ERP platform interface illustration",
-    imageFit: "cover",
-    problem: "Internal operations needed secure role-based workflows instead of fragmented manual processes.",
-    approach: "Built .NET APIs, React workflows, JWT authentication, role access, and QA-backed release checks.",
-    outcomes: [".NET API design", "JWT and role security", "React workflow UI"],
-  },
-  {
     category: "Mobile · Community",
     title: "Yanioba Road Safety Platform",
     image: "/WhatsApp%20Image%202026-06-29%20at%204.14.50%20PM%20(1).jpeg",
