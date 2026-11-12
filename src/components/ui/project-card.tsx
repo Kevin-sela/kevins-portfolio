@@ -109,7 +109,7 @@ export function ProjectCard({
             ))}
           </div>
           <a href={href} className="project-link" target="_blank" rel="noreferrer">
-            <span>{isGithubRepo ? "View source code" : "Explore project"}</span>
+            <span>{isGithubRepo ? "View source code" : href.startsWith("/images/") ? "View screens" : "Explore project"}</span>
             {isGithubRepo ? <Github className="h-4 w-4" aria-hidden="true" /> : <ArrowUpRight className="h-4 w-4" aria-hidden="true" />}
           </a>
         </div>

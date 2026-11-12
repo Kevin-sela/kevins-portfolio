@@ -10,6 +10,26 @@ export const projects = [
     href: "https://cybersmart-workplace.vercel.app/"
   },
   {
+    title: "AI-BizGRA — Business & Tax Management",
+    badge: "Prototype",
+    description:
+      "A bookkeeping concept for Ghanaian small businesses, bringing sales, inventory, payments, payroll, and GRA tax preparation into one workflow. The supplied project is a scaffold with desktop and mobile screen designs.",
+    tech: ["Next.js", "Flutter", "FastAPI", "PostgreSQL"],
+    imageClass: "project-ai-bizgra",
+    imageSrc: "/images/projects/ai-bizgra/reference-screenshot.png",
+    href: "/images/projects/ai-bizgra/reference-screenshot.png"
+  },
+  {
+    title: "Hospital Management System",
+    badge: "Healthcare",
+    description:
+      "A hospital operations system concept with patient registration and records, staff workflows, doctor consultations, and administrative reporting.",
+    tech: ["Patient Records", "Staff Management", "Clinical Workflows", "Reporting"],
+    imageClass: "project-hospital-management",
+    imageSrc: "/images/projects/hospital-management/hospital-screen-1.png",
+    href: "/images/projects/hospital-management/hospital-screen-1.png"
+  },
+  {
     title: "Stark Architects Palette",
     badge: "Featured",
     description:
