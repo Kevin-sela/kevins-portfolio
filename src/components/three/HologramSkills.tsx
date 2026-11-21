@@ -26,7 +26,7 @@ export default function HologramSkills() {
         return (
         <Float key={label} speed={1.4 + i * 0.1} floatIntensity={0.5}>
           <Html transform position={[x, y, z]} scale={0.26}>
-            <div className="rounded-2xl border border-violet-400/30 bg-violet-500/10 px-6 py-4 text-white backdrop-blur-xl shadow-[0_0_35px_rgba(245,184,61,.35)]">
+            <div className="rounded-2xl border border-violet-400/30 bg-violet-500/10 px-6 py-4 text-white backdrop-blur-xl shadow-[0_0_35px_rgba(255,200,61,.35)]">
               {label}
             </div>
           </Html>

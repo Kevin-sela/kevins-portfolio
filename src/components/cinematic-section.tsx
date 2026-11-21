@@ -17,11 +17,11 @@ export function CinematicSection({
   const reduceMotion = useReducedMotion();
 
   const sceneTone: Record<typeof scene, string> = {
-    hero: "radial-gradient(circle at 50% 0%, rgba(245, 184, 61,.20), transparent 42%)",
-    glass: "radial-gradient(circle at 50% 0%, rgba(245, 184, 61,.14), transparent 42%)",
-    hologram: "radial-gradient(circle at 60% 0%, rgba(111, 209, 184,.14), transparent 42%)",
-    portal: "radial-gradient(circle at 50% 0%, rgba(111, 209, 184,.14), transparent 42%)",
-    contact: "radial-gradient(circle at 45% 0%, rgba(248, 207, 116,.12), transparent 42%)"
+    hero: "radial-gradient(circle at 50% 0%, rgba(255, 200, 61,.20), transparent 42%)",
+    glass: "radial-gradient(circle at 50% 0%, rgba(255, 200, 61,.14), transparent 42%)",
+    hologram: "radial-gradient(circle at 60% 0%, rgba(79, 227, 184,.14), transparent 42%)",
+    portal: "radial-gradient(circle at 50% 0%, rgba(79, 227, 184,.14), transparent 42%)",
+    contact: "radial-gradient(circle at 45% 0%, rgba(255, 219, 122,.12), transparent 42%)"
   };
 
   return (
@@ -51,7 +51,7 @@ export function CinematicSection({
         }
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         style={{
-          background: "linear-gradient(135deg, rgba(245, 184, 61,.35), rgba(111, 209, 184,.18))"
+          background: "linear-gradient(135deg, rgba(255, 200, 61,.35), rgba(79, 227, 184,.18))"
         }}
       />
       <motion.div

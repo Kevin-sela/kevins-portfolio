@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Briefcase, GraduationCap, MapPin, Target } from "lucide-react";
+import { GraduationCap, MapPin, Target } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { LocalTime } from "@/components/local-time";
 
@@ -33,16 +33,17 @@ export function FeedAbout() {
             <figcaption>Kelvin Ofori</figcaption>
           </figure>
 
-          <article className="tile spot" data-reveal style={{ "--d": "120ms" } as React.CSSProperties}>
-            <p className="tile-label"><Briefcase aria-hidden="true" /> Currently</p>
-            <p className="tile-big">Backend Engineer</p>
-            <p className="tile-sub">Aptiveon Technologies, building real-time APIs for Relitix. Since 2023.</p>
-          </article>
 
-          <article className="tile spot" data-reveal style={{ "--d": "160ms" } as React.CSSProperties}>
+          <article className="tile spot" data-reveal style={{ "--d": "120ms" } as React.CSSProperties}>
             <p className="tile-label"><MapPin aria-hidden="true" /> Based in</p>
             <p className="tile-big">Accra, <LocalTime /></p>
             <p className="tile-sub">GMT all year. Full overlap with UK and EU hours, and US East mornings.</p>
+          </article>
+
+          <article className="tile spot" data-reveal style={{ "--d": "160ms" } as React.CSSProperties}>
+            <p className="tile-label"><GraduationCap aria-hidden="true" /> Education</p>
+            <p className="tile-big tile-big--sm">BSc Information Technology</p>
+            <p className="tile-sub">Accra Institute of Technology · in progress</p>
           </article>
 
           <article className="tile spot tile--wide" data-reveal style={{ "--d": "200ms" } as React.CSSProperties}>
@@ -56,11 +57,6 @@ export function FeedAbout() {
             </ul>
           </article>
 
-          <article className="tile spot" data-reveal style={{ "--d": "240ms" } as React.CSSProperties}>
-            <p className="tile-label"><GraduationCap aria-hidden="true" /> Education</p>
-            <p className="tile-big tile-big--sm">BSc Information Technology</p>
-            <p className="tile-sub">Accra Institute of Technology · in progress</p>
-          </article>
         </div>
       </div>
     </section>
