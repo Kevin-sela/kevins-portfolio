@@ -32,7 +32,7 @@
   --surface: #121a17;
   --surface-2: #0f1613;
   --text: #e9eee6;
-  --muted-hex: #6e7d73;
+  --muted-hex: #7a8a80;
   --border-hex: #24312b;
   --purple: #e8b54a;
   --violet: #f2ce7f;
@@ -49,7 +49,7 @@
   --line: #24312b;
   --bone: #e9eee6;
   --stone: #a3b0a6;
-  --dim: #6e7d73;
+  --dim: #7a8a80;
   /* semantic aliases (legacy names above map onto these colors) */
   --gold: #e8b54a;
   --gold-soft: #f2ce7f;
@@ -1084,7 +1084,7 @@ body::after {
 .hero-proof-row li + li::before {
   content: "·";
   margin-inline: 12px;
-  color: #6e7d73;
+  color: #7a8a80;
 }
 
 .system-heading,
@@ -1315,7 +1315,7 @@ body::after {
 }
 
 .about p {
-  color: #6e7d73;
+  color: #7a8a80;
   line-height: 1.8;
 }
 
@@ -1400,8 +1400,8 @@ body::after {
 
 .skill-icon-glyph {
   filter:
-    drop-shadow(0 0 6px color-mix(in srgb, var(--skill-color, #6e7d73) 58%, transparent))
-    drop-shadow(0 0 14px color-mix(in srgb, var(--skill-color, #6e7d73) 34%, transparent));
+    drop-shadow(0 0 6px color-mix(in srgb, var(--skill-color, #7a8a80) 58%, transparent))
+    drop-shadow(0 0 14px color-mix(in srgb, var(--skill-color, #7a8a80) 34%, transparent));
 }
 
 .skill-icon:hover {
@@ -2232,7 +2232,7 @@ body::after {
 
 .case-study-header p,
 .article-preview-card p {
-  color: #6e7d73;
+  color: #7a8a80;
   font-size: 14px;
   line-height: 1.7;
 }
@@ -2390,7 +2390,7 @@ body::after {
 }
 
 .project-index span {
-  color: #6e7d73;
+  color: #7a8a80;
 }
 
 .project-category {
@@ -2745,7 +2745,7 @@ body::after {
 
 .site-proof-item span {
   display: block;
-  color: #6e7d73;
+  color: #7a8a80;
   font-size: 11px;
   font-weight: 800;
   text-transform: uppercase;
