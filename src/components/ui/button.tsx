@@ -11,7 +11,7 @@ export function Button({ className, variant = "primary", ...props }: ButtonProps
       className={cn(
         "btn group inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-bold transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember",
         variant === "primary" &&
-          "bg-ember text-[#0c1210] hover:-translate-y-0.5 hover:bg-[#e9eee6]",
+          "bg-ember text-[#090f0c] hover:-translate-y-0.5 hover:bg-[#f3f6f1]",
         variant === "outline" &&
           "border border-ember/70 bg-slate-950/30 text-white hover:bg-ember/10",
         variant === "ghost" && "text-slate-300 hover:text-ember-soft",

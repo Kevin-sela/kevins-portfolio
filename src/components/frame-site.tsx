@@ -107,7 +107,7 @@ function Hero() {
               priority
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_20%,rgba(232,181,74,0.24),transparent_34%),radial-gradient(circle_at_78%_72%,rgba(125,196,178,0.2),transparent_30%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_20%,rgba(245,184,61,0.24),transparent_34%),radial-gradient(circle_at_78%_72%,rgba(111,209,184,0.2),transparent_30%)]" />
           </div>
         </div>
 
@@ -266,14 +266,14 @@ function About() {
   const reduceMotion = useReducedMotion();
   const skills: Array<{ label: string; Icon: IconType | typeof Layers; color: string; glow: string }> =
     [
-      { label: ".NET", Icon: SiDotnet, color: "#c9962e", glow: "rgba(201, 150, 46,0.55)" },
+      { label: ".NET", Icon: SiDotnet, color: "#d69b28", glow: "rgba(214, 155, 40,0.55)" },
       { label: "C#", Icon: SiSharp, color: "#239120", glow: "rgba(35,145,32,0.5)" },
       { label: "React", Icon: SiReact, color: "#61DAFB", glow: "rgba(97,218,251,0.55)" },
       { label: "Next.js", Icon: SiNextdotjs, color: "#E5E7EB", glow: "rgba(255,255,255,0.25)" },
       { label: "TypeScript", Icon: SiTypescript, color: "#3178C6", glow: "rgba(49,120,198,0.55)" },
       { label: "Tailwind", Icon: SiTailwindcss, color: "#38BDF8", glow: "rgba(56,189,248,0.55)" },
       { label: "Framer Motion", Icon: SiFramer, color: "#FF0055", glow: "rgba(255,0,85,0.55)" },
-      { label: "Design systems", Icon: Layers, color: "#f2ce7f", glow: "rgba(242, 206, 127,0.5)" }
+      { label: "Design systems", Icon: Layers, color: "#f8cf74", glow: "rgba(248, 207, 116,0.5)" }
     ];
 
   return (

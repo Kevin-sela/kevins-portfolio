@@ -20,7 +20,7 @@ function TechOrb() {
       <mesh ref={meshRef}>
         <icosahedronGeometry args={[1.45, 4]} />
         <MeshDistortMaterial
-          color="#c9962e"
+          color="#d69b28"
           distort={0.38}
           speed={2}
           roughness={0}
@@ -34,8 +34,8 @@ function TechOrb() {
       <mesh scale={0.88}>
         <sphereGeometry args={[1.45, 24, 24]} />
         <meshStandardMaterial
-          color="#c9962e"
-          emissive="#c9962e"
+          color="#d69b28"
+          emissive="#d69b28"
           emissiveIntensity={0.35}
           transparent
           opacity={0.12}
@@ -58,8 +58,8 @@ function OrbGlow() {
     <mesh ref={ref} scale={2.4}>
       <sphereGeometry args={[1.45, 12, 12]} />
       <meshStandardMaterial
-        color="#c9962e"
-        emissive="#c9962e"
+        color="#d69b28"
+        emissive="#d69b28"
         emissiveIntensity={0.25}
         transparent
         opacity={0.055}
@@ -113,12 +113,12 @@ function FloatingParticle({ position, color }: { position: [number, number, numb
 }
 
 const particles: { pos: [number, number, number]; color: string }[] = [
-  { pos: [1.2, 1.8, 0.4], color: "#7dc4b2" },
-  { pos: [-1.6, 1.2, 0.2], color: "#e8b54a" },
-  { pos: [1.8, -1.0, 0.6], color: "#7dc4b2" },
-  { pos: [-1.0, -1.6, 0.3], color: "#f2ce7f" },
-  { pos: [0.6, 2.2, 0.1], color: "#a0d6c7" },
-  { pos: [-1.8, 0.4, 0.5], color: "#f2ce7f" },
+  { pos: [1.2, 1.8, 0.4], color: "#6fd1b8" },
+  { pos: [-1.6, 1.2, 0.2], color: "#f5b83d" },
+  { pos: [1.8, -1.0, 0.6], color: "#6fd1b8" },
+  { pos: [-1.0, -1.6, 0.3], color: "#f8cf74" },
+  { pos: [0.6, 2.2, 0.1], color: "#96e0cd" },
+  { pos: [-1.8, 0.4, 0.5], color: "#f8cf74" },
   { pos: [2.1, 0.2, 0.3], color: "#38bdf8" },
 ];
 
@@ -126,10 +126,10 @@ function Scene() {
   return (
     <>
       <ambientLight intensity={0.18} />
-      <pointLight position={[5, 5, 5]}   color="#7dc4b2" intensity={6} distance={14} decay={2} />
-      <pointLight position={[-5, -2, 4]} color="#e8b54a" intensity={8} distance={16} decay={2} />
-      <pointLight position={[0,  3,  5]} color="#7dc4b2" intensity={4} distance={12} decay={2} />
-      <pointLight position={[3, -4,  2]} color="#f2ce7f" intensity={5} distance={14} decay={2} />
+      <pointLight position={[5, 5, 5]}   color="#6fd1b8" intensity={6} distance={14} decay={2} />
+      <pointLight position={[-5, -2, 4]} color="#f5b83d" intensity={8} distance={16} decay={2} />
+      <pointLight position={[0,  3,  5]} color="#6fd1b8" intensity={4} distance={12} decay={2} />
+      <pointLight position={[3, -4,  2]} color="#f8cf74" intensity={5} distance={14} decay={2} />
 
       <Environment preset="night" />
       <Stars radius={90} depth={55} count={1800} factor={3} saturation={0.45} fade speed={0.22} />
@@ -140,9 +140,9 @@ function Scene() {
         {particles.map((p, i) => (
           <FloatingParticle key={i} position={p.pos} color={p.color} />
         ))}
-        <Ring radius={2.5}  tube={0.013} rotation={[0.4,  0.2,  0]}   color="#7dc4b2" speed={0.07} />
-        <Ring radius={3.05} tube={0.009} rotation={[-0.3, 0.55, 0.1]} color="#e8b54a" speed={-0.05} />
-        <Ring radius={2.15} tube={0.011} rotation={[1.1, -0.4, 0.3]}  color="#7dc4b2" speed={0.09} />
+        <Ring radius={2.5}  tube={0.013} rotation={[0.4,  0.2,  0]}   color="#6fd1b8" speed={0.07} />
+        <Ring radius={3.05} tube={0.009} rotation={[-0.3, 0.55, 0.1]} color="#f5b83d" speed={-0.05} />
+        <Ring radius={2.15} tube={0.011} rotation={[1.1, -0.4, 0.3]}  color="#6fd1b8" speed={0.09} />
       </group>
     </>
   );

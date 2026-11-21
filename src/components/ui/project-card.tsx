@@ -62,13 +62,14 @@ export function ProjectCard({
               fill
               sizes={featured ? "(max-width: 900px) 100vw, 60vw" : "(max-width: 900px) 100vw, 40vw"}
               className="work-shot-img"
+              quality={90}
             />
           </div>
         </div>
         {mobileSrc ? (
           <div className="work-phone" aria-hidden="true">
             <div className="work-phone-screen">
-              <Image src={mobileSrc} alt="" fill sizes="180px" className="work-shot-img" />
+              <Image src={mobileSrc} alt="" fill sizes="180px" quality={90} className="work-shot-img" />
             </div>
           </div>
         ) : null}

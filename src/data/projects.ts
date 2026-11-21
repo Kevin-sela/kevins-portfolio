@@ -35,7 +35,7 @@ export const projects: readonly Project[] = [
       "A practical cybersecurity awareness platform with interactive lessons, knowledge checks, and learner progress tracking for working professionals.",
     tech: ["Next.js", "React", "TypeScript", "FastAPI"],
     imageClass: "project-cybersmart",
-    imageSrc: "/images/projects/cybersmart-workplace.png",
+    imageSrc: "/images/projects/cybersmart/cybersmart-desktop.webp",
     href: "https://cybersmart-workplace.vercel.app/",
     domain: "cybersmart-workplace.vercel.app"
   },
@@ -46,7 +46,7 @@ export const projects: readonly Project[] = [
       "Real-time road safety reporting system for Ghana, live alerts, and community-driven reporting.",
     tech: ["React Native", "Node.js", "Socket.io"],
     imageClass: "project-yanioba",
-    imageSrc: "/images/projects/yanioba-live.png",
+    imageSrc: "/images/projects/yanioba/yanioba-desktop.webp",
     mobileSrc: "/WhatsApp%20Image%202026-06-29%20at%204.14.50%20PM%20(1).jpeg",
     href: "https://www.yanioba.com/",
     domain: "yanioba.com"
@@ -58,7 +58,7 @@ export const projects: readonly Project[] = [
       "Real-time APIs and services supporting brokerage performance metrics, listing insights, and market intelligence.",
     tech: ["Python", "REST APIs", "AWS", "Docker"],
     imageClass: "project-relitix",
-    imageSrc: "/assets/relitix-homepage.webp",
+    imageSrc: "/images/projects/relitix/relitix-desktop.webp",
     href: "https://relitix.com/",
     domain: "relitix.com"
   },

@@ -26,8 +26,7 @@ export function SplitSite() {
         <Contact />
         <footer className="colophon">
           <p>
-            Designed &amp; built by Kelvin Ofori with Next.js and Tailwind. Set in Bricolage Grotesque, Instrument Sans
-            and JetBrains Mono. The music is generated live in your browser with the Web Audio API.
+            Designed &amp; built by Kelvin Ofori with Next.js and Tailwind. Set in Geist and Geist Mono. The music is generated live in your browser with the Web Audio API.
           </p>
           <p>© {new Date().getFullYear()} Kelvin Ofori</p>
         </footer>

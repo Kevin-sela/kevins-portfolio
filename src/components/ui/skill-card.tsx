@@ -40,7 +40,7 @@ import {
 
 export const skillIconMap: Record<string, { icon: IconType; color: string }> = {
   Python: { icon: SiPython, color: "#FFD43B" },
-  "C#": { icon: SiSharp, color: "#E8B54A" },
+  "C#": { icon: SiSharp, color: "#f5b83d" },
   TypeScript: { icon: SiTypescript, color: "#3178C6" },
   Go: { icon: SiGo, color: "#00ADD8" },
   Java: { icon: SiOpenjdk, color: "#F89820" },
@@ -51,10 +51,10 @@ export const skillIconMap: Record<string, { icon: IconType; color: string }> = {
   Angular: { icon: SiAngular, color: "#DD0031" },
   "React Native": { icon: SiReact, color: "#61DAFB" },
   CSS: { icon: SiCss, color: "#1572B6" },
-  ".NET": { icon: SiDotnet, color: "#E8B54A" },
+  ".NET": { icon: SiDotnet, color: "#f5b83d" },
   "Node.js": { icon: SiNodedotjs, color: "#68A063" },
   NestJS: { icon: SiNestjs, color: "#E0234E" },
-  GraphQL: { icon: SiGraphql, color: "#E8B54A" },
+  GraphQL: { icon: SiGraphql, color: "#f5b83d" },
   "Azure Functions": { icon: Cloud, color: "#00A4EF" },
   AWS: { icon: Cloud, color: "#FF9900" },
   Azure: { icon: Cloud, color: "#0089D6" },

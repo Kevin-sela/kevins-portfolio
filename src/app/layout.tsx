@@ -5,14 +5,11 @@ import { CommandPalette } from "@/components/command-palette";
 import { Spotlight } from "@/components/spotlight";
 import { PageMotion } from "@/components/page-motion";
 import { ScrollProgress } from "@/components/scroll-progress";
-import { Bricolage_Grotesque, Instrument_Sans, JetBrains_Mono } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import { MusicPlayer } from "@/components/music-player";
 import { RevealObserver } from "@/components/reveal-observer";
 
-// Variable names kept for backwards compatibility with existing CSS references.
-const inter = Instrument_Sans({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const spaceGrotesk = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-space-grotesk", display: "swap" });
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains", display: "swap", weight: ["400", "500"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
@@ -49,7 +46,7 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.png", type: "image/png" }],
 };
 
-export const viewport: Viewport = { themeColor: "#0c1210" };
+export const viewport: Viewport = { themeColor: "#090f0c" };
 
 export default function RootLayout({
   children
@@ -58,7 +55,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} ${mono.variable} font-sans`}>
+      <body className={`${GeistSans.variable} ${GeistMono.variable} font-sans`}>
         <Providers>
           <div className="relative min-h-dvh bg-bg text-fg">
             <div aria-hidden className="ambient-backdrop" />

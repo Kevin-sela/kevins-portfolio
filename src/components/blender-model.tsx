@@ -73,9 +73,9 @@ export function BlenderModelViewer({
         shadows
       >
         <ambientLight intensity={0.4} />
-        <pointLight position={[5,  5, 5]} color="#7dc4b2" intensity={4} distance={14} decay={2} />
-        <pointLight position={[-4, 3, 4]} color="#e8b54a" intensity={5} distance={16} decay={2} />
-        <pointLight position={[0, -2, 4]} color="#7dc4b2" intensity={3} distance={12} decay={2} />
+        <pointLight position={[5,  5, 5]} color="#6fd1b8" intensity={4} distance={14} decay={2} />
+        <pointLight position={[-4, 3, 4]} color="#f5b83d" intensity={5} distance={16} decay={2} />
+        <pointLight position={[0, -2, 4]} color="#6fd1b8" intensity={3} distance={12} decay={2} />
         <Environment preset="night" />
         <ContactShadows
           position={[0, -1.6, 0]}
@@ -83,7 +83,7 @@ export function BlenderModelViewer({
           scale={10}
           blur={2.5}
           far={4}
-          color="#e8b54a"
+          color="#f5b83d"
         />
         <Suspense fallback={null}>
           <Model url={url} scale={scale} autoRotate={autoRotate} />

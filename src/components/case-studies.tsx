@@ -22,7 +22,7 @@ const caseStudies = [
     category: "Backend · Cloud",
     title: "Relitix",
     subtitle: "Real-time brokerage analytics APIs",
-    image: "/assets/relitix-homepage.webp",
+    image: "/images/projects/relitix/relitix-desktop.webp",
     imageAlt: "Relitix brokerage performance platform homepage",
     fit: "cover",
     href: "https://relitix.com/",
@@ -86,7 +86,7 @@ export function CaseStudies() {
                 className={`case${active === i ? " is-active" : ""}`}
               >
                 <div className={`case-inline-shot${c.fit === "contain" ? " is-contain" : ""}`}>
-                  <Image src={c.image} alt={c.imageAlt} fill sizes="100vw" />
+                  <Image src={c.image} alt={c.imageAlt} fill sizes="100vw" quality={90} />
                 </div>
                 <p className="case-cat">
                   <span>{String(i + 1).padStart(2, "0")}</span> {c.category}
@@ -123,7 +123,7 @@ export function CaseStudies() {
             <div className="cases-frame">
               {caseStudies.map((c, i) => (
                 <div key={c.title} className={`cases-shot${active === i ? " is-active" : ""}${c.fit === "contain" ? " is-contain" : ""}`}>
-                  <Image src={c.image} alt="" fill sizes="340px" />
+                  <Image src={c.image} alt="" fill sizes="(min-width: 1200px) 420px, 100vw" quality={90} />
                 </div>
               ))}
               <div className="cases-progress">

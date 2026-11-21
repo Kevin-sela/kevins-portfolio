@@ -70,13 +70,13 @@ export function CursorGlow() {
             x: hovered ? -28 : -18,
             y: hovered ? -28 : -18,
             borderColor: hovered
-              ? "rgba(232, 181, 74, 0.9)"
+              ? "rgba(245, 184, 61, 0.9)"
               : "rgba(255, 255, 255, 0.5)",
             backgroundColor: hovered
-              ? "rgba(232, 181, 74, 0.08)"
+              ? "rgba(245, 184, 61, 0.08)"
               : "transparent",
             boxShadow: hovered
-              ? "0 0 20px rgba(232, 181, 74, 0.35), inset 0 0 20px rgba(232, 181, 74, 0.06)"
+              ? "0 0 20px rgba(245, 184, 61, 0.35), inset 0 0 20px rgba(245, 184, 61, 0.06)"
               : "none",
           }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
