@@ -13,9 +13,6 @@ export function CursorGlow() {
   const cx = useMotionValue(-100);
   const cy = useMotionValue(-100);
 
-  // Glow blob: very slow spring — large ambient background effect
-  const gx = useSpring(cx, { stiffness: 80, damping: 20, mass: 1.2 });
-  const gy = useSpring(cy, { stiffness: 80, damping: 20, mass: 1.2 });
 
   // Ring: luxurious lag behind the cursor
   const rx = useSpring(cx, { stiffness: 200, damping: 30, mass: 0.35 });
@@ -57,12 +54,6 @@ export function CursorGlow() {
   return (
     <>
       {/* Ambient glow blob — very slow, painterly background effect */}
-      <motion.div
-        aria-hidden
-        id="cursor-glow"
-        className="pointer-events-none fixed left-0 top-0 z-[20] h-[320px] w-[320px] rounded-full opacity-25 blur-[80px] mix-blend-screen"
-        style={{ x: gx, y: gy, translateX: "-50%", translateY: "-50%" }}
-      />
 
       {/* Ring — lagged follow with luxury spring */}
       <motion.div
@@ -79,13 +70,13 @@ export function CursorGlow() {
             x: hovered ? -28 : -18,
             y: hovered ? -28 : -18,
             borderColor: hovered
-              ? "rgba(139, 92, 246, 0.9)"
+              ? "rgba(239, 106, 58, 0.9)"
               : "rgba(255, 255, 255, 0.5)",
             backgroundColor: hovered
-              ? "rgba(139, 92, 246, 0.08)"
+              ? "rgba(239, 106, 58, 0.08)"
               : "transparent",
             boxShadow: hovered
-              ? "0 0 20px rgba(139, 92, 246, 0.35), inset 0 0 20px rgba(139, 92, 246, 0.06)"
+              ? "0 0 20px rgba(239, 106, 58, 0.35), inset 0 0 20px rgba(239, 106, 58, 0.06)"
               : "none",
           }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}

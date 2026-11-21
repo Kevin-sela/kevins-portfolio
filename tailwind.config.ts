@@ -12,46 +12,42 @@ export default {
           border: "hsl(var(--border))",
           card: "hsl(var(--card))",
           ring: "hsl(var(--ring))",
+          white: "#F7F3EC",
           slate: {
-            300: "#AAB4CC",
-            400: "#6F7B96",
-            700: "#1B2745",
-            800: "#0B1228",
-            900: "#080D24",
-            950: "#05091A"
+            100: "#F1ECE2",
+            200: "#E4DDD0",
+            300: "#B5AC9C",
+            400: "#847B6D",
+            500: "#6A6255",
+            600: "#4A443B",
+            700: "#2B2722",
+            800: "#171512",
+            900: "#12110E",
+            950: "#0E0D0B"
           },
-          purple: {
-            300: "#A855F7",
-            400: "#8B5CF6",
-            500: "#8B5CF6"
-          },
-          violet: {
-            300: "#A855F7",
-            400: "#8B5CF6",
-            500: "#8B5CF6"
-          },
-          blue: {
-            300: "#22D3EE",
-            400: "#3B82F6",
-            500: "#3B82F6"
-          },
-          emerald: {
-            300: "#10B981",
-            400: "#10B981",
-            500: "#10B981"
-          },
+          // Legacy purple/blue utility names are remapped onto the Ink & Ember palette
+          purple: { 200: "#F9C3A3", 300: "#F5925F", 400: "#EF6A3A", 500: "#EF6A3A", 600: "#D4521F", 700: "#A63E16" },
+          violet: { 200: "#F9C3A3", 300: "#F5925F", 400: "#EF6A3A", 500: "#EF6A3A", 600: "#D4521F", 700: "#A63E16" },
+          indigo: { 300: "#F5925F", 400: "#EF6A3A", 500: "#EF6A3A", 600: "#D4521F" },
+          blue: { 300: "#E7C27A", 400: "#D9A84E", 500: "#D9A84E", 600: "#B88A35" },
+          sky: { 200: "#F0DDB4", 300: "#E7C27A", 400: "#D9A84E", 500: "#D9A84E" },
+          cyan: { 300: "#E7C27A", 400: "#D9A84E", 500: "#D9A84E" },
+          emerald: { 300: "#A9C99A", 400: "#8DB37B", 500: "#8DB37B" },
+          ember: { DEFAULT: "#EF6A3A", soft: "#F5925F", deep: "#D4521F" },
+          brass: { DEFAULT: "#D9A84E", soft: "#E7C27A" },
+          sage: { DEFAULT: "#8DB37B" },
           brand: {
-            background: "#05091A",
-            surface: "#0B1228",
-            secondary: "#080D24",
-            border: "#1B2745",
-            text: "#F5F7FF",
-            muted: "#6F7B96",
-            purple: "#8b5cf6",
-            violet: "#a855f7",
-            blue: "#3b82f6",
-            cyan: "#22d3ee",
-            success: "#10b981"
+            background: "#0E0D0B",
+            surface: "#171512",
+            secondary: "#12110E",
+            border: "#2B2722",
+            text: "#F1ECE2",
+            muted: "#847B6D",
+            purple: "#EF6A3A",
+            violet: "#F5925F",
+            blue: "#D9A84E",
+            cyan: "#E7C27A",
+            success: "#8DB37B"
           },
         accent: {
           1: "hsl(var(--accent-1))",
@@ -61,6 +57,9 @@ export default {
           5: "hsl(var(--accent-5))",
           6: "hsl(var(--accent-6))"
         }
+      },
+      fontFamily: {
+        mono: ["var(--font-jetbrains)", "ui-monospace", "monospace"]
       },
       boxShadow: {
         glow: "0 0 0 1px hsl(var(--border)), 0 10px 30px -12px rgba(0,0,0,.35)"

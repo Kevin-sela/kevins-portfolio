@@ -1,14 +1,17 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { CursorGlow } from "@/components/cursor-glow";
 import { PageMotion } from "@/components/page-motion";
-import { ParallaxBackground } from "@/components/parallax-background";
 import { ScrollProgress } from "@/components/scroll-progress";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Bricolage_Grotesque, Instrument_Sans, JetBrains_Mono } from "next/font/google";
+import { MusicPlayer } from "@/components/music-player";
+import { RevealObserver } from "@/components/reveal-observer";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk", display: "swap" });
+// Variable names kept for backwards compatibility with existing CSS references.
+const inter = Instrument_Sans({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const spaceGrotesk = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-space-grotesk", display: "swap" });
+const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains", display: "swap", weight: ["400", "500"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
@@ -45,6 +48,8 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.png", type: "image/png" }],
 };
 
+export const viewport: Viewport = { themeColor: "#0e0d0b" };
+
 export default function RootLayout({
   children
 }: Readonly<{
@@ -52,12 +57,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans`}>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} ${mono.variable} font-sans`}>
         <Providers>
           <div className="relative min-h-dvh bg-bg text-fg">
-            <ParallaxBackground />
+            <div aria-hidden className="ambient-backdrop" />
             <CursorGlow />
             <ScrollProgress />
+            <RevealObserver />
+            <MusicPlayer />
             <div className="relative z-10">
               <PageMotion>{children}</PageMotion>
             </div>

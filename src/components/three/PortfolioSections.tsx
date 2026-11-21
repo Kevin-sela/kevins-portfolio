@@ -43,7 +43,7 @@ export default function PortfolioSections({
             {skills.flatMap((group) => group.items.slice(0, 18)).map((skill) => (
               <div
                 key={skill}
-                className="rounded-2xl border border-violet-400/30 bg-violet-500/10 px-6 py-4 text-center text-white shadow-[0_0_35px_rgba(139,92,246,.35)] backdrop-blur-xl"
+                className="rounded-2xl border border-violet-400/30 bg-violet-500/10 px-6 py-4 text-center text-white shadow-[0_0_35px_rgba(239,106,58,.35)] backdrop-blur-xl"
               >
                 {skill}
               </div>
@@ -108,7 +108,7 @@ export default function PortfolioSections({
           <p className="mb-8 text-slate-300">Ready to build something? Let&apos;s talk.</p>
           <a
             href={`mailto:${person.email}`}
-            className="inline-flex items-center gap-2 rounded-2xl bg-violet-600 px-8 py-4 font-bold transition-all duration-300 hover:-translate-y-1 hover:bg-violet-700 hover:shadow-[0_20px_40px_rgba(139,92,246,0.4)]"
+            className="inline-flex items-center gap-2 rounded-2xl bg-violet-600 px-8 py-4 font-bold transition-all duration-300 hover:-translate-y-1 hover:bg-violet-700 hover:shadow-[0_20px_40px_rgba(239,106,58,0.4)]"
           >
             Say Hello
           </a>

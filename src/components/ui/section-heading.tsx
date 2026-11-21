@@ -1,31 +1,40 @@
-"use client";
+import { Fragment, type ReactNode } from "react";
 
-import { LineReveal } from "@/components/line-reveal";
-
+/**
+ * Editorial section heading. Section numbers come from a CSS counter on
+ * `.portfolio-page`, so they stay correct when sections are reordered.
+ * Plain-string titles are split into words for a staggered reveal.
+ */
 export function SectionHeading({
   eyebrow,
   title,
   align = "left"
 }: {
   eyebrow: string;
-  title: React.ReactNode;
+  title: ReactNode;
   align?: "left" | "center";
 }) {
+  const words = typeof title === "string" ? title.split(" ") : null;
+
   return (
-    <div className={align === "center" ? "text-center" : undefined}>
-      <LineReveal>
-        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-sky-400">
-          {eyebrow}
-        </p>
-      </LineReveal>
-      <div className="mt-3">
-        <LineReveal delay={0.06}>
-          <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl">
-            {title}
-          </h2>
-        </LineReveal>
+    <div className={`sh${align === "center" ? " sh--center" : ""}`} data-reveal>
+      <div className="sh-top">
+        <span className="sh-index" aria-hidden="true" />
+        <span className="sh-rule" aria-hidden="true" />
+        <p className="sh-eyebrow">{eyebrow}</p>
       </div>
-      <span className={`section-heading-accent${align === "center" ? " mx-auto" : ""}`} />
+      <h2 className="sh-title">
+        {words
+          ? words.map((w, i) => (
+              <Fragment key={`${w}-${i}`}>
+                <span className="sh-word">
+                  <span style={{ "--i": i } as React.CSSProperties}>{w}</span>
+                </span>
+                {i < words.length - 1 ? " " : null}
+              </Fragment>
+            ))
+          : title}
+      </h2>
     </div>
   );
 }

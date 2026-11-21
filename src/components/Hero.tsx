@@ -144,6 +144,20 @@ export function Hero() {
         </ul>
       </motion.div>
 
+      <div className="hero-stamp" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <defs>
+            <path id="stamp-circle" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0" />
+          </defs>
+          <text fontSize="10.5" letterSpacing="3.2" fill="currentColor" fontFamily="var(--font-jetbrains), monospace">
+            <textPath href="#stamp-circle">OPEN TO WORK · REMOTE · ACCRA, GH · </textPath>
+          </text>
+        </svg>
+        <span className="hero-stamp-core">
+          <ArrowDown className="h-5 w-5" />
+        </span>
+      </div>
+
       <a className="hero-scroll-hint" href="#projects" aria-label="Continue to selected projects">
         <span>Selected Work</span><ArrowDown className="h-4 w-4" aria-hidden="true" />
       </a>

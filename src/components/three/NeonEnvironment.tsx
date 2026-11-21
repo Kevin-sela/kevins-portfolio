@@ -9,7 +9,7 @@ export default function NeonEnvironment() {
         <mesh position={[-3, 1, -4]}>
           <sphereGeometry args={[1.4, 64, 64]} />
           <MeshDistortMaterial
-            color="#8b5cf6"
+            color="#ef6a3a"
             transparent
             opacity={0.18}
             distort={0.45}
@@ -22,7 +22,7 @@ export default function NeonEnvironment() {
         <mesh position={[3, -3, -5]}>
           <icosahedronGeometry args={[1.8, 2]} />
           <meshStandardMaterial
-            color="#3b82f6"
+            color="#d9a84e"
             transparent
             opacity={0.16}
             roughness={0.25}

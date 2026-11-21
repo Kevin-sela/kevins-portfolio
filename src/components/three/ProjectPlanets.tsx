@@ -18,8 +18,8 @@ export default function ProjectPlanets() {
             <mesh>
               <boxGeometry args={[1.5, 1, 0.08]} />
               <meshStandardMaterial
-                color={i === 1 ? "#8b5cf6" : "#1e293b"}
-                emissive={i === 1 ? "#4c1d95" : "#111827"}
+                color={i === 1 ? "#ef6a3a" : "#24211d"}
+                emissive={i === 1 ? "#6e2812" : "#161411"}
                 emissiveIntensity={0.5}
                 roughness={0.25}
                 metalness={0.45}
