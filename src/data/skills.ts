@@ -20,7 +20,7 @@ export const skillGroups = [
     items: ["MongoDB", "MySQL", "Oracle", "DynamoDB", "Prisma"]
   },
   {
-    title: "Tools & Others",
+    title: "Tooling",
     items: ["Git", "GitHub", "GitLab", "Firebase", "npm", "Jest"]
   }
 ] as const;

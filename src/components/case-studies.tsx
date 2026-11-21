@@ -1,91 +1,138 @@
+"use client";
+
 import Image from "next/image";
-import { ArrowUpRight, Check, ChevronRight } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { SectionHeading } from "@/components/ui/section-heading";
 
 const caseStudies = [
   {
     category: "Product · Web + Android",
-    title: "Asiewie Funeral Services Marketplace",
+    title: "Asiewie",
+    subtitle: "Funeral services marketplace",
     image: "/images/projects/asiewie/asiewie-desktop.webp",
     imageAlt: "Asiewie homepage listing trusted funeral service providers",
-    imageFit: "cover",
+    fit: "cover",
+    href: "https://asiewie.com/",
     problem: "Families arranging funerals in Ghana find providers by word of mouth and share arrangements over scattered chats.",
     approach: "Built a provider directory grouped by service and region, funeral arrangement posts, and direct messaging, on web and Android.",
     outcomes: ["Provider search by region", "Funeral arrangement posts", "Live on web + Google Play"],
   },
   {
     category: "Backend · Cloud",
-    title: "Relitix Real-Time API Platform",
+    title: "Relitix",
+    subtitle: "Real-time brokerage analytics APIs",
     image: "/assets/relitix-homepage.webp",
     imageAlt: "Relitix brokerage performance platform homepage",
-    imageFit: "cover",
+    fit: "cover",
+    href: "https://relitix.com/",
     problem: "Analytics workflows needed reliable APIs, real-time data movement, and predictable cloud cost.",
-    approach: "Designed REST microservices and AWS service boundaries, then optimized Cython hot paths.",
-    outcomes: ["Real-time API services", "AWS architecture", "Cython performance tuning"],
+    approach: "Designed REST microservices and AWS service boundaries, then optimised Cython hot paths.",
+    outcomes: ["10k+ requests a day", "~30% lower AWS cost", "2× Python throughput"],
   },
   {
     category: "Mobile · Community",
-    title: "Yanioba Road Safety Platform",
+    title: "Yanioba",
+    subtitle: "Community road-safety reporting",
     image: "/WhatsApp%20Image%202026-06-29%20at%204.14.50%20PM%20(1).jpeg",
     imageAlt: "Yanioba mobile incident map and active rescue report",
-    imageFit: "contain",
+    fit: "contain",
+    href: "https://www.yanioba.com/",
     problem: "Road incident reporting needed faster community feedback and visible alert flows.",
     approach: "Shipped mobile-first reporting, live incident updates, and an end-to-end road-safety flow.",
     outcomes: ["Mobile-first reporting", "Live incident updates", "Community alerts"],
   },
 ] as const;
 
+/**
+ * Sticky scroll reveal (idea from Aceternity): the write-ups scroll on the
+ * left while one pinned frame on the right cross-fades to the study in view.
+ * On narrow screens each study shows its own image inline instead.
+ */
 export function CaseStudies() {
+  const [active, setActive] = useState(0);
+  const refs = useRef<(HTMLElement | null)[]>([]);
+
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) setActive(Number((e.target as HTMLElement).dataset.index));
+        }
+      },
+      { rootMargin: "-45% 0px -45% 0px" }
+    );
+    refs.current.forEach((el) => el && io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section id="case-studies" className="section">
       <div className="container">
-        <div className="case-study-header">
-          <SectionHeading eyebrow="Case studies" title="From product need to shipped system" />
-          <p>
-            I connect the user problem to the system design, then show the engineering decisions and product outcomes behind each project.
-          </p>
-        </div>
-        <div className="case-study-grid">
-          {caseStudies.map((item, index) => (
-            <article key={item.title} className="case-study-card">
-              <div className={`case-study-shot ${item.imageFit === "contain" ? "case-study-shot-contain" : ""}`}>
-                <Image
-                  src={item.image}
-                  alt={item.imageAlt}
-                  fill
-                  sizes="(max-width: 900px) 100vw, 33vw"
-                  className="case-study-image"
-                />
-                <div className="case-study-shot-meta">
-                  <span>CASE {String(index + 1).padStart(2, "0")}</span>
-                  <span>{item.category}</span>
+        <SectionHeading eyebrow="Case studies" title="From product need to shipped system" />
+        <p className="section-lede">
+          The problem, the engineering decisions, and what changed. Scroll through three of them.
+        </p>
+
+        <div className="cases">
+          <div className="cases-steps">
+            {caseStudies.map((c, i) => (
+              <article
+                key={c.title}
+                ref={(el) => {
+                  refs.current[i] = el;
+                }}
+                data-index={i}
+                className={`case${active === i ? " is-active" : ""}`}
+              >
+                <div className={`case-inline-shot${c.fit === "contain" ? " is-contain" : ""}`}>
+                  <Image src={c.image} alt={c.imageAlt} fill sizes="100vw" />
                 </div>
-                <div className="case-study-shot-caption">
-                  <span>{item.title}</span>
-                  <ChevronRight aria-hidden="true" className="h-4 w-4" />
-                </div>
-              </div>
-              <div className="case-study-body">
-                <h3>{item.title}</h3>
-                <div className="case-study-step">
-                  <span className="case-study-step-label">The challenge</span>
-                  <p>{item.problem}</p>
-                </div>
-                <div className="case-study-step">
-                  <span className="case-study-step-label">The approach</span>
-                  <p>{item.approach}</p>
-                </div>
-                <ul className="case-study-outcomes" aria-label="Engineering outcomes">
-                  {item.outcomes.map((outcome) => (
-                    <li key={outcome}><Check aria-hidden="true" />{outcome}</li>
+                <p className="case-cat">
+                  <span>{String(i + 1).padStart(2, "0")}</span> {c.category}
+                </p>
+                <h3 className="case-title">
+                  {c.title} <span>{c.subtitle}</span>
+                </h3>
+                <dl className="case-steps">
+                  <div>
+                    <dt>Challenge</dt>
+                    <dd>{c.problem}</dd>
+                  </div>
+                  <div>
+                    <dt>Approach</dt>
+                    <dd>{c.approach}</dd>
+                  </div>
+                </dl>
+                <ul className="case-outcomes" aria-label="Outcomes">
+                  {c.outcomes.map((o) => (
+                    <li key={o}>
+                      <Check aria-hidden="true" />
+                      {o}
+                    </li>
                   ))}
                 </ul>
-                <a href="#contact" className="case-study-link">
-                  Discuss this work <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+                <a href={c.href} target="_blank" rel="noreferrer" className="text-link inline-flex">
+                  Visit {c.title} <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                 </a>
+              </article>
+            ))}
+          </div>
+
+          <div className="cases-stage" aria-hidden="true">
+            <div className="cases-frame">
+              {caseStudies.map((c, i) => (
+                <div key={c.title} className={`cases-shot${active === i ? " is-active" : ""}${c.fit === "contain" ? " is-contain" : ""}`}>
+                  <Image src={c.image} alt="" fill sizes="340px" />
+                </div>
+              ))}
+              <div className="cases-progress">
+                {caseStudies.map((c, i) => (
+                  <span key={c.title} className={active === i ? "is-active" : undefined} />
+                ))}
               </div>
-            </article>
-          ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

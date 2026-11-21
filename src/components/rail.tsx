@@ -1,14 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { ArrowUpRight, FileDown, Github, Linkedin, Mail } from "lucide-react";
 import { nav } from "@/content/site";
 import { useActiveSection } from "@/hooks/use-active-section";
+import { NumberTicker } from "@/components/number-ticker";
+import { LocalTime } from "@/components/local-time";
 
 const metrics = [
-  { value: "7+", label: "years shipping" },
-  { value: "10k+", label: "API requests / day" },
-  { value: "−30%", label: "AWS spend" },
+  { value: 7, prefix: "", suffix: "+", label: "years shipping" },
+  { value: 10, prefix: "", suffix: "k+", label: "API requests / day" },
+  { value: 30, prefix: "−", suffix: "%", label: "AWS spend" },
 ] as const;
 
 const links = [
@@ -16,24 +17,6 @@ const links = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/kelvin-ofori-dev", icon: Linkedin },
   { label: "Email", href: "mailto:kofori787@gmail.com", icon: Mail },
 ] as const;
-
-function AccraClock() {
-  const [time, setTime] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fmt = new Intl.DateTimeFormat("en-GB", {
-      hour: "2-digit",
-      minute: "2-digit",
-      timeZone: "Africa/Accra"
-    });
-    const tick = () => setTime(fmt.format(new Date()));
-    tick();
-    const id = window.setInterval(tick, 30_000);
-    return () => window.clearInterval(id);
-  }, []);
-
-  return <span suppressHydrationWarning>{time ?? "--:--"} GMT</span>;
-}
 
 const openPalette = () => window.dispatchEvent(new Event("command-palette:open"));
 
@@ -60,7 +43,7 @@ export function Rail() {
         <div className="rail-top">
           <p className="rail-loc">
             <span className="rail-status-dot" aria-hidden="true" />
-            Accra, Ghana · <AccraClock />
+            Accra, Ghana · <LocalTime /> GMT
           </p>
 
           <h1 className="rail-name">
@@ -98,7 +81,9 @@ export function Rail() {
             {metrics.map((m) => (
               <div key={m.label}>
                 <dt>{m.label}</dt>
-                <dd>{m.value}</dd>
+                <dd>
+                  <NumberTicker value={m.value} prefix={m.prefix} suffix={m.suffix} />
+                </dd>
               </div>
             ))}
           </dl>

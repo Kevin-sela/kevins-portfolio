@@ -1,72 +1,85 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import { Box, Cloud, Code2, Cpu, Database, Terminal } from "lucide-react";
+import { useRef, useState, type KeyboardEvent } from "react";
+import { Code2 } from "lucide-react";
 import { skillGroups } from "@/data/skills";
+import { experience } from "@/data/experience";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { SkillCard } from "@/components/ui/skill-card";
-import { easeOutExpo } from "@/lib/motion";
+import { skillIconMap } from "@/components/ui/skill-card";
 
-const icons = [Terminal, Code2, Cpu, Cloud, Database, Box] as const;
-const hologramHighlights = ["React", ".NET", "Cloud", "APIs", "Systems", "DevOps"] as const;
+// Anything named in a real role's tech list is marked "used in production".
+const inProduction = new Set<string>(experience.flatMap((e) => [...e.tech]));
+const aliases: Record<string, string> = { "C#": "C#", ".NET": "C#" };
+const isProd = (s: string) => inProduction.has(s) || inProduction.has(aliases[s] ?? "");
 
+/**
+ * Stack as tabs (pattern from shadcn/ui Tabs): one category at a time, with a
+ * sliding indicator, arrow-key navigation, and logos that turn gold on hover.
+ */
 export function Skills() {
-  const reduceMotion = useReducedMotion();
+  const [tab, setTab] = useState(0);
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const onKey = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft" && e.key !== "Home" && e.key !== "End") return;
+    e.preventDefault();
+    const last = skillGroups.length - 1;
+    const next =
+      e.key === "Home" ? 0 : e.key === "End" ? last : e.key === "ArrowRight" ? (tab === last ? 0 : tab + 1) : tab === 0 ? last : tab - 1;
+    setTab(next);
+    tabRefs.current[next]?.focus();
+  };
+
+  const group = skillGroups[tab];
 
   return (
-    <motion.section
-      id="skills"
-      className="section"
-      initial={reduceMotion ? false : { opacity: 0, y: 30 }}
-      whileInView={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.18 }}
-      transition={{ duration: 0.72, ease: easeOutExpo }}
-    >
+    <section id="skills" className="section">
       <div className="container">
-        <motion.div
-          className="mb-8 flex items-end justify-between gap-6"
-          initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-          whileInView={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.62, ease: easeOutExpo, delay: 0.04 }}
-        >
-          <SectionHeading eyebrow="Stack" title="Tools I reach for" />
-          <a
-            href="#contact"
-            className="hidden items-center gap-2 text-sm font-semibold text-slate-200 transition hover:text-violet-300 sm:inline-flex"
-          >
-            View All Skills
-          </a>
-        </motion.div>
-        <motion.div
-          className="mb-8 flex flex-wrap gap-3"
-          initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-          whileInView={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.28 }}
-          transition={{ duration: 0.6, ease: easeOutExpo, delay: 0.1 }}
-        >
-          {hologramHighlights.map((item, index) => (
-            <span
-              key={item}
-              className="hologram-pill"
-              style={{ animationDelay: `${index * 0.12}s` }}
+        <SectionHeading eyebrow="Stack" title="Tools I reach for" />
+        <p className="section-lede">
+          Grouped the way I think about them. <span className="prod-key"><i aria-hidden="true" /> used in production</span>
+        </p>
+
+        <div className="tabs" role="tablist" aria-label="Skill categories" onKeyDown={onKey}>
+          {skillGroups.map((g, i) => (
+            <button
+              key={g.title}
+              ref={(el) => {
+                tabRefs.current[i] = el;
+              }}
+              type="button"
+              role="tab"
+              id={`tab-${i}`}
+              aria-selected={tab === i}
+              aria-controls="stack-panel"
+              tabIndex={tab === i ? 0 : -1}
+              className={`tab${tab === i ? " is-active" : ""}`}
+              onClick={() => setTab(i)}
             >
-              {item}
-            </span>
-          ))}
-        </motion.div>
-        <div className="skills-grid">
-          {skillGroups.map((skillGroup, index) => (
-            <SkillCard
-              key={skillGroup.title}
-              title={skillGroup.title}
-              items={skillGroup.items}
-              icon={icons[index]}
-              index={index}
-            />
+              {g.title}
+              <span className="tab-count">{g.items.length}</span>
+            </button>
           ))}
         </div>
+
+        <div id="stack-panel" role="tabpanel" aria-labelledby={`tab-${tab}`} className="stack-grid" key={group.title}>
+          {group.items.map((item, i) => {
+            const meta = skillIconMap[item];
+            const Icon = meta?.icon ?? Code2;
+            return (
+              <div
+                key={item}
+                className="stack-tile spot"
+                style={{ "--i": i } as React.CSSProperties}
+              >
+                <Icon className="stack-icon" aria-hidden="true" />
+                <span className="stack-name">{item}</span>
+                {isProd(item) ? <span className="stack-prod" title="Used in production" aria-label="used in production" /> : null}
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </motion.section>
+    </section>
   );
 }

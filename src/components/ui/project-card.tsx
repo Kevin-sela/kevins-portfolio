@@ -34,10 +34,11 @@ export function ProjectCard({
 
   return (
     <article
-      className={`work-card${featured ? " work-card--featured" : ""}${mobileSrc ? " has-phone" : ""}`}
+      className={`work-card spot${featured ? " work-card--featured" : ""}${mobileSrc ? " has-phone" : ""}`}
       data-reveal
       style={{ "--d": `${(index % 3) * 80}ms` } as React.CSSProperties}
     >
+      {featured ? <span className="work-beam" aria-hidden="true" /> : null}
       <a
         href={href}
         target="_blank"

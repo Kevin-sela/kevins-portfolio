@@ -25,7 +25,7 @@ export default function FloatingGlassDashboard() {
       <mesh>
         <boxGeometry args={[4.8, 2.8, 0.12]} />
         <meshPhysicalMaterial
-          color="#161411"
+          color="#111916"
           transparent
           opacity={0.35}
           roughness={0.12}
@@ -37,7 +37,7 @@ export default function FloatingGlassDashboard() {
 
       <mesh position={[0, 0, 0.08]}>
         <planeGeometry args={[4.9, 2.9]} />
-        <meshBasicMaterial color="#ef6a3a" transparent opacity={0.08} />
+        <meshBasicMaterial color="#e8b54a" transparent opacity={0.08} />
       </mesh>
 
       <Html transform position={[0, 0, 0.18]} scale={0.42} className="w-[720px]">

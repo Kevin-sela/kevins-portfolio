@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.png", type: "image/png" }],
 };
 
-export const viewport: Viewport = { themeColor: "#0e0d0b" };
+export const viewport: Viewport = { themeColor: "#0c1210" };
 
 export default function RootLayout({
   children

@@ -38,9 +38,9 @@ import {
   SiVuedotjs
 } from "react-icons/si";
 
-const skillIconMap: Record<string, { icon: IconType; color: string }> = {
+export const skillIconMap: Record<string, { icon: IconType; color: string }> = {
   Python: { icon: SiPython, color: "#FFD43B" },
-  "C#": { icon: SiSharp, color: "#9B4FCE" },
+  "C#": { icon: SiSharp, color: "#E8B54A" },
   TypeScript: { icon: SiTypescript, color: "#3178C6" },
   Go: { icon: SiGo, color: "#00ADD8" },
   Java: { icon: SiOpenjdk, color: "#F89820" },
@@ -51,10 +51,10 @@ const skillIconMap: Record<string, { icon: IconType; color: string }> = {
   Angular: { icon: SiAngular, color: "#DD0031" },
   "React Native": { icon: SiReact, color: "#61DAFB" },
   CSS: { icon: SiCss, color: "#1572B6" },
-  ".NET": { icon: SiDotnet, color: "#8A63D2" },
+  ".NET": { icon: SiDotnet, color: "#E8B54A" },
   "Node.js": { icon: SiNodedotjs, color: "#68A063" },
   NestJS: { icon: SiNestjs, color: "#E0234E" },
-  GraphQL: { icon: SiGraphql, color: "#E10098" },
+  GraphQL: { icon: SiGraphql, color: "#E8B54A" },
   "Azure Functions": { icon: Cloud, color: "#00A4EF" },
   AWS: { icon: Cloud, color: "#FF9900" },
   Azure: { icon: Cloud, color: "#0089D6" },

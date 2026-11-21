@@ -21,14 +21,14 @@ function AccentCluster() {
   return (
     <group ref={groupRef}>
       <ambientLight intensity={0.8} />
-      <pointLight position={[2, 2, 3]} intensity={18} color="#e7c27a" />
-      <pointLight position={[-2, -1, 3]} intensity={16} color="#ef6a3a" />
+      <pointLight position={[2, 2, 3]} intensity={18} color="#a0d6c7" />
+      <pointLight position={[-2, -1, 3]} intensity={16} color="#e8b54a" />
 
       <Float speed={1.3} rotationIntensity={0.22} floatIntensity={0.65}>
         <mesh position={[-1.25, 0.45, -0.8]}>
           <sphereGeometry args={[0.72, 48, 48]} />
           <meshPhysicalMaterial
-            color="#d4521f"
+            color="#c9962e"
             transparent
             opacity={0.28}
             roughness={0.15}
@@ -54,7 +54,7 @@ function AccentCluster() {
 
       <Float speed={1.2} rotationIntensity={0.18} floatIntensity={0.5}>
         <Html transform position={[0.05, 0.05, 0.6]} scale={0.22}>
-          <div className="rounded-2xl border border-white/10 bg-slate-950/65 px-4 py-3 text-[11px] uppercase tracking-[0.22em] text-slate-200 shadow-[0_0_40px_rgba(231,194,122,0.18)] backdrop-blur-xl">
+          <div className="rounded-2xl border border-white/10 bg-slate-950/65 px-4 py-3 text-[11px] uppercase tracking-[0.22em] text-slate-200 shadow-[0_0_40px_rgba(160,214,199,0.18)] backdrop-blur-xl">
             Neon systems
           </div>
         </Html>

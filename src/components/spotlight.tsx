@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 /**
- * Soft light that trails the pointer. It is a single fixed element moved
+ * Soft light that trails the pointer, plus per-card spotlights on `.spot`. It is a single fixed element moved
  * with `transform` inside requestAnimationFrame, so it stays on the
  * compositor (no repaints, no blur filter). Disabled for touch and
  * reduced-motion users.
@@ -24,9 +24,20 @@ export function Spotlight() {
       frame = 0;
       el.style.transform = `translate3d(${x - 350}px, ${y - 350}px, 0)`;
     };
+    let lastCard: HTMLElement | null = null;
     const onMove = (e: PointerEvent) => {
       x = e.clientX;
       y = e.clientY;
+      // Per-card spotlight (Aceternity "Card Spotlight" idea): one shared
+      // listener writes the pointer position into the hovered card's CSS vars.
+      const card = (e.target as HTMLElement | null)?.closest?.(".spot") as HTMLElement | null;
+      if (card) {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty("--mx", `${x - r.left}px`);
+        card.style.setProperty("--my", `${y - r.top}px`);
+      }
+      if (lastCard && lastCard !== card) lastCard.style.removeProperty("--mx");
+      lastCard = card;
       el.dataset.on = "true";
       if (!frame) frame = requestAnimationFrame(render);
     };
