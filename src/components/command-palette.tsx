@@ -20,9 +20,9 @@ export function CommandPalette() {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const actions = useMemo<Action[]>(() => {
-    const sectionActions: Action[] = nav.map((n, i) => ({
+    const sectionActions: Action[] = nav.map((n) => ({
       label: `Go to ${n.label}`,
-      hint: `press ${i + 1}`,
+      hint: `#${n.id}`,
       icon: Command,
       onRun: () => {
         document.getElementById(n.id)?.scrollIntoView({ behavior: "smooth" });
