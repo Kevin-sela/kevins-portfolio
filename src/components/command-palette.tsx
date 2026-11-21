@@ -39,10 +39,10 @@ export function CommandPalette() {
     const utility: Action[] = [
       {
         label: "Download résumé",
-        hint: ".docx",
+        hint: "PDF",
         icon: FileDown,
         onRun: () => {
-          window.location.href = "/resume/Kelvin_Ofori_org_Resume.docx";
+          window.location.href = "/resume/Kelvin_Ofori_Software_Engineer_Resume.pdf";
         }
       },
       {

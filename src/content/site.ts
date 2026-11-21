@@ -51,7 +51,7 @@ export const person = {
   quickFacts: [
     { icon: MapPin, label: "Based in", value: "Accra, Ghana" },
     { icon: Mail, label: "Email", value: "kofori787@gmail.com" },
-    { icon: FileDown, label: "Resume", value: "/resume/Kelvin_Ofori_org_Resume.docx" },
+    { icon: FileDown, label: "Resume", value: "/resume/Kelvin_Ofori_Software_Engineer_Resume.pdf" },
   ],
 } as const;
 

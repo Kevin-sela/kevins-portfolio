@@ -157,7 +157,7 @@ export function Rail() {
           </ol>
         </nav>
         <div className="mmenu-foot">
-          <a href="/resume/Kelvin_Ofori_org_Resume.docx" download className="rail-btn rail-btn--solid">
+          <a href="/resume/Kelvin_Ofori_Software_Engineer_Resume.pdf" download className="rail-btn rail-btn--solid">
             Résumé <FileDown className="h-4 w-4" aria-hidden="true" />
           </a>
           <ul className="rail-socials">
@@ -235,7 +235,7 @@ export function Rail() {
           </dl>
 
           <div className="rail-actions">
-            <a href="/resume/Kelvin_Ofori_org_Resume.docx" download className="rail-btn rail-btn--solid">
+            <a href="/resume/Kelvin_Ofori_Software_Engineer_Resume.pdf" download className="rail-btn rail-btn--solid">
               Résumé <FileDown className="h-4 w-4" aria-hidden="true" />
             </a>
             <button type="button" className="rail-btn rail-kbd" onClick={openPalette} aria-label="Open command menu">

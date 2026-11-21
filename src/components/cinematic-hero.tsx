@@ -116,7 +116,7 @@ export function CinematicHero() {
               Email <Mail className="h-4 w-4" />
             </a>
             <a
-              href="/resume/Kelvin_Ofori_org_Resume.docx"
+              href="/resume/Kelvin_Ofori_Software_Engineer_Resume.pdf"
               className="fancy-ring inline-flex items-center gap-2 rounded-xl border border-border bg-bg/40 px-4 py-2.5 text-sm font-semibold text-fg shadow-glow backdrop-blur transition hover:border-border/80"
             >
               Resume <FileDown className="h-4 w-4" />

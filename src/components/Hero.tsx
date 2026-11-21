@@ -129,7 +129,7 @@ export function Hero() {
             </a>
           </Magnetic>
           <Magnetic strength={6}>
-            <a href="/resume/Kelvin_Ofori_org_Resume.docx" download className="hero-cta hero-cta-outline">
+            <a href="/resume/Kelvin_Ofori_Software_Engineer_Resume.pdf" download className="hero-cta hero-cta-outline">
               Download Resume <FileDown className="h-4 w-4" aria-hidden="true" />
             </a>
           </Magnetic>

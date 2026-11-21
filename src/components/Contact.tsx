@@ -11,7 +11,7 @@ const EMAIL = "kofori787@gmail.com";
 const links = [
   { label: "LinkedIn", detail: "linkedin.com/in/kelvin-ofori-dev", href: "https://www.linkedin.com/in/kelvin-ofori-dev", icon: Linkedin },
   { label: "GitHub", detail: "github.com/Kevin-sela", href: "https://github.com/Kevin-sela", icon: Github },
-  { label: "Résumé", detail: "Download .docx", href: "/resume/Kelvin_Ofori_org_Resume.docx", icon: FileDown, download: true },
+  { label: "Résumé", detail: "Download PDF", href: "/resume/Kelvin_Ofori_Software_Engineer_Resume.pdf", icon: FileDown, download: true },
 ] as const;
 
 export function Contact() {

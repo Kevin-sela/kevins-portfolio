@@ -85,7 +85,7 @@ export function Experience() {
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.56, ease: easeOutExpo, delay: 0.18 }}
         >
-          <a href="/resume/Kelvin_Ofori_org_Resume.docx" className="inline-flex items-center gap-2 rounded-lg border border-violet-500 px-5 py-3 text-sm font-bold text-violet-300 transition hover:bg-violet-500/10">
+          <a href="/resume/Kelvin_Ofori_Software_Engineer_Resume.pdf" className="inline-flex items-center gap-2 rounded-lg border border-violet-500 px-5 py-3 text-sm font-bold text-violet-300 transition hover:bg-violet-500/10">
             View Full Experience <ArrowRight className="h-4 w-4" />
           </a>
         </motion.div>

@@ -95,7 +95,7 @@ export function About() {
           </motion.div>
 
           <motion.a
-            href="/resume/Kelvin_Ofori_org_Resume.docx"
+            href="/resume/Kelvin_Ofori_Software_Engineer_Resume.pdf"
             className="btn mt-7 inline-flex items-center gap-2 rounded-lg border border-violet-400/60 px-5 py-2.5 text-sm font-semibold text-violet-300 hover:bg-violet-500/10"
             initial={reduceMotion ? false : { opacity: 0, y: 14 }}
             whileInView={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}

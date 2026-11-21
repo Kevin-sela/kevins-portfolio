@@ -53,7 +53,7 @@ export function Navbar() {
             <Github className="h-5 w-5" />
           </a>
           <a
-            href="/resume/Kelvin_Ofori_org_Resume.docx"
+            href="/resume/Kelvin_Ofori_Software_Engineer_Resume.pdf"
             className="inline-flex items-center gap-2 rounded-lg border border-violet-400/60 px-4 py-2 text-sm font-semibold text-slate-50 transition hover:bg-violet-500/15"
           >
             Resume <FileDown className="h-4 w-4" />

@@ -37,7 +37,7 @@ export function ExperienceLedger() {
             </li>
           ))}
         </ScrollBeam>
-        <a href="/resume/Kelvin_Ofori_org_Resume.docx" download className="text-link mt-10 inline-flex">
+        <a href="/resume/Kelvin_Ofori_Software_Engineer_Resume.pdf" download className="text-link mt-10 inline-flex">
           Full résumé <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
         </a>
       </div>
