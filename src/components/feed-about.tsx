@@ -43,7 +43,7 @@ export function FeedAbout() {
           <article className="tile spot" data-reveal style={{ "--d": "160ms" } as React.CSSProperties}>
             <p className="tile-label"><GraduationCap aria-hidden="true" /> Education</p>
             <p className="tile-big tile-big--sm">BSc Information Technology</p>
-            <p className="tile-sub">Accra Institute of Technology · in progress</p>
+            <p className="tile-sub">Accra Institute of Technology · Completion: December 2026</p>
           </article>
 
           <article className="tile spot tile--wide" data-reveal style={{ "--d": "200ms" } as React.CSSProperties}>

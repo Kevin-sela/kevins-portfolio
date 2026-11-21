@@ -123,7 +123,7 @@ export const experience: ExperienceItem[] = [
     role: "Backend Software Engineer",
     company: "Aptiveon Technologies (client: Relitix)",
     start: "2023",
-    end: "Present",
+    end: "2026",
     bullets: [
       "Architected and maintained scalable REST APIs and microservices for real-time systems.",
       "Deployed and managed services on AWS EC2, S3, and Lambda.",
@@ -185,5 +185,5 @@ export const skills = [
 ] as const;
 
 export const education = [
-  { school: "Accra University of Technology", program: "BSc Information Technology (Ongoing)" },
+  { school: "Accra University of Technology", program: "BSc Information Technology (Completion: December 2026)" },
 ] as const;

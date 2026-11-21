@@ -1,6 +1,6 @@
 export const experience = [
   {
-    dates: "2023 - Present",
+    dates: "2023 - 2026",
     role: "Backend Software Engineer",
     company: "Aptiveon Technologies - Client: Relitix",
     brand: "APTIVEON",
