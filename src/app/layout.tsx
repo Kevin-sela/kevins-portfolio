@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.png", type: "image/png" }],
 };
 
-export const viewport: Viewport = { themeColor: "#06241b" };
+export const viewport: Viewport = { themeColor: "#111214" };
 
 export default function RootLayout({
   children
