@@ -3,6 +3,7 @@ import "./globals.css";
 import { Providers } from "@/components/providers";
 import { CommandPalette } from "@/components/command-palette";
 import { Spotlight } from "@/components/spotlight";
+import { SkipLink } from "@/components/skip-link";
 import { PageMotion } from "@/components/page-motion";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { GeistSans } from "geist/font/sans";
@@ -56,6 +57,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${GeistSans.variable} ${GeistMono.variable} font-sans`}>
+        <SkipLink />
         <Providers>
           <div className="relative min-h-dvh bg-bg text-fg">
             <div aria-hidden className="ambient-backdrop" />

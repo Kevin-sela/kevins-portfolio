@@ -6187,3 +6187,291 @@ body::after {
 .tile--wide {
   grid-column: 1 / -1;
 }
+
+/* ==========================================================================
+   NAVIGATION v2
+   ========================================================================== */
+
+/* Skip link: invisible until focused with the keyboard */
+.skip-link {
+  position: fixed;
+  left: 16px;
+  top: 12px;
+  z-index: 200;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 14px;
+  transform: translateY(-160%);
+  transition: transform 200ms ease;
+}
+
+.skip-link:focus-visible {
+  transform: none;
+  outline: 2px solid var(--bone);
+  outline-offset: 3px;
+}
+
+#main:focus {
+  outline: none;
+}
+
+/* ---------- Desktop rail: section progress + key hints ---------- */
+.rail-nav-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.rail-nav a.is-active .rail-nav-line {
+  background: var(--line);
+}
+
+.rail-nav-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.rail-nav a.is-active .rail-nav-fill {
+  transform: scaleX(max(0.08, var(--section-progress, 0)));
+}
+
+.rail-nav-key {
+  margin-left: 4px;
+  min-width: 18px;
+  height: 18px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--dim);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 200ms ease, transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rail-nav a:hover .rail-nav-key,
+.rail-nav a:focus-visible .rail-nav-key {
+  opacity: 1;
+  transform: none;
+}
+
+.rail-nav a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+@media (hover: none) {
+  .rail-nav-key {
+    display: none;
+  }
+}
+
+/* ---------- Mobile bar ---------- */
+.mbar {
+  gap: 10px;
+  height: 60px;
+  padding-top: env(safe-area-inset-top, 0px);
+  height: calc(60px + env(safe-area-inset-top, 0px));
+}
+
+.mbar-links {
+  display: none;
+}
+
+.mbar-current {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--dim);
+}
+
+.mbar-current span {
+  color: var(--gold);
+}
+
+.mbar-cta {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.mbar-toggle {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--ink-2);
+  color: var(--bone);
+  cursor: pointer;
+}
+
+.mbar-toggle:focus-visible,
+.mbar-cta:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+@media (max-width: 360px) {
+  .mbar-current {
+    display: none;
+  }
+
+  .mbar-name {
+    flex: 1;
+  }
+}
+
+/* ---------- Mobile full-screen menu ---------- */
+html.menu-open,
+html.menu-open body {
+  overflow: hidden;
+}
+
+.mmenu {
+  position: fixed;
+  inset: 0;
+  z-index: 65;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  padding: calc(84px + env(safe-area-inset-top, 0px)) max(20px, env(safe-area-inset-right, 0px))
+    calc(28px + env(safe-area-inset-bottom, 0px)) max(20px, env(safe-area-inset-left, 0px));
+  background: var(--ink);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.mmenu.is-open {
+  animation: menu-in 260ms ease both;
+}
+
+@media (min-width: 1024px) {
+  .mmenu {
+    display: none !important;
+  }
+}
+
+.mmenu-list {
+  display: grid;
+}
+
+.mmenu-list li {
+  border-bottom: 1px solid var(--line);
+  animation: menu-item-in 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--i, 0) * 40ms + 60ms);
+}
+
+.mmenu-list a {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  min-height: 60px;
+  padding: 14px 4px;
+  color: var(--stone);
+}
+
+.mmenu-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--dim);
+}
+
+.mmenu-label {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.mmenu-list a.is-active {
+  color: var(--bone);
+}
+
+.mmenu-list a.is-active .mmenu-num {
+  color: var(--gold);
+}
+
+.mmenu-list a.is-active .mmenu-label::after {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: 12px;
+  border-radius: 999px;
+  background: var(--gold);
+  vertical-align: middle;
+}
+
+.mmenu-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.mmenu-foot .rail-socials {
+  margin-left: 0;
+}
+
+.mmenu-mail {
+  flex-basis: 100%;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--dim);
+  user-select: all;
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes menu-item-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mmenu.is-open,
+  .mmenu-list li {
+    animation: none;
+  }
+}
+
+/* keep the floating music button out of the open menu */
+html.menu-open .music-toggle {
+  visibility: hidden;
+}

@@ -17,7 +17,7 @@ export function SplitSite() {
     <div className="portfolio-page split">
       <ScrollReset />
       <Rail />
-      <main className="feed" id="main">
+      <main className="feed" id="main" tabIndex={-1}>
         <FeedAbout />
         <Projects />
         <ExperienceLedger />
