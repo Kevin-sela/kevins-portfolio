@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Providers } from "@/components/providers";
-import { CursorGlow } from "@/components/cursor-glow";
+import { CommandPalette } from "@/components/command-palette";
+import { Spotlight } from "@/components/spotlight";
 import { PageMotion } from "@/components/page-motion";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { Bricolage_Grotesque, Instrument_Sans, JetBrains_Mono } from "next/font/google";
@@ -61,10 +62,11 @@ export default function RootLayout({
         <Providers>
           <div className="relative min-h-dvh bg-bg text-fg">
             <div aria-hidden className="ambient-backdrop" />
-            <CursorGlow />
+            <Spotlight />
             <ScrollProgress />
             <RevealObserver />
             <MusicPlayer />
+            <CommandPalette />
             <div className="relative z-10">
               <PageMotion>{children}</PageMotion>
             </div>

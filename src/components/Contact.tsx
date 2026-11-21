@@ -31,7 +31,7 @@ export function Contact() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.62, ease: easeOutExpo, delay: 0.04 }}
         >
-          <SectionHeading eyebrow="Let's Connect" title="Let's Build Something Amazing Together" />
+          <SectionHeading eyebrow="Contact" title="Let's build something reliable" />
           <p className="mt-4 text-sm leading-relaxed text-slate-400">
             I&rsquo;m currently open to backend, full-stack, and cloud engineering opportunities. Whether you have a role, a project, or just want to talk tech — I&rsquo;d love to hear from you.
           </p>

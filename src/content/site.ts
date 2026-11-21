@@ -42,7 +42,7 @@ export const person = {
   tagline:
     "Full-stack engineer specializing in .NET (C#) + React - building reliable APIs and product-grade web apps.",
   location: "Accra, Ghana",
-  email: "kelvinofori@example.com",
+  email: "kofori787@gmail.com",
   heroBullets: [
     "7+ years building across web + backend (freelance -> product teams).",
     "Hackathon winner mindset: fast MVPs with polished UX and real architecture.",
@@ -50,22 +50,23 @@ export const person = {
   ],
   quickFacts: [
     { icon: MapPin, label: "Based in", value: "Accra, Ghana" },
-    { icon: Mail, label: "Email", value: "kelvinofori@example.com" },
+    { icon: Mail, label: "Email", value: "kofori787@gmail.com" },
     { icon: FileDown, label: "Resume", value: "/resume/Kelvin_Ofori_org_Resume.docx" },
   ],
 } as const;
 
 export const nav = [
-  { id: "hero", label: "Home" },
   { id: "about", label: "About" },
-  { id: "projects", label: "Projects" },
-  { id: "featured", label: "Featured" },
+  { id: "projects", label: "Work" },
+  { id: "experience", label: "Experience" },
+  { id: "case-studies", label: "Case studies" },
+  { id: "skills", label: "Stack" },
   { id: "contact", label: "Contact" },
 ] as const;
 
 export const socials: SocialLink[] = [
   { label: "GitHub", href: "https://github.com/Kevin-sela", icon: Github },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/", icon: Linkedin },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/kelvin-ofori-dev", icon: Linkedin },
   { label: "Instagram", href: "https://instagram.com/blacq_mamba", icon: Instagram },
 ];
 

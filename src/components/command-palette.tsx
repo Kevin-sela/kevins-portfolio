@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { nav, person, socials } from "@/content/site";
 import { cn } from "@/lib/cn";
-import { Command, CornerDownLeft, Search, X } from "lucide-react";
+import { Command, CornerDownLeft, FileDown, Music, Search, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { EASE_OUT } from "@/lib/motion";
 
@@ -37,6 +37,20 @@ export function CommandPalette() {
     }));
 
     const utility: Action[] = [
+      {
+        label: "Download résumé",
+        hint: ".docx",
+        icon: FileDown,
+        onRun: () => {
+          window.location.href = "/resume/Kelvin_Ofori_org_Resume.docx";
+        }
+      },
+      {
+        label: "Toggle lo-fi music",
+        hint: "M",
+        icon: Music,
+        onRun: () => window.dispatchEvent(new Event("music:toggle"))
+      },
       {
         label: "Email Kelvin",
         hint: person.email,
@@ -115,7 +129,7 @@ export function CommandPalette() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Type a command…"
-                className="w-full bg-transparent text-sm text-fg placeholder:text-muted focus:outline-none"
+                className="cmdk-input w-full bg-transparent text-sm text-fg placeholder:text-muted focus:outline-none"
               />
               <button
                 type="button"

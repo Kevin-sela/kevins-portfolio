@@ -10,7 +10,8 @@ export const experience = [
       "Containerised services with Docker and orchestrated deployments via Kubernetes, cutting deploy time by 40%",
       "Boosted Python computation throughput 2x through targeted Cython hot-path optimisation",
       "Integrated third-party enterprise systems via secure API pipelines, achieving 99.9% uptime"
-    ]
+    ],
+    tech: ["Python", "Cython", "AWS", "Docker", "Kubernetes", "REST APIs"]
   },
   {
     dates: "Jul 2016 - Jun 2022",
@@ -21,6 +22,7 @@ export const experience = [
       "Delivered 15+ full-stack web and mobile applications for clients across Africa and Europe using React, Node.js, and C#",
       "Architected cloud-native solutions on Azure with CI/CD pipelines for automated testing and zero-downtime deployments",
       "Maintained 99%+ uptime across all production deployments on Azure App Service and Vercel"
-    ]
+    ],
+    tech: ["React", "Node.js", "C#", "Azure", "CI/CD", "Vercel"]
   }
 ] as const;

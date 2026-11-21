@@ -30,7 +30,7 @@ export function Skills() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.62, ease: easeOutExpo, delay: 0.04 }}
         >
-          <SectionHeading eyebrow="Technical Skills" title="Technologies & Tools I Work With" />
+          <SectionHeading eyebrow="Stack" title="Tools I reach for" />
           <a
             href="#contact"
             className="hidden items-center gap-2 text-sm font-semibold text-slate-200 transition hover:text-violet-300 sm:inline-flex"

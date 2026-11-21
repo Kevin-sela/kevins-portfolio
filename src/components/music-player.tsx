@@ -55,11 +55,14 @@ export function MusicPlayer() {
       if (el && (el.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName))) return;
       void toggle();
     };
+    const onExternal = () => void toggle();
     document.addEventListener("visibilitychange", onVisibility);
     window.addEventListener("keydown", onKey);
+    window.addEventListener("music:toggle", onExternal);
     return () => {
       document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("keydown", onKey);
+      window.removeEventListener("music:toggle", onExternal);
     };
   }, [toggle]);
 

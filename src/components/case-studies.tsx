@@ -4,6 +4,16 @@ import { SectionHeading } from "@/components/ui/section-heading";
 
 const caseStudies = [
   {
+    category: "Product · Web + Android",
+    title: "Asiewie Funeral Services Marketplace",
+    image: "/images/projects/asiewie/asiewie-desktop.webp",
+    imageAlt: "Asiewie homepage listing trusted funeral service providers",
+    imageFit: "cover",
+    problem: "Families arranging funerals in Ghana find providers by word of mouth and share arrangements over scattered chats.",
+    approach: "Built a provider directory grouped by service and region, funeral arrangement posts, and direct messaging, on web and Android.",
+    outcomes: ["Provider search by region", "Funeral arrangement posts", "Live on web + Google Play"],
+  },
+  {
     category: "Backend · Cloud",
     title: "Relitix Real-Time API Platform",
     image: "/assets/relitix-homepage.webp",
@@ -30,7 +40,7 @@ export function CaseStudies() {
     <section id="case-studies" className="section">
       <div className="container">
         <div className="case-study-header">
-          <SectionHeading eyebrow="How I Build" title="From Product Need to Shipped System" />
+          <SectionHeading eyebrow="Case studies" title="From product need to shipped system" />
           <p>
             I connect the user problem to the system design, then show the engineering decisions and product outcomes behind each project.
           </p>

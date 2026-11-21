@@ -1,3 +1,3 @@
-import { TemplateSite } from "@/components/template-site";
+import { SplitSite } from "@/components/split-site";
 
-export default TemplateSite;
+export default SplitSite;
